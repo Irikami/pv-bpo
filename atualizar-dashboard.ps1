@@ -7,14 +7,14 @@ $ErrorActionPreference = "Stop"
 
 $Source = "C:\Users\Canella e Santos\Desktop\Dashboard_PV_Empreendimentos_Jan-Abr_2026.html"
 $ProjectRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
-$PublicDir = Join-Path $ProjectRoot "public"
-$Target = Join-Path $PublicDir "index.html"
+$DocsDir = Join-Path $ProjectRoot "docs"
+$Target = Join-Path $DocsDir "index.html"
 
 if (-not (Test-Path -LiteralPath $Source)) {
     throw "Arquivo original nao encontrado: $Source"
 }
 
-New-Item -ItemType Directory -Force -Path $PublicDir | Out-Null
+New-Item -ItemType Directory -Force -Path $DocsDir | Out-Null
 Copy-Item -LiteralPath $Source -Destination $Target -Force
 $Html = Get-Content -LiteralPath $Target -Raw
 if ($Html -notmatch 'name=["'']robots["'']') {
@@ -35,7 +35,7 @@ if ($Push) {
             git checkout -B main | Out-Host
         }
 
-        git add public/index.html netlify.toml vercel.json README.md atualizar-dashboard.ps1 | Out-Host
+        git add docs/index.html docs/.nojekyll netlify.toml vercel.json README.md atualizar-dashboard.ps1 | Out-Host
         $Status = git status --porcelain
 
         if ($Status) {

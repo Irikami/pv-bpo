@@ -4,7 +4,7 @@ Este pacote transforma o arquivo do Desktop em um site estatico pronto para publ
 
 ## Arquivos
 
-- `public/index.html`: copia publicavel do dashboard.
+- `docs/index.html`: copia publicavel do dashboard para GitHub Pages.
 - `atualizar-dashboard.ps1`: sincroniza o HTML original do Desktop para `public/index.html`.
 - `netlify.toml`: configuracao para Netlify.
 - `vercel.json`: configuracao para Vercel.
@@ -17,7 +17,7 @@ Este pacote transforma o arquivo do Desktop em um site estatico pronto para publ
 4. Em `Build and deployment`, escolha:
    - Source: `Deploy from a branch`
    - Branch: `main`
-   - Folder: `/public`
+   - Folder: `/docs`
 5. O link final ficara neste formato:
    - `https://Irikami.github.io/pv-empreendimentos-dashboard/`
 
@@ -29,7 +29,7 @@ Rode este comando dentro desta pasta:
 powershell -ExecutionPolicy Bypass -File .\atualizar-dashboard.ps1 -Push
 ```
 
-O script copia o HTML do Desktop para `public/index.html`, inclui `noindex,nofollow`, cria um commit e faz `git push` se existir um remote `origin`.
+O script copia o HTML do Desktop para `docs/index.html`, inclui `noindex,nofollow`, cria um commit e faz `git push` se existir um remote `origin`.
 
 Se voce publicar manualmente por drag-and-drop, rode:
 
