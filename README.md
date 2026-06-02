@@ -11,7 +11,7 @@ Este pacote transforma o arquivo do Desktop em um site estatico pronto para publ
 
 ## Opcao recomendada: GitHub Pages
 
-1. Crie um repositorio publico no GitHub, por exemplo `pv-empreendimentos-dashboard`.
+1. Crie um repositorio publico no GitHub, por exemplo `pv-bpo`.
 2. Envie esta pasta para o repositorio.
 3. No GitHub, acesse `Settings > Pages`.
 4. Em `Build and deployment`, escolha:
@@ -19,7 +19,7 @@ Este pacote transforma o arquivo do Desktop em um site estatico pronto para publ
    - Branch: `main`
    - Folder: `/docs`
 5. O link final ficara neste formato:
-   - `https://Irikami.github.io/pv-empreendimentos-dashboard/`
+   - `https://Irikami.github.io/pv-bpo/`
 
 ## Atualizar depois que editar o dashboard
 
