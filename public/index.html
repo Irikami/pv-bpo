@@ -1,0 +1,2345 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta name="robots" content="noindex,nofollow">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Financeiro Â· PV Empreendimentos Â· Canella & Santos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter+Tight:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        :root {
+            /* Identidade Canella & Santos */
+            --coral:        #FF4D5C;
+            --coral-deep:   #E63946;
+            --coral-soft:   #FFE5E8;
+            --cyan:         #1FC0D9;
+            --cyan-deep:    #0FA3BA;
+            --cyan-soft:    #DEF7FC;
+
+            /* Neutros premium */
+            --ink:          #0E1116;   /* grafite profundo */
+            --ink-2:        #1A1F26;
+            --ink-3:        #2A313B;
+            --line:         #E6E8EC;
+            --line-soft:    #F2F3F5;
+            --paper:        #FAFAF7;   /* off-white editorial */
+            --paper-2:      #FFFFFF;
+            --muted:        #6B7280;
+            --muted-2:      #9CA3AF;
+
+            /* Estado */
+            --pos:          #0A8754;
+            --pos-soft:     #DCFCE7;
+            --neg:          #B91C1C;
+            --neg-soft:     #FEE2E2;
+            --warn:         #B45309;
+            --warn-soft:    #FEF3C7;
+        }
+
+        * { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+        html, body {
+            font-family: 'Inter Tight', system-ui, sans-serif;
+            background: var(--paper);
+            color: var(--ink);
+            font-feature-settings: "ss01", "cv11", "tnum";
+        }
+
+        .font-display { font-family: 'Plus Jakarta Sans', 'Inter Tight', sans-serif; font-weight: 800; letter-spacing: -0.025em; }
+        .font-condensed { font-family: 'Inter Tight', sans-serif; font-weight: 700; letter-spacing: -0.005em; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; font-feature-settings: "tnum"; }
+        .tnum { font-feature-settings: "tnum"; font-variant-numeric: tabular-nums; }
+
+        /* === SIDEBAR === */
+        .sidebar {
+            background: var(--ink);
+            color: #D7DAE0;
+        }
+        .brand-mark {
+            background: var(--coral);
+            position: relative;
+            overflow: hidden;
+        }
+        .brand-mark::after {
+            content: '';
+            position: absolute;
+            right: -14px; top: 50%; transform: translateY(-50%) rotate(45deg);
+            width: 58px; height: 58px;
+            background: var(--cyan);
+            opacity: 0.95;
+            border-radius: 8px;
+        }
+        .brand-mark .amp {
+            position: absolute;
+            right: 6px; top: 50%; transform: translateY(-50%);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 800;
+            color: var(--coral);
+            font-size: 28px;
+            z-index: 2;
+            line-height: 1;
+        }
+        .brand-mark .name {
+            position: relative;
+            z-index: 2;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700;
+            font-size: 12px;
+            line-height: 1.05;
+            color: #fff;
+            padding: 10px 12px;
+            letter-spacing: 0.005em;
+        }
+
+        .nav-item {
+            color: #9AA0AB;
+            border-left: 2px solid transparent;
+            transition: all .18s ease;
+            position: relative;
+        }
+        .nav-item:hover {
+            color: #fff;
+            background: rgba(255,255,255,0.03);
+        }
+        .nav-item.active {
+            color: #fff;
+            background: linear-gradient(90deg, rgba(255,77,92,0.18) 0%, rgba(255,77,92,0) 100%);
+            border-left-color: var(--coral);
+        }
+        .nav-item.active .nav-icon { color: var(--coral); }
+        .nav-icon { color: #6B7280; transition: color .18s ease; }
+        .nav-item:hover .nav-icon { color: var(--cyan); }
+
+        .section-label {
+            font-family: 'Inter Tight', sans-serif;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 0.18em;
+            color: #4B5563;
+            text-transform: uppercase;
+        }
+
+        /* === BUTTONS / PILLS === */
+        .pill-group {
+            background: var(--paper-2);
+            border: 1px solid var(--line);
+            padding: 4px;
+            border-radius: 10px;
+            display: inline-flex;
+            gap: 2px;
+        }
+        .pill-btn {
+            padding: 7px 14px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            color: var(--muted);
+            border-radius: 7px;
+            transition: all .15s ease;
+            white-space: nowrap;
+            border: 1px solid transparent;
+        }
+        .pill-btn:hover { color: var(--ink); background: var(--line-soft); }
+        .pill-btn.active {
+            background: var(--ink);
+            color: #fff !important;
+            box-shadow: 0 1px 2px rgba(0,0,0,.18), inset 0 -1px 0 rgba(255,255,255,.08);
+        }
+
+        /* === CARDS === */
+        .card {
+            background: var(--paper-2);
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            transition: border-color .2s ease, transform .2s ease;
+        }
+        .card-accent-top {
+            position: relative;
+            overflow: hidden;
+        }
+        .card-accent-top::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--coral), var(--cyan));
+        }
+        .kpi-label {
+            font-size: 10.5px;
+            font-weight: 800;
+            letter-spacing: 0.16em;
+            color: var(--muted);
+            text-transform: uppercase;
+        }
+        .kpi-value {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700;
+            font-size: 26px;
+            line-height: 1.1;
+            letter-spacing: -0.025em;
+            color: var(--ink);
+        }
+        .kpi-icon {
+            width: 36px; height: 36px;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 10px;
+        }
+        .delta-up {
+            color: var(--pos); background: var(--pos-soft);
+            padding: 2px 7px; border-radius: 5px;
+            font-size: 10.5px; font-weight: 700;
+            display: inline-flex; align-items: center; gap: 2px;
+        }
+        .delta-down {
+            color: var(--neg); background: var(--neg-soft);
+            padding: 2px 7px; border-radius: 5px;
+            font-size: 10.5px; font-weight: 700;
+            display: inline-flex; align-items: center; gap: 2px;
+        }
+        .delta-flat {
+            color: var(--muted); background: var(--line-soft);
+            padding: 2px 7px; border-radius: 5px;
+            font-size: 10.5px; font-weight: 700;
+            display: inline-flex; align-items: center; gap: 2px;
+        }
+
+        /* === HEADINGS === */
+        .h-eyebrow {
+            font-size: 11px; font-weight: 800;
+            letter-spacing: 0.22em; text-transform: uppercase;
+            color: var(--coral);
+        }
+        .h-section {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700;
+            font-size: 26px;
+            letter-spacing: -0.03em;
+            color: var(--ink);
+            line-height: 1.1;
+        }
+        .h-card {
+            font-family: 'Inter Tight', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: -0.005em;
+            color: var(--ink);
+        }
+
+        /* === PROGRESS BARS === */
+        .bar-track {
+            background: var(--line-soft);
+            height: 6px;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .bar-fill {
+            height: 100%;
+            border-radius: 3px;
+            transition: width 1s cubic-bezier(.2,.7,.2,1);
+        }
+
+        /* === TABLES === */
+        .data-table { width: 100%; border-collapse: separate; border-spacing: 0; }
+        .data-table thead th {
+            font-size: 10.5px; font-weight: 800;
+            letter-spacing: 0.14em; text-transform: uppercase;
+            color: var(--muted);
+            padding: 14px 20px;
+            text-align: left;
+            border-bottom: 1px solid var(--line);
+            background: #FCFCFB;
+        }
+        .data-table tbody td {
+            padding: 12px 20px;
+            font-size: 13px;
+            border-bottom: 1px solid var(--line-soft);
+            color: var(--ink);
+        }
+        .data-table tbody tr:hover { background: #FCFCFB; }
+        .data-table tr.subhead td {
+            font-size: 10px; font-weight: 800;
+            letter-spacing: 0.16em; text-transform: uppercase;
+            padding: 10px 20px;
+            background: #FAFAF7;
+            color: var(--muted);
+        }
+        .data-table tr.total-row td {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            background: var(--ink);
+            color: #fff;
+            padding: 16px 20px;
+            letter-spacing: -0.005em;
+        }
+        .data-table tr.total-row td:last-child { color: var(--cyan); }
+
+        /* === VIEW SWITCHING === */
+        .view-section { display: none; }
+        .view-section.active { display: block; animation: fadeUp .35s ease-out; }
+        .month-content { display: none; }
+        .month-content.active { display: block; animation: fadeUp .25s ease-out; }
+        .chart-content { display: none; }
+        .chart-content.active { display: block; animation: fadeUp .25s ease-out; }
+        .regime-content { display: none; }
+        .regime-content.active { display: block; animation: fadeUp .3s ease-out; }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(6px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* === CHARTS === */
+        .chart-box {
+            position: relative;
+            height: 360px; width: 100%;
+        }
+        .chart-box-sm { height: 260px; }
+
+        /* === DECORATIVE === */
+        .grain {
+            background-image: radial-gradient(circle at 1px 1px, rgba(14,17,22,0.04) 1px, transparent 0);
+            background-size: 16px 16px;
+        }
+        .diagonal-tape {
+            background: repeating-linear-gradient(45deg,
+                var(--coral) 0, var(--coral) 12px,
+                var(--ink) 12px, var(--ink) 24px);
+        }
+        .number-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            color: var(--muted);
+            letter-spacing: 0.04em;
+        }
+
+        /* === FOOTER STAMP === */
+        .stamp {
+            border: 1.5px solid var(--coral);
+            color: var(--coral);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 800;
+            font-size: 10px;
+            letter-spacing: 0.18em;
+            padding: 4px 9px;
+            border-radius: 3px;
+            text-transform: uppercase;
+            display: inline-flex; align-items: center; gap: 6px;
+        }
+
+        /* === PRINT === */
+        @media print {
+            @page { margin: 1cm; size: A4 landscape; }
+            body { background: #fff !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+            .no-print, .sidebar { display: none !important; }
+            .main-content { margin-left: 0 !important; width: 100% !important; padding: 0 !important; }
+            .card { box-shadow: none !important; border: 1px solid #E6E8EC !important; break-inside: avoid; }
+            .view-section, .month-content, .chart-content { display: none; }
+            .view-section.active, .month-content.active, .chart-content.active { display: block !important; }
+            .chart-box { height: 280px !important; }
+        }
+
+        /* === SCROLLBAR === */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #D1D5DB; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #9CA3AF; }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden">
+
+    <!-- ========================= SIDEBAR ========================= -->
+    <aside class="sidebar w-72 flex-shrink-0 hidden md:flex flex-col h-full relative z-20">
+
+        <!-- Brand block -->
+        <div class="px-6 pt-7 pb-6 border-b border-white/5">
+            <div class="flex items-center gap-3">
+                <div class="brand-mark rounded-md" style="width: 52px; height: 52px; position: relative;">
+                    <div class="name">Canella<br>Santos</div>
+                    <div class="amp">&amp;</div>
+                </div>
+                <div class="leading-tight">
+                    <div class="font-display text-white text-[15px] tracking-tight">CANELLA &amp; SANTOS</div>
+                    <div class="text-[10px] uppercase tracking-[0.22em] text-white/40 mt-0.5">BPO Financeiro</div>
+                </div>
+            </div>
+            <div class="mt-5 flex items-center gap-2">
+                <div class="h-px flex-1 bg-white/10"></div>
+                <span class="number-tag text-white/30">CLIENTE / 001</span>
+                <div class="h-px flex-1 bg-white/10"></div>
+            </div>
+            <div class="mt-4">
+                <div class="text-[10px] uppercase tracking-[0.2em] text-white/40">Conta</div>
+                <div class="font-display text-white text-[18px] mt-1 leading-none">PV EMPREENDIMENTOS</div>
+                <div class="text-[10.5px] text-white/50 mt-1.5 tnum">CNPJ 50.351.135/0001-70</div>
+            </div>
+        </div>
+
+        <!-- Nav -->
+        <nav class="flex-1 overflow-y-auto px-3 py-5 space-y-0.5">
+            <div class="px-3 pb-2 section-label">AnÃ¡lise</div>
+            <button onclick="switchView('dashboard')" id="nav-dashboard" class="nav-item active w-full flex items-center gap-3 px-4 py-3 text-[13px] font-semibold text-left">
+                <i data-lucide="layout-dashboard" class="nav-icon w-[18px] h-[18px]"></i>
+                VisÃ£o Executiva
+            </button>
+            <button onclick="switchView('charts')" id="nav-charts" class="nav-item w-full flex items-center gap-3 px-4 py-3 text-[13px] font-semibold text-left">
+                <i data-lucide="trending-up" class="nav-icon w-[18px] h-[18px]"></i>
+                EvoluÃ§Ã£o &amp; TendÃªncias
+            </button>
+            <button onclick="switchView('fluxo')" id="nav-fluxo" class="nav-item w-full flex items-center gap-3 px-4 py-3 text-[13px] font-semibold text-left">
+                <i data-lucide="activity" class="nav-icon w-[18px] h-[18px]"></i>
+                Fluxo de Caixa
+            </button>
+            <button onclick="switchView('dre')" id="nav-dre" class="nav-item w-full flex items-center gap-3 px-4 py-3 text-[13px] font-semibold text-left">
+                <i data-lucide="calculator" class="nav-icon w-[18px] h-[18px]"></i>
+                DRE Gerencial
+            </button>
+
+            <div class="px-3 pt-5 pb-2 section-label">OperaÃ§Ã£o</div>
+            <button onclick="switchView('recebimentos')" id="nav-recebimentos" class="nav-item w-full flex items-center gap-3 px-4 py-3 text-[13px] font-semibold text-left">
+                <i data-lucide="arrow-down-left" class="nav-icon w-[18px] h-[18px]"></i>
+                Recebimentos
+            </button>
+            <button onclick="switchView('pagamentos')" id="nav-pagamentos" class="nav-item w-full flex items-center gap-3 px-4 py-3 text-[13px] font-semibold text-left">
+                <i data-lucide="arrow-up-right" class="nav-icon w-[18px] h-[18px]"></i>
+                Pagamentos
+            </button>
+
+            <div class="px-3 pt-5 pb-2 section-label">E-commerce</div>
+            <button onclick="switchView('nuvemshop')" id="nav-nuvemshop" class="nav-item w-full flex items-center gap-3 px-4 py-3 text-[13px] font-semibold text-left">
+                <i data-lucide="shopping-bag" class="nav-icon w-[18px] h-[18px]"></i>
+                NuvemShop
+            </button>
+        </nav>
+
+        <!-- Footer -->
+        <div class="px-6 py-5 border-t border-white/5">
+            <button onclick="window.print()" class="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-white/5 hover:bg-white/10 text-white rounded-md text-[12px] font-semibold transition-colors border border-white/10">
+                <i data-lucide="printer" class="w-4 h-4"></i> Exportar / Imprimir
+            </button>
+            <div class="mt-4 text-center">
+                <div class="number-tag text-white/40">RELATÃ“RIO Â· 1Âº QUAD / 2026</div>
+                <div class="text-[10px] text-white/30 mt-1">Atualizado em 26/05/2026</div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- ========================= MAIN ========================= -->
+    <main class="main-content flex-1 h-full overflow-y-auto relative">
+
+        <!-- Mobile brand -->
+        <div class="md:hidden bg-[var(--ink)] text-white p-4 flex justify-between items-center no-print">
+            <div class="flex items-center gap-2">
+                <div class="brand-mark rounded" style="width:32px;height:32px;position:relative;">
+                    <div class="name" style="padding: 6px 6px; font-size: 8px;">C&amp;S</div>
+                </div>
+                <span class="font-display text-[14px]">CANELLA &amp; SANTOS</span>
+            </div>
+        </div>
+
+        <!-- Top ribbon -->
+        <div class="bg-[var(--ink)] text-white px-8 py-3 flex items-center justify-between no-print">
+            <div class="flex items-center gap-6 text-[11px] uppercase tracking-[0.18em] text-white/60">
+                <span class="flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[var(--coral)] animate-pulse"></span>
+                    Painel ao vivo
+                </span>
+                <span class="hidden md:inline">PerÃ­odo: Jan â€“ Abr 2026</span>
+                <span class="hidden lg:inline">Moeda: BRL</span>
+            </div>
+            <div class="flex items-center gap-2 text-[11px] text-white/50">
+                <span class="number-tag">v2.0 Â· 4 MESES</span>
+            </div>
+        </div>
+
+        <div class="px-6 sm:px-10 py-8 max-w-[1400px] mx-auto pb-24">
+
+            <!-- ===================================================================================== -->
+            <!-- 1. VISÃƒO EXECUTIVA -->
+            <!-- ===================================================================================== -->
+            <section id="view-dashboard" class="view-section active">
+
+                <!-- Hero -->
+                <div class="mb-10 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+                    <div>
+                        <div class="h-eyebrow mb-3">RelatÃ³rio Gerencial Â· 1Âº Quadrimestre</div>
+                        <h1 class="h-section" style="font-size: 38px;">VISÃƒO EXECUTIVA<br><span style="color: var(--coral);">PV EMPREENDIMENTOS</span></h1>
+                        <p class="text-[13.5px] text-[var(--muted)] mt-3 max-w-xl leading-relaxed">
+                            ConsolidaÃ§Ã£o financeira de Janeiro a Abril de 2026 â€” fluxo de caixa, DRE gerencial, performance de e-commerce e radiografia de pagamentos &amp; recebimentos.
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="stamp"><i data-lucide="shield-check" class="w-3 h-3"></i> Auditado</div>
+                        <div class="stamp" style="border-color: var(--cyan); color: var(--cyan);">
+                            <i data-lucide="badge-check" class="w-3 h-3"></i> Conta Azul
+                        </div>
+                    </div>
+                </div>
+
+                <!-- KPI grid: 4 meses -->
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-5 mb-6">
+
+                    <!-- JAN -->
+                    <div class="card card-accent-top p-5">
+                        <div class="flex items-center justify-between mb-4">
+                            <div>
+                                <div class="font-condensed text-[22px] text-[var(--ink)] leading-none">JANEIRO</div>
+                                <div class="number-tag mt-1">01 â€” 31 Â· 2026</div>
+                            </div>
+                            <span class="text-[10px] font-bold uppercase tracking-widest text-[var(--muted)]">M1</span>
+                        </div>
+                        <div class="space-y-3">
+                            <div>
+                                <div class="kpi-label text-[9.5px]">Entradas</div>
+                                <div class="kpi-value tnum" style="font-size:22px;">R$ 39.066</div>
+                            </div>
+                            <div>
+                                <div class="kpi-label text-[9.5px]">SaÃ­das</div>
+                                <div class="kpi-value tnum" style="font-size:22px; color: var(--ink);">R$ 67.305</div>
+                            </div>
+                            <div class="pt-2 border-t border-[var(--line)]">
+                                <div class="kpi-label text-[9.5px]">Resultado</div>
+                                <div class="font-display tnum" style="font-size: 20px; color: var(--neg);">â€“ R$ 28.239</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FEV -->
+                    <div class="card card-accent-top p-5">
+                        <div class="flex items-center justify-between mb-4">
+                            <div>
+                                <div class="font-condensed text-[22px] text-[var(--ink)] leading-none">FEVEREIRO</div>
+                                <div class="number-tag mt-1">01 â€” 28 Â· 2026</div>
+                            </div>
+                            <span class="text-[10px] font-bold uppercase tracking-widest text-[var(--muted)]">M2</span>
+                        </div>
+                        <div class="space-y-3">
+                            <div>
+                                <div class="kpi-label text-[9.5px]">Entradas</div>
+                                <div class="kpi-value tnum" style="font-size:22px;">R$ 54.924</div>
+                            </div>
+                            <div>
+                                <div class="kpi-label text-[9.5px]">SaÃ­das</div>
+                                <div class="kpi-value tnum" style="font-size:22px;">R$ 56.021</div>
+                            </div>
+                            <div class="pt-2 border-t border-[var(--line)]">
+                                <div class="kpi-label text-[9.5px]">Resultado</div>
+                                <div class="font-display tnum" style="font-size: 20px; color: var(--neg);">â€“ R$ 1.097</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MAR -->
+                    <div class="card card-accent-top p-5" style="background: linear-gradient(180deg, #FFF8F9 0%, #fff 70%);">
+                        <div class="flex items-center justify-between mb-4">
+                            <div>
+                                <div class="font-condensed text-[22px] text-[var(--ink)] leading-none">MARÃ‡O</div>
+                                <div class="number-tag mt-1">01 â€” 31 Â· 2026</div>
+                            </div>
+                            <span class="text-[10px] font-bold uppercase tracking-widest" style="color: var(--coral);">M3 Â· NOVO</span>
+                        </div>
+                        <div class="space-y-3">
+                            <div>
+                                <div class="kpi-label text-[9.5px]">Entradas <span class="text-[9px] text-[var(--coral)] font-bold">(c/ emprÃ©stimo)</span></div>
+                                <div class="kpi-value tnum" style="font-size:22px;">R$ 57.113</div>
+                            </div>
+                            <div>
+                                <div class="kpi-label text-[9.5px]">SaÃ­das</div>
+                                <div class="kpi-value tnum" style="font-size:22px;">R$ 31.680</div>
+                            </div>
+                            <div class="pt-2 border-t border-[var(--line)]">
+                                <div class="kpi-label text-[9.5px]">Resultado Caixa</div>
+                                <div class="font-display tnum" style="font-size: 20px; color: var(--pos);">+ R$ 25.433</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ABR -->
+                    <div class="card card-accent-top p-5" style="background: linear-gradient(180deg, #FFF8F9 0%, #fff 70%);">
+                        <div class="flex items-center justify-between mb-4">
+                            <div>
+                                <div class="font-condensed text-[22px] text-[var(--ink)] leading-none">ABRIL</div>
+                                <div class="number-tag mt-1">01 â€” 30 Â· 2026</div>
+                            </div>
+                            <span class="text-[10px] font-bold uppercase tracking-widest" style="color: var(--coral);">M4 Â· NOVO</span>
+                        </div>
+                        <div class="space-y-3">
+                            <div>
+                                <div class="kpi-label text-[9.5px]">Entradas</div>
+                                <div class="kpi-value tnum" style="font-size:22px;">R$ 35.801</div>
+                            </div>
+                            <div>
+                                <div class="kpi-label text-[9.5px]">SaÃ­das</div>
+                                <div class="kpi-value tnum" style="font-size:22px;">R$ 65.110</div>
+                            </div>
+                            <div class="pt-2 border-t border-[var(--line)]">
+                                <div class="kpi-label text-[9.5px]">Resultado</div>
+                                <div class="font-display tnum" style="font-size: 20px; color: var(--neg);">â€“ R$ 29.309</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Consolidado quadrimestre -->
+                <div class="card p-7 mb-8" style="background: var(--ink); color: white; border-color: var(--ink);">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+                        <div>
+                            <div class="h-eyebrow mb-2" style="color: var(--cyan);">Consolidado Â· 4 meses</div>
+                            <div class="font-display text-[26px] tracking-tight">RADIOGRAFIA DO QUADRIMESTRE</div>
+                            <p class="text-[12.5px] text-white/60 mt-2 max-w-md">Volume movimentado e impacto lÃ­quido das operaÃ§Ãµes entre Janeiro e Abril de 2026.</p>
+                        </div>
+                        <div class="grid grid-cols-3 gap-8">
+                            <div>
+                                <div class="text-[10px] uppercase tracking-[0.16em] text-white/50">Entradas Totais</div>
+                                <div class="font-display tnum text-white" style="font-size: 26px;">R$ 186.903</div>
+                                <div class="text-[10.5px] text-white/40 mt-1 tnum">mÃ©dia R$ 46.726/mÃªs</div>
+                            </div>
+                            <div>
+                                <div class="text-[10px] uppercase tracking-[0.16em] text-white/50">SaÃ­das Totais</div>
+                                <div class="font-display tnum text-white" style="font-size: 26px;">R$ 220.116</div>
+                                <div class="text-[10.5px] text-white/40 mt-1 tnum">mÃ©dia R$ 55.029/mÃªs</div>
+                            </div>
+                            <div class="pl-8 border-l border-white/15">
+                                <div class="text-[10px] uppercase tracking-[0.16em]" style="color: var(--coral);">Resultado LÃ­quido</div>
+                                <div class="font-display tnum" style="font-size: 26px; color: var(--coral);">â€“ R$ 33.213</div>
+                                <div class="text-[10.5px] text-white/40 mt-1">dÃ©ficit acumulado de caixa</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Resumo gerencial + Top despesas -->
+                <div class="grid grid-cols-1 lg:grid-cols-5 gap-5">
+
+                    <!-- Insights -->
+                    <div class="card p-7 lg:col-span-3">
+                        <div class="flex items-center justify-between mb-5">
+                            <div class="flex items-center gap-2">
+                                <div class="w-1 h-6 rounded-full" style="background: var(--coral);"></div>
+                                <h3 class="h-card">Resumo gerencial &amp; alertas</h3>
+                            </div>
+                            <span class="number-tag">04 Â· INSIGHTS</span>
+                        </div>
+
+                        <ul class="space-y-5 text-[13px] text-[var(--ink)]/85 leading-relaxed">
+
+                            <li class="flex items-start gap-4">
+                                <div class="flex-shrink-0 w-7 h-7 rounded-md flex items-center justify-center" style="background: var(--neg-soft); color: var(--neg);">
+                                    <i data-lucide="alert-triangle" class="w-4 h-4"></i>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-[var(--ink)] mb-0.5">Abril rompeu o equilÃ­brio recuperado</div>
+                                    ApÃ³s dois meses de melhora (dÃ©ficit caindo de â€“R$ 28k para â€“R$ 1k), <strong>Abril voltou a â€“R$ 29,3k</strong>. CombinaÃ§Ã£o de receita 35% menor que Fev e gastos 106% maiores que Mar.
+                                </div>
+                            </li>
+
+                            <li class="flex items-start gap-4">
+                                <div class="flex-shrink-0 w-7 h-7 rounded-md flex items-center justify-center" style="background: var(--warn-soft); color: var(--warn);">
+                                    <i data-lucide="banknote" class="w-4 h-4"></i>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-[var(--ink)] mb-0.5">EmprÃ©stimo bancÃ¡rio em MarÃ§o mascara desempenho real</div>
+                                    Dos R$ 57,1k recebidos em Mar, <strong>R$ 28,5k sÃ£o emprÃ©stimo</strong> (49,97%). Operacional real de Mar foi R$ 28,5k â€” abaixo de Fev. Sem o crÃ©dito, o resultado de Mar seria <strong>â€“R$ 3,1k</strong>.
+                                </div>
+                            </li>
+
+                            <li class="flex items-start gap-4">
+                                <div class="flex-shrink-0 w-7 h-7 rounded-md flex items-center justify-center" style="background: var(--cyan-soft); color: var(--cyan-deep);">
+                                    <i data-lucide="package" class="w-4 h-4"></i>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-[var(--ink)] mb-0.5">Compra de Produtos Ã© o grande condutor de caixa</div>
+                                    Compras representam <strong>49,6% das saÃ­das do quadrimestre</strong> (R$ 116,3k). Em Abr (R$ 47,2k) e Fev (R$ 37,2k) explodiu â€” ciclo de estoque preparando temporada.
+                                </div>
+                            </li>
+
+                            <li class="flex items-start gap-4">
+                                <div class="flex-shrink-0 w-7 h-7 rounded-md flex items-center justify-center" style="background: var(--pos-soft); color: var(--pos);">
+                                    <i data-lucide="zap" class="w-4 h-4"></i>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-[var(--ink)] mb-0.5">E-commerce dobrou de tamanho em Abril</div>
+                                    NuvemShop: 26 pedidos em Mar â†’ <strong>71 pedidos em Abr</strong> (+173%). Receita lÃ­quida de R$ 3,3k para <strong>R$ 8,1k</strong> (+143%). TrÃ¡fego pago de R$ 350 comeÃ§a a converter.
+                                </div>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                    <!-- Top despesas consolidadas -->
+                    <div class="card p-7 lg:col-span-2 flex flex-col">
+                        <div class="flex items-center justify-between mb-5">
+                            <div class="flex items-center gap-2">
+                                <div class="w-1 h-6 rounded-full" style="background: var(--cyan);"></div>
+                                <h3 class="h-card">Top despesas Â· 4 meses</h3>
+                            </div>
+                            <span class="number-tag">R$ 220k</span>
+                        </div>
+
+                        <div class="space-y-5 flex-1">
+                            <div>
+                                <div class="flex justify-between items-baseline mb-2">
+                                    <div>
+                                        <span class="text-[10px] number-tag block">01</span>
+                                        <span class="text-[13px] font-bold">Produtos</span>
+                                    </div>
+                                    <div class="text-right">
+                                        <span class="font-display tnum text-[15px]">R$ 116.295</span>
+                                        <span class="number-tag block text-[var(--coral)]">52,8%</span>
+                                    </div>
+                                </div>
+                                <div class="bar-track"><div class="bar-fill" style="width: 100%; background: var(--coral);"></div></div>
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between items-baseline mb-2">
+                                    <div>
+                                        <span class="text-[10px] number-tag block">02</span>
+                                        <span class="text-[13px] font-bold">Pessoas</span>
+                                    </div>
+                                    <div class="text-right">
+                                        <span class="font-display tnum text-[15px]">R$ 21.336</span>
+                                        <span class="number-tag block">9,7%</span>
+                                    </div>
+                                </div>
+                                <div class="bar-track"><div class="bar-fill" style="width: 18.3%; background: var(--ink);"></div></div>
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between items-baseline mb-2">
+                                    <div>
+                                        <span class="text-[10px] number-tag block">03</span>
+                                        <span class="text-[13px] font-bold">Royalties</span>
+                                    </div>
+                                    <div class="text-right">
+                                        <span class="font-display tnum text-[15px]">R$ 23.657</span>
+                                        <span class="number-tag block">10,7%</span>
+                                    </div>
+                                </div>
+                                <div class="bar-track"><div class="bar-fill" style="width: 20.3%; background: var(--ink);"></div></div>
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between items-baseline mb-2">
+                                    <div>
+                                        <span class="text-[10px] number-tag block">04</span>
+                                        <span class="text-[13px] font-bold">Simples Nacional</span>
+                                    </div>
+                                    <div class="text-right">
+                                        <span class="font-display tnum text-[15px]">R$ 11.478</span>
+                                        <span class="number-tag block">5,2%</span>
+                                    </div>
+                                </div>
+                                <div class="bar-track"><div class="bar-fill" style="width: 9.9%; background: var(--cyan);"></div></div>
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between items-baseline mb-2">
+                                    <div>
+                                        <span class="text-[10px] number-tag block">05</span>
+                                        <span class="text-[13px] font-bold">HonorÃ¡rios ContÃ¡beis</span>
+                                    </div>
+                                    <div class="text-right">
+                                        <span class="font-display tnum text-[15px]">R$ 6.690</span>
+                                        <span class="number-tag block">3,0%</span>
+                                    </div>
+                                </div>
+                                <div class="bar-track"><div class="bar-fill" style="width: 5.8%; background: var(--cyan);"></div></div>
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between items-baseline mb-2">
+                                    <div>
+                                        <span class="text-[10px] number-tag block">06</span>
+                                        <span class="text-[13px] font-bold">DIFAL</span>
+                                    </div>
+                                    <div class="text-right">
+                                        <span class="font-display tnum text-[15px]">R$ 8.617</span>
+                                        <span class="number-tag block">3,9%</span>
+                                    </div>
+                                </div>
+                                <div class="bar-track"><div class="bar-fill" style="width: 7.4%; background: var(--cyan);"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- ===================================================================================== -->
+            <!-- 2. EVOLUÃ‡ÃƒO E TENDÃŠNCIAS -->
+            <!-- ===================================================================================== -->
+            <section id="view-charts" class="view-section">
+
+                <div class="mb-8 flex flex-col md:flex-row md:items-end md:justify-between gap-6 pb-6 border-b border-[var(--line)]">
+                    <div>
+                        <div class="h-eyebrow mb-2">CapÃ­tulo II Â· TendÃªncias</div>
+                        <h2 class="h-section">EVOLUÃ‡ÃƒO &amp; TENDÃŠNCIAS</h2>
+                        <p class="text-[13px] text-[var(--muted)] mt-2 max-w-xl">TrajetÃ³ria visual do quadrimestre com destaque para os pontos de virada de caixa.</p>
+                    </div>
+                    <div class="pill-group no-print">
+                        <button onclick="switchChart('geral')" id="btn-chart-geral" class="pill-btn active">VisÃ£o DRE</button>
+                        <button onclick="switchChart('rec')" id="btn-chart-rec" class="pill-btn">Recebimentos</button>
+                        <button onclick="switchChart('pag')" id="btn-chart-pag" class="pill-btn">Pagamentos</button>
+                        <button onclick="switchChart('nuvem')" id="btn-chart-nuvem" class="pill-btn">NuvemShop</button>
+                    </div>
+                </div>
+
+                <!-- Chart: DRE Geral -->
+                <div id="chart-geral" class="chart-content active">
+                    <div class="card p-7">
+                        <div class="flex items-start justify-between mb-6">
+                            <div>
+                                <h3 class="h-card">Entradas, SaÃ­das e Resultado Â· 4 meses</h3>
+                                <p class="text-[12px] text-[var(--muted)] mt-1">Linha de resultado revela impacto do emprÃ©stimo em Mar e o retorno do dÃ©ficit em Abr.</p>
+                            </div>
+                            <span class="number-tag">FIG. 01</span>
+                        </div>
+                        <div class="chart-box"><canvas id="canvasGeral"></canvas></div>
+                    </div>
+
+                    <!-- Sub-cards de leitura -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mt-5">
+                        <div class="card p-6">
+                            <i data-lucide="trending-up" class="w-5 h-5" style="color: var(--pos);"></i>
+                            <div class="font-display text-[16px] mt-3">Pico de Receita</div>
+                            <div class="text-[12px] text-[var(--muted)] mt-1">Fevereiro Â· R$ 54,9k em entradas reais (sem emprÃ©stimos).</div>
+                        </div>
+                        <div class="card p-6">
+                            <i data-lucide="trending-down" class="w-5 h-5" style="color: var(--neg);"></i>
+                            <div class="font-display text-[16px] mt-3">Pior Resultado</div>
+                            <div class="text-[12px] text-[var(--muted)] mt-1">Abril Â· â€“R$ 29,3k. ReposiÃ§Ã£o de estoque sem receita correspondente.</div>
+                        </div>
+                        <div class="card p-6">
+                            <i data-lucide="dollar-sign" class="w-5 h-5" style="color: var(--cyan-deep);"></i>
+                            <div class="font-display text-[16px] mt-3">Maior SaÃ­da</div>
+                            <div class="text-[12px] text-[var(--muted)] mt-1">Abril Â· R$ 65,1k. Compra de produtos respondeu por 72,5%.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chart: Recebimentos -->
+                <div id="chart-rec" class="chart-content">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div class="card p-6">
+                            <h3 class="h-card mb-1">Recebimentos Â· Janeiro</h3>
+                            <div class="number-tag mb-4">R$ 39.066 Â· 7 categorias</div>
+                            <div class="chart-box chart-box-sm"><canvas id="canvasRecJan"></canvas></div>
+                        </div>
+                        <div class="card p-6">
+                            <h3 class="h-card mb-1">Recebimentos Â· Fevereiro</h3>
+                            <div class="number-tag mb-4">R$ 54.924 Â· 7 categorias</div>
+                            <div class="chart-box chart-box-sm"><canvas id="canvasRecFev"></canvas></div>
+                        </div>
+                        <div class="card p-6">
+                            <h3 class="h-card mb-1">Recebimentos Â· MarÃ§o</h3>
+                            <div class="number-tag mb-4">R$ 57.113 Â· inclui emprÃ©stimo bancÃ¡rio</div>
+                            <div class="chart-box chart-box-sm"><canvas id="canvasRecMar"></canvas></div>
+                        </div>
+                        <div class="card p-6">
+                            <h3 class="h-card mb-1">Recebimentos Â· Abril</h3>
+                            <div class="number-tag mb-4">R$ 35.801 Â· 97,1% via PIX</div>
+                            <div class="chart-box chart-box-sm"><canvas id="canvasRecAbr"></canvas></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chart: Pagamentos -->
+                <div id="chart-pag" class="chart-content">
+                    <div class="card p-7">
+                        <div class="flex items-start justify-between mb-6">
+                            <div>
+                                <h3 class="h-card">Top 6 categorias de saÃ­da Â· Comparativo mensal</h3>
+                                <p class="text-[12px] text-[var(--muted)] mt-1">Produtos lidera todos os meses com folga. Janeiro tem outlier de DistribuiÃ§Ã£o de Lucros.</p>
+                            </div>
+                            <span class="number-tag">FIG. 02</span>
+                        </div>
+                        <div class="chart-box" style="height: 460px;"><canvas id="canvasPagamentos"></canvas></div>
+                    </div>
+                </div>
+
+                <!-- Chart: NuvemShop -->
+                <div id="chart-nuvem" class="chart-content">
+                    <div class="card p-7 mb-5">
+                        <div class="flex items-start justify-between mb-6">
+                            <div>
+                                <h3 class="h-card">E-commerce NuvemShop Â· Curva de receita</h3>
+                                <p class="text-[12px] text-[var(--muted)] mt-1">RecuperaÃ§Ã£o forte em Abril apÃ³s queda em MarÃ§o â€” base de pedidos triplicou.</p>
+                            </div>
+                            <span class="number-tag">FIG. 03</span>
+                        </div>
+                        <div class="chart-box"><canvas id="canvasNuvem"></canvas></div>
+                    </div>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="card p-5 text-center">
+                            <div class="number-tag">JAN</div>
+                            <div class="font-display text-[22px] mt-1">â€”</div>
+                            <div class="text-[11px] text-[var(--muted)]">Sem segregaÃ§Ã£o Conta Azul</div>
+                            <div class="text-[12px] mt-2 font-bold tnum">R$ 4.665</div>
+                        </div>
+                        <div class="card p-5 text-center">
+                            <div class="number-tag">FEV</div>
+                            <div class="font-display text-[22px] mt-1">â€”</div>
+                            <div class="text-[11px] text-[var(--muted)]">Sem segregaÃ§Ã£o Conta Azul</div>
+                            <div class="text-[12px] mt-2 font-bold tnum">R$ 3.154</div>
+                        </div>
+                        <div class="card p-5 text-center" style="border-color: var(--coral);">
+                            <div class="number-tag" style="color: var(--coral);">MAR</div>
+                            <div class="font-display text-[22px] mt-1 tnum">26</div>
+                            <div class="text-[11px] text-[var(--muted)]">pedidos Â· 100% liquidados</div>
+                            <div class="text-[12px] mt-2 font-bold tnum">R$ 2.736</div>
+                        </div>
+                        <div class="card p-5 text-center" style="border-color: var(--coral);">
+                            <div class="number-tag" style="color: var(--coral);">ABR</div>
+                            <div class="font-display text-[22px] mt-1 tnum">71</div>
+                            <div class="text-[11px] text-[var(--muted)]">pedidos Â· 67 liquidados</div>
+                            <div class="text-[12px] mt-2 font-bold tnum">R$ 7.425</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===================================================================================== -->
+            <!-- 3. FLUXO DE CAIXA -->
+            <!-- ===================================================================================== -->
+            <section id="view-fluxo" class="view-section">
+                <div class="mb-8 flex flex-col md:flex-row md:items-end md:justify-between gap-6 pb-6 border-b border-[var(--line)]">
+                    <div>
+                        <div class="h-eyebrow mb-2">CapÃ­tulo III Â· Caixa</div>
+                        <h2 class="h-section">FLUXO DE CAIXA</h2>
+                        <p class="text-[13px] text-[var(--muted)] mt-2 max-w-xl">Curva acumulada e movimentaÃ§Ãµes por perÃ­odo. Selecione o mÃªs para anÃ¡lise detalhada.</p>
+                    </div>
+                    <div class="pill-group no-print">
+                        <button onclick="switchMonth('fluxo','jan')" id="btn-month-fluxo-jan" class="pill-btn">Jan</button>
+                        <button onclick="switchMonth('fluxo','fev')" id="btn-month-fluxo-fev" class="pill-btn">Fev</button>
+                        <button onclick="switchMonth('fluxo','mar')" id="btn-month-fluxo-mar" class="pill-btn">Mar</button>
+                        <button onclick="switchMonth('fluxo','abr')" id="btn-month-fluxo-abr" class="pill-btn active">Abr</button>
+                        <button onclick="switchMonth('fluxo','consolidado')" id="btn-month-fluxo-consolidado" class="pill-btn">Consolidado</button>
+                    </div>
+                </div>
+
+                <!-- JAN -->
+                <div id="month-fluxo-jan" class="month-content">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
+                        <div class="card p-5"><div class="kpi-label">Entradas (Jan)</div><div class="kpi-value tnum mt-1" style="color: var(--pos);">R$ 39.066</div></div>
+                        <div class="card p-5"><div class="kpi-label">SaÃ­das (Jan)</div><div class="kpi-value tnum mt-1" style="color: var(--neg);">R$ 67.305</div></div>
+                        <div class="card p-5" style="border-color: var(--neg);"><div class="kpi-label" style="color: var(--neg);">Resultado</div><div class="kpi-value tnum mt-1" style="color: var(--neg);">â€“ R$ 28.239</div></div>
+                    </div>
+                    <div class="card p-6">
+                        <h3 class="h-card mb-4">MovimentaÃ§Ã£o diÃ¡ria Â· Janeiro/26</h3>
+                        <div class="chart-box"><canvas id="canvasFluxoJan"></canvas></div>
+                    </div>
+                </div>
+
+                <!-- FEV -->
+                <div id="month-fluxo-fev" class="month-content">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
+                        <div class="card p-5"><div class="kpi-label">Entradas (Fev)</div><div class="kpi-value tnum mt-1" style="color: var(--pos);">R$ 54.924</div></div>
+                        <div class="card p-5"><div class="kpi-label">SaÃ­das (Fev)</div><div class="kpi-value tnum mt-1" style="color: var(--neg);">R$ 56.021</div></div>
+                        <div class="card p-5" style="border-color: var(--warn);"><div class="kpi-label" style="color: var(--warn);">Resultado</div><div class="kpi-value tnum mt-1" style="color: var(--neg);">â€“ R$ 1.097</div></div>
+                    </div>
+                    <div class="card p-6">
+                        <h3 class="h-card mb-4">MovimentaÃ§Ã£o diÃ¡ria Â· Fevereiro/26</h3>
+                        <div class="chart-box"><canvas id="canvasFluxoFev"></canvas></div>
+                    </div>
+                </div>
+
+                <!-- MAR -->
+                <div id="month-fluxo-mar" class="month-content">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
+                        <div class="card p-5"><div class="kpi-label">Entradas (Mar)</div><div class="kpi-value tnum mt-1" style="color: var(--pos);">R$ 57.113</div><div class="text-[11px] text-[var(--coral)] font-semibold mt-1">inclui R$ 28.538 de emprÃ©stimo</div></div>
+                        <div class="card p-5"><div class="kpi-label">SaÃ­das (Mar)</div><div class="kpi-value tnum mt-1" style="color: var(--neg);">R$ 31.680</div></div>
+                        <div class="card p-5" style="border-color: var(--pos);"><div class="kpi-label" style="color: var(--pos);">Resultado Caixa</div><div class="kpi-value tnum mt-1" style="color: var(--pos);">+ R$ 25.433</div><div class="text-[11px] text-[var(--muted)] mt-1">operacional: <span class="tnum" style="color: var(--neg);">â€“R$ 3.105</span></div></div>
+                    </div>
+                    <div class="card p-6 mb-6">
+                        <h3 class="h-card mb-4">MovimentaÃ§Ã£o diÃ¡ria Â· MarÃ§o/26</h3>
+                        <div class="chart-box"><canvas id="canvasFluxoMar"></canvas></div>
+                    </div>
+                    <div class="card p-6">
+                        <h3 class="h-card mb-1">ComposiÃ§Ã£o de Entradas Â· MarÃ§o</h3>
+                        <p class="text-[12px] text-[var(--muted)] mb-4">Em MarÃ§o, quase metade das entradas Ã© capital de terceiros (emprÃ©stimo). NÃ£o Ã© receita operacional.</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            <div class="space-y-4">
+                                <div>
+                                    <div class="flex justify-between text-[13px] mb-2 font-semibold">
+                                        <span>EmprÃ©stimos de Bancos</span><span class="tnum">R$ 28.537,79</span>
+                                    </div>
+                                    <div class="bar-track"><div class="bar-fill" style="width: 49.97%; background: var(--coral);"></div></div>
+                                    <div class="number-tag mt-1">49,97% Â· capital de terceiros</div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-[13px] mb-2 font-semibold">
+                                        <span>Receita de Vendas - PIX</span><span class="tnum">R$ 28.081,07</span>
+                                    </div>
+                                    <div class="bar-track"><div class="bar-fill" style="width: 49.17%; background: var(--cyan);"></div></div>
+                                    <div class="number-tag mt-1">49,17% Â· operacional</div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-[13px] mb-2 font-semibold">
+                                        <span>Venda em Dinheiro</span><span class="tnum">R$ 475,70</span>
+                                    </div>
+                                    <div class="bar-track"><div class="bar-fill" style="width: 0.83%; background: var(--cyan);"></div></div>
+                                    <div class="number-tag mt-1">0,83%</div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-[13px] mb-2 font-semibold">
+                                        <span>Receita de Vendas Online</span><span class="tnum">R$ 17,58</span>
+                                    </div>
+                                    <div class="bar-track"><div class="bar-fill" style="width: 0.03%; background: var(--cyan);"></div></div>
+                                    <div class="number-tag mt-1">0,03%</div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-[13px] mb-2 font-semibold">
+                                        <span>Rendimentos de AplicaÃ§Ãµes</span><span class="tnum">R$ 1,27</span>
+                                    </div>
+                                    <div class="bar-track"><div class="bar-fill" style="width: 0.002%; background: var(--cyan);"></div></div>
+                                    <div class="number-tag mt-1">0,00%</div>
+                                </div>
+                            </div>
+                            <div class="card p-5" style="background: var(--ink); color: white; border-color: var(--ink);">
+                                <div class="h-eyebrow mb-3" style="color: var(--cyan);">AtenÃ§Ã£o contÃ¡bil</div>
+                                <div class="font-display text-[18px] mb-3 leading-tight">A entrada de capital alavanca o caixa mas <span style="color: var(--coral);">nÃ£o representa lucro</span>.</div>
+                                <p class="text-[12.5px] text-white/70 leading-relaxed mb-4">O emprÃ©stimo de R$ 28.537,79 deve ser tratado como passivo financeiro com cronograma de amortizaÃ§Ã£o (juros + principal) impactando os prÃ³ximos meses.</p>
+                                <div class="pt-3 border-t border-white/10">
+                                    <div class="text-[10.5px] uppercase tracking-widest text-white/40">Operacional puro</div>
+                                    <div class="font-display tnum text-white text-[22px]">R$ 28.575,62</div>
+                                    <div class="text-[11px] text-white/50 mt-1">vendas reais do mÃªs</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ABR -->
+                <div id="month-fluxo-abr" class="month-content active">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
+                        <div class="card p-5"><div class="kpi-label">Entradas (Abr)</div><div class="kpi-value tnum mt-1" style="color: var(--pos);">R$ 35.801</div></div>
+                        <div class="card p-5"><div class="kpi-label">SaÃ­das (Abr)</div><div class="kpi-value tnum mt-1" style="color: var(--neg);">R$ 65.110</div></div>
+                        <div class="card p-5" style="border-color: var(--neg);"><div class="kpi-label" style="color: var(--neg);">Resultado</div><div class="kpi-value tnum mt-1" style="color: var(--neg);">â€“ R$ 29.309</div></div>
+                    </div>
+                    <div class="card p-6 mb-6">
+                        <h3 class="h-card mb-4">MovimentaÃ§Ã£o diÃ¡ria Â· Abril/26</h3>
+                        <div class="chart-box"><canvas id="canvasFluxoAbr"></canvas></div>
+                    </div>
+                    <div class="card p-6">
+                        <h3 class="h-card mb-1">Anatomia do dÃ©ficit Â· Abril</h3>
+                        <p class="text-[12px] text-[var(--muted)] mb-5">Receita caiu 35% vs Fev enquanto reposiÃ§Ã£o de estoque acelerou. VisualizaÃ§Ã£o de impacto de cada bloco no resultado.</p>
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-4">
+                                <div class="w-32 text-[12px] font-semibold text-right text-[var(--pos)]">Entradas</div>
+                                <div class="flex-1 bar-track" style="height: 22px;">
+                                    <div class="bar-fill flex items-center justify-end pr-2" style="width: 55.0%; background: var(--pos);">
+                                        <span class="text-[11px] font-semibold text-white tnum">R$ 35.801</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="w-32 text-[12px] font-semibold text-right">Compra Produtos</div>
+                                <div class="flex-1 bar-track" style="height: 22px;">
+                                    <div class="bar-fill flex items-center justify-end pr-2" style="width: 72.5%; background: var(--coral);">
+                                        <span class="text-[11px] font-semibold text-white tnum">R$ 47.178</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="w-32 text-[12px] font-semibold text-right">Pessoas</div>
+                                <div class="flex-1 bar-track" style="height: 22px;">
+                                    <div class="bar-fill flex items-center justify-end pr-2" style="width: 8.2%; background: var(--ink);">
+                                        <span class="text-[11px] font-semibold text-white tnum">R$ 5.330</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="w-32 text-[12px] font-semibold text-right">Royalties</div>
+                                <div class="flex-1 bar-track" style="height: 22px;">
+                                    <div class="bar-fill flex items-center justify-end pr-2" style="width: 5.8%; background: var(--ink);">
+                                        <span class="text-[11px] font-semibold text-white tnum">R$ 3.806</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="w-32 text-[12px] font-semibold text-right">Demais</div>
+                                <div class="flex-1 bar-track" style="height: 22px;">
+                                    <div class="bar-fill flex items-center justify-end pr-2" style="width: 13.5%; background: #94A3B8;">
+                                        <span class="text-[11px] font-semibold text-white tnum">R$ 8.796</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4 pt-3 border-t border-[var(--line)] mt-2">
+                                <div class="w-32 text-[12px] font-semibold text-right" style="color: var(--neg);">DÃ©ficit</div>
+                                <div class="flex-1 bar-track" style="height: 22px; background: var(--neg-soft);">
+                                    <div class="bar-fill flex items-center justify-end pr-2" style="width: 46.6%; background: var(--neg);">
+                                        <span class="text-[11px] font-semibold text-white tnum">â€“ R$ 29.309</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CONSOLIDADO -->
+                <div id="month-fluxo-consolidado" class="month-content">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
+                        <div class="card p-5"><div class="kpi-label">Entradas (4 meses)</div><div class="kpi-value tnum mt-1" style="color: var(--pos);">R$ 186.903</div></div>
+                        <div class="card p-5"><div class="kpi-label">SaÃ­das (4 meses)</div><div class="kpi-value tnum mt-1" style="color: var(--neg);">R$ 220.116</div></div>
+                        <div class="card p-5" style="border-color: var(--neg); background: linear-gradient(135deg, #FFF8F9 0%, #fff 100%);"><div class="kpi-label" style="color: var(--neg);">DÃ©ficit Acumulado</div><div class="kpi-value tnum mt-1" style="color: var(--neg);">â€“ R$ 33.213</div></div>
+                    </div>
+                    <div class="card p-6">
+                        <h3 class="h-card mb-4">Curva acumulada Â· Jan a Abr</h3>
+                        <div class="chart-box"><canvas id="canvasFluxoAcum"></canvas></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===================================================================================== -->
+            <!-- 4. DRE GERENCIAL -->
+            <!-- ===================================================================================== -->
+            <section id="view-dre" class="view-section">
+                <div class="mb-6 pb-6 border-b border-[var(--line)]">
+                    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-5">
+                        <div>
+                            <div class="h-eyebrow mb-2">CapÃ­tulo IV Â· DRE</div>
+                            <h2 class="h-section">DRE GERENCIAL CONSOLIDADA</h2>
+                            <p class="text-[13px] text-[var(--muted)] mt-2 max-w-2xl">Demonstrativo apresentado em dois regimes: <span class="font-semibold text-[var(--ink)]">Caixa</span> (movimento financeiro do mÃªs) e <span class="font-semibold text-[var(--ink)]">CompetÃªncia</span> (despesas alocadas no mÃªs em que efetivamente foram geradas).</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                        <div class="pill-group no-print">
+                            <button onclick="switchRegime('caixa')" id="btn-regime-caixa" class="pill-btn active">Regime de Caixa</button>
+                            <button onclick="switchRegime('comp')" id="btn-regime-comp" class="pill-btn">Regime de CompetÃªncia</button>
+                        </div>
+                        <div class="pill-group no-print" id="dre-month-tabs">
+                            <button onclick="switchMonth('dre','jan')" id="btn-month-dre-jan" class="pill-btn">Jan</button>
+                            <button onclick="switchMonth('dre','fev')" id="btn-month-dre-fev" class="pill-btn">Fev</button>
+                            <button onclick="switchMonth('dre','mar')" id="btn-month-dre-mar" class="pill-btn">Mar</button>
+                            <button onclick="switchMonth('dre','abr')" id="btn-month-dre-abr" class="pill-btn active">Abr</button>
+                        </div>
+                        <div class="pill-group no-print" id="dre-comp-month-tabs" style="display:none;">
+                            <button onclick="switchMonth('drecomp','fev')" id="btn-month-drecomp-fev" class="pill-btn active">Fev</button>
+                            <button onclick="switchMonth('drecomp','mar')" id="btn-month-drecomp-mar" class="pill-btn">Mar</button>
+                            <button onclick="switchMonth('drecomp','abr')" id="btn-month-drecomp-abr" class="pill-btn">Abr</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- =============== REGIME DE CAIXA =============== -->
+                <div id="regime-caixa" class="regime-content active">
+
+                <!-- JAN DRE -->
+                <div id="month-dre-jan" class="month-content">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
+                        <div class="card p-5"><div class="kpi-label">Receitas Totais</div><div class="kpi-value tnum mt-1" style="color: var(--pos);">R$ 39.065,68</div></div>
+                        <div class="card p-5"><div class="kpi-label">Despesas Totais</div><div class="kpi-value tnum mt-1" style="color: var(--neg);">R$ 67.305,17</div></div>
+                        <div class="card p-5" style="border-color: var(--neg);"><div class="kpi-label" style="color: var(--neg);">Resultado LÃ­quido</div><div class="kpi-value tnum mt-1" style="color: var(--neg);">â€“ R$ 28.239,49</div></div>
+                    </div>
+                    <div class="card overflow-hidden">
+                        <table class="data-table">
+                            <thead><tr><th>Categoria</th><th class="text-right">Valor</th></tr></thead>
+                            <tbody>
+                                <tr class="subhead"><td colspan="2" style="color: var(--pos);">â– Entradas operacionais</td></tr>
+                                <tr><td class="font-semibold">Receita Total de Vendas / Outros</td><td class="text-right font-semibold tnum" style="color: var(--pos);">R$ 39.065,68</td></tr>
+
+                                <tr class="subhead"><td colspan="2" style="color: var(--neg);">â– Custos variÃ¡veis &amp; impostos</td></tr>
+                                <tr><td class="pl-8 text-[var(--muted)]">Produtos</td><td class="text-right tnum">R$ 17.239,23</td></tr>
+                                <tr><td class="pl-8 text-[var(--muted)]">Royalties</td><td class="text-right tnum">R$ 10.547,90</td></tr>
+                                <tr><td class="pl-8 text-[var(--muted)]">DIFAL</td><td class="text-right tnum">R$ 7.614,63</td></tr>
+                                <tr><td class="pl-8 text-[var(--muted)]">Simples Nacional - DAS</td><td class="text-right tnum">R$ 5.062,50</td></tr>
+                                <tr><td class="pl-8 text-[var(--muted)]">ComissÃµes de Vendedores</td><td class="text-right tnum">R$ 3.630,04</td></tr>
+                                <tr><td class="pl-8 text-[var(--muted)]">Fretes e LogÃ­stica</td><td class="text-right tnum">R$ 495,42</td></tr>
+
+                                <tr class="subhead"><td colspan="2" style="color: var(--warn);">â– Despesas operacionais &amp; financeiras</td></tr>
+                                <tr><td class="pl-8 text-[var(--muted)]">Pessoas (PrÃ³-labore + SalÃ¡rios + ServiÃ§os)</td><td class="text-right tnum">R$ 7.008,17</td></tr>
+                                <tr><td class="pl-8 text-[var(--muted)]">CartÃ£o Nubank</td><td class="text-right tnum">R$ 1.924,78</td></tr>
+                                <tr><td class="pl-8 text-[var(--muted)]">HonorÃ¡rios ContÃ¡beis</td><td class="text-right tnum">R$ 752,50</td></tr>
+                                <tr><td class="pl-8 text-[var(--muted)]">INSS (PrÃ³-labore + SalÃ¡rios)</td><td class="text-right tnum">R$ 692,18</td></tr>
+                                <tr><td class="pl-8 text-[var(--muted)]">CartÃµes Outros</td><td class="text-right tnum">R$ 337,82</td></tr>
+
+                                <tr class="subhead"><td colspan="2">â– SaÃ­das nÃ£o operacionais</td></tr>
+                                <tr><td class="pl-8 font-semibold">DistribuiÃ§Ã£o de Lucros</td><td class="text-right font-semibold tnum">R$ 12.000,00</td></tr>
+
+                                <tr class="total-row"><td>RESULTADO LÃQUIDO (CAIXA)</td><td class="text-right tnum">â€“ R$ 28.239,49</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- FEV DRE -->
+                <div id="month-dre-fev" class="month-content">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
+                        <div class="card p-5"><div class="kpi-label">Receitas Totais</div><div class="kpi-value tnum mt-1" style="color: var(--pos);">R$ 54.923,58</div></div>
+                        <div class="card p-5"><div class="kpi-label">Despesas Totais</div><div class="kpi-value tnum mt-1" style="color: var(--neg);">R$ 56.021,08</div></div>
+                        <div class="card p-5" style="border-color: var(--warn);"><div class="kpi-label" style="color: var(--warn);">Resultado LÃ­quido</div><div class="kpi-value tnum mt-1" style="color: var(--neg);">â€“ R$ 1.097,50</div></div>
+                    </div>
+                    <div class="card overflow-hidden">
+                        <table class="data-table">
+                            <thead><tr><th>Categoria</th><th class="text-right">Valor</th></tr></thead>
+                            <tbody>
+                                <tr class="subhead"><td colspan="2" style="color: var(--pos);">â– Entradas operacionais</td></tr>
+                                <tr><td class="font-semibold">Receita Total de Vendas / Outros</td><td class="text-right font-semibold tnum" style="color: var(--pos);">R$ 54.923,58</td></tr>
+
+                                <tr class="subhead"><td colspan="2" style="color: var(--neg);">â– Custos variÃ¡veis &amp; impostos</td></tr>
+                                <tr><td class="pl-8 text-[var(--muted)]">Produtos</td><td class="text-right tnum">R$ 37.215,22</td></tr>
+                                <tr><td class="pl-8 text-[var(--muted)]">Royalties</td><td class="text-right tnum">R$ 4.786,04</td></tr>
+                                <tr><td class="pl-8 text-[var(--muted)]">Simples Nacional - DAS</td><td class="text-right tnum">R$ 2.069,83</td></tr>
+                                <tr><td class="pl-8 text-[var(--muted)]">Fretes e LogÃ­stica</td><td class="text-right tnum">R$ 1.123,55</td></tr>
+                                <tr><td class="pl-8 text-[var(--muted)]">ComissÃµes de Vendedores</td><td class="text-right tnum">R$ 1.115,42</td></tr>
+                                <tr><td class="pl-8 text-[var(--muted)]">DIFAL</td><td class="text-right tnum">R$ 1.002,62</td></tr>
+
+                                <tr class="subhead"><td colspan="2" style="color: var(--warn);">â– Despesas operacionais &amp; financeiras</td></tr>
+                                <tr><td class="pl-8 text-[var(--muted)]">Pessoas (PrÃ³-labore + ServiÃ§os)</td><td class="text-right tnum">R$ 5.140,38</td></tr>
+                                <tr><td class="pl-8 text-[var(--muted)]">HonorÃ¡rios ContÃ¡beis</td><td class="text-right tnum">R$ 1.857,69</td></tr>
+                                <tr><td class="pl-8 text-[var(--muted)]">TrÃ¡fego (Facebook + outros)</td><td class="text-right tnum">R$ 877,96</td></tr>
+                                <tr><td class="pl-8 text-[var(--muted)]">CartÃ£o de CrÃ©dito Outros</td><td class="text-right tnum">R$ 337,82</td></tr>
+                                <tr><td class="pl-8 text-[var(--muted)]">INSS sobre SalÃ¡rios - GPS</td><td class="text-right tnum">R$ 356,62</td></tr>
+                                <tr><td class="pl-8 text-[var(--muted)]">Software/LicenÃ§a de Uso</td><td class="text-right tnum">R$ 50,22</td></tr>
+                                <tr><td class="pl-8 text-[var(--muted)]">Juros + Multas + IOF</td><td class="text-right tnum">R$ 87,71</td></tr>
+
+                                <tr class="total-row"><td>RESULTADO LÃQUIDO (CAIXA)</td><td class="text-right tnum">â€“ R$ 1.097,50</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- MAR DRE -->
+                <div id="month-dre-mar" class="month-content">
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-5 mb-6">
+                        <div class="card p-5"><div class="kpi-label">Receita Operacional</div><div class="kpi-value tnum mt-1" style="color: var(--pos);">R$ 28.575,62</div><div class="text-[10.5px] text-[var(--muted)] mt-1">sem emprÃ©stimo</div></div>
+                        <div class="card p-5"><div class="kpi-label">Entrada Financeira</div><div class="kpi-value tnum mt-1" style="color: var(--cyan-deep);">R$ 28.537,79</div><div class="text-[10.5px] text-[var(--muted)] mt-1">emprÃ©stimo bancÃ¡rio</div></div>
+                        <div class="card p-5"><div class="kpi-label">Despesas Totais</div><div class="kpi-value tnum mt-1" style="color: var(--neg);">R$ 31.680,25</div></div>
+                        <div class="card p-5" style="border-color: var(--pos);"><div class="kpi-label" style="color: var(--pos);">Resultado Caixa</div><div class="kpi-value tnum mt-1" style="color: var(--pos);">+ R$ 25.433,16</div><div class="text-[10.5px] text-[var(--neg)] font-bold mt-1">operac: â€“ R$ 3.104,63</div></div>
+                    </div>
+                    <div class="card overflow-hidden">
+                        <table class="data-table">
+                            <thead><tr><th>Categoria</th><th class="text-right">Valor</th></tr></thead>
+                            <tbody>
+                                <tr class="subhead"><td colspan="2" style="color: var(--pos);">â– Entradas operacionais</td></tr>
+                                <tr><td class="pl-8">Receita de Vendas - PIX</td><td class="text-right font-semibold tnum" style="color: var(--pos);">R$ 28.081,07</td></tr>
+                                <tr><td class="pl-8">Venda em Dinheiro</td><td class="text-right tnum">R$ 475,70</td></tr>
+                                <tr><td class="pl-8">Receita de Vendas Online</td><td class="text-right tnum">R$ 17,58</td></tr>
+                                <tr><td class="pl-8">Rendimentos de AplicaÃ§Ãµes</td><td class="text-right tnum">R$ 1,27</td></tr>
+
+                                <tr class="subhead"><td colspan="2" style="color: var(--cyan-deep);">â– Entradas nÃ£o operacionais (capital de terceiros)</td></tr>
+                                <tr><td class="pl-8 font-semibold">EmprÃ©stimos de Bancos</td><td class="text-right font-semibold tnum" style="color: var(--cyan-deep);">R$ 28.537,79</td></tr>
+
+                                <tr class="subhead"><td colspan="2" style="color: var(--neg);">â– Custos variÃ¡veis &amp; impostos</td></tr>
+                                <tr><td class="pl-8 text-[var(--muted)]">Produtos</td><td class="text-right tnum">R$ 14.662,52</td></tr>
+                                <tr><td class="pl-8 text-[var(--muted)]">Royalties</td><td class="text-right tnum">R$ 4.517,12</td></tr>
+                                <tr><td class="pl-8 text-[var(--muted)]">Simples Nacional - DAS</td><td class="text-right tnum">R$ 2.492,55</td></tr>
+                                <tr><td class="pl-8 text-[var(--muted)]">ComissÃµes de Vendedores</td><td class="text-right tnum">R$ 1.770,95</td></tr>
+                                <tr><td class="pl-8 text-[var(--muted)]">Fretes e LogÃ­stica</td><td class="text-right tnum">R$ 608,54</td></tr>
+
+                                <tr class="subhead"><td colspan="2" style="color: var(--warn);">â– Despesas operacionais &amp; financeiras</td></tr>
+                                <tr><td class="pl-8 text-[var(--muted)]">Pessoas</td><td class="text-right tnum">R$ 3.857,69</td></tr>
+                                <tr><td class="pl-8 text-[var(--muted)]">HonorÃ¡rios ContÃ¡beis</td><td class="text-right tnum">R$ 1.939,89</td></tr>
+                                <tr><td class="pl-8 text-[var(--muted)]">CartÃµes (Nubank + Outros)</td><td class="text-right tnum">R$ 1.124,37</td></tr>
+                                <tr><td class="pl-8 text-[var(--muted)]">INSS sobre SalÃ¡rios - GPS</td><td class="text-right tnum">R$ 356,62</td></tr>
+                                <tr><td class="pl-8 text-[var(--muted)]">TrÃ¡fego</td><td class="text-right tnum">R$ 350,00</td></tr>
+
+                                <tr class="total-row"><td>RESULTADO CAIXA (com emprÃ©stimo)</td><td class="text-right tnum">+ R$ 25.433,16</td></tr>
+                                <tr style="background: var(--ink-2); color: white;"><td class="font-bold px-5 py-3 text-[12px] uppercase tracking-widest" style="color: var(--coral);">Resultado operacional puro</td><td class="text-right font-bold tnum px-5 py-3" style="color: var(--coral);">â€“ R$ 3.104,63</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- ABR DRE -->
+                <div id="month-dre-abr" class="month-content active">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
+                        <div class="card p-5"><div class="kpi-label">Receitas Totais</div><div class="kpi-value tnum mt-1" style="color: var(--pos);">R$ 35.800,78</div></div>
+                        <div class="card p-5"><div class="kpi-label">Despesas Totais</div><div class="kpi-value tnum mt-1" style="color: var(--neg);">R$ 65.109,75</div></div>
+                        <div class="card p-5" style="border-color: var(--neg); background: linear-gradient(135deg, #FFF8F9 0%, #fff 100%);"><div class="kpi-label" style="color: var(--neg);">Resultado LÃ­quido</div><div class="kpi-value tnum mt-1" style="color: var(--neg);">â€“ R$ 29.308,97</div></div>
+                    </div>
+                    <div class="card overflow-hidden">
+                        <table class="data-table">
+                            <thead><tr><th>Categoria</th><th class="text-right">Valor</th></tr></thead>
+                            <tbody>
+                                <tr class="subhead"><td colspan="2" style="color: var(--pos);">â– Entradas operacionais</td></tr>
+                                <tr><td class="pl-8">Receita de Vendas - PIX</td><td class="text-right font-semibold tnum" style="color: var(--pos);">R$ 34.768,25</td></tr>
+                                <tr><td class="pl-8">Receita de Vendas Online</td><td class="text-right tnum">R$ 17,34</td></tr>
+                                <tr><td class="pl-8">Rendimentos de AplicaÃ§Ãµes</td><td class="text-right tnum">R$ 7,69</td></tr>
+
+                                <tr class="subhead"><td colspan="2" style="color: var(--neg);">â– Custos variÃ¡veis &amp; impostos</td></tr>
+                                <tr><td class="pl-8 text-[var(--muted)]">Produtos <span class="number-tag ml-2">72,5% do total</span></td><td class="text-right font-semibold tnum" style="color: var(--neg);">R$ 47.178,32</td></tr>
+                                <tr><td class="pl-8 text-[var(--muted)]">Royalties</td><td class="text-right tnum">R$ 3.806,23</td></tr>
+                                <tr><td class="pl-8 text-[var(--muted)]">Simples Nacional - DAS</td><td class="text-right tnum">R$ 1.853,12</td></tr>
+                                <tr><td class="pl-8 text-[var(--muted)]">ComissÃµes de Vendedores</td><td class="text-right tnum">R$ 1.349,70</td></tr>
+                                <tr><td class="pl-8 text-[var(--muted)]">Fretes e LogÃ­stica</td><td class="text-right tnum">R$ 692,32</td></tr>
+
+                                <tr class="subhead"><td colspan="2" style="color: var(--warn);">â– Despesas operacionais &amp; financeiras</td></tr>
+                                <tr><td class="pl-8 text-[var(--muted)]">Pessoas</td><td class="text-right tnum">R$ 5.330,38</td></tr>
+                                <tr><td class="pl-8 text-[var(--muted)]">HonorÃ¡rios ContÃ¡beis</td><td class="text-right tnum">R$ 2.139,89</td></tr>
+                                <tr><td class="pl-8 text-[var(--muted)]">CartÃµes (Nubank + Outros)</td><td class="text-right tnum">R$ 2.053,17</td></tr>
+                                <tr><td class="pl-8 text-[var(--muted)]">INSS sobre SalÃ¡rios - GPS</td><td class="text-right tnum">R$ 356,62</td></tr>
+                                <tr><td class="pl-8 text-[var(--muted)]">TrÃ¡fego</td><td class="text-right tnum">R$ 350,00</td></tr>
+
+                                <tr class="total-row"><td>RESULTADO LÃQUIDO (CAIXA)</td><td class="text-right tnum">â€“ R$ 29.308,97</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                </div><!-- /regime-caixa -->
+
+                <!-- =============== REGIME DE COMPETÃŠNCIA =============== -->
+                <div id="regime-comp" class="regime-content">
+
+                    <!-- ExplicaÃ§Ã£o do mÃ©todo -->
+                    <div class="card p-6 mb-6" style="background: linear-gradient(135deg, #FCFAF7 0%, #FFFFFF 100%); border-color: var(--line);">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="md:col-span-2">
+                                <div class="h-eyebrow mb-2" style="color: var(--cyan-deep);">Como ler esta DRE</div>
+                                <h3 class="font-display text-[20px] leading-tight mb-3">Despesas alocadas no <span style="color: var(--coral);">mÃªs de origem</span>, nÃ£o no mÃªs do pagamento.</h3>
+                                <p class="text-[13px] text-[var(--muted)] leading-relaxed">As categorias <strong class="text-[var(--ink)]">Pessoas, Royalties, DAS, INSS, CartÃ£o de CrÃ©dito, ComissÃµes, HonorÃ¡rios ContÃ¡beis e DIFAL</strong> sÃ£o pagas no mÃªs seguinte ao da competÃªncia. Aqui, elas voltam para o mÃªs a que se referem. As demais despesas (Produtos, TrÃ¡fego, Fretes, etc.) permanecem no mÃªs de pagamento.</p>
+                            </div>
+                            <div class="grid grid-cols-1 gap-2 text-[12px]">
+                                <div class="flex items-center gap-2"><span class="inline-block w-2 h-2 rounded-full" style="background: var(--cyan);"></span><span class="text-[var(--muted)]">MÃªs N Â· receita do prÃ³prio mÃªs</span></div>
+                                <div class="flex items-center gap-2"><span class="inline-block w-2 h-2 rounded-full" style="background: var(--coral);"></span><span class="text-[var(--muted)]">Despesas deferidas Â· pagas em N+1</span></div>
+                                <div class="flex items-center gap-2"><span class="inline-block w-2 h-2 rounded-full" style="background: var(--ink);"></span><span class="text-[var(--muted)]">Demais despesas Â· caixa do prÃ³prio mÃªs</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FEV COMPETÃŠNCIA -->
+                    <div id="month-drecomp-fev" class="month-content active">
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-5 mb-6">
+                            <div class="card p-5"><div class="kpi-label">Receita</div><div class="kpi-value tnum mt-1" style="color: var(--pos);">R$ 54.923,58</div></div>
+                            <div class="card p-5"><div class="kpi-label">Despesas CompetÃªncia</div><div class="kpi-value tnum mt-1" style="color: var(--neg);">R$ 16.059,19</div><div class="text-[10.5px] text-[var(--muted)] mt-1">pagas em MarÃ§o</div></div>
+                            <div class="card p-5"><div class="kpi-label">Demais (Caixa Fev)</div><div class="kpi-value tnum mt-1" style="color: var(--neg);">R$ 39.354,66</div></div>
+                            <div class="card p-5" style="border-color: var(--warn);"><div class="kpi-label" style="color: var(--warn);">Resultado CompetÃªncia</div><div class="kpi-value tnum mt-1" style="color: var(--neg);">â€“ R$ 490,27</div></div>
+                        </div>
+                        <div class="card overflow-hidden">
+                            <table class="data-table">
+                                <thead><tr><th>Categoria</th><th class="text-right" style="width:18%;">Valor</th><th class="text-right" style="width:18%;">Regime</th></tr></thead>
+                                <tbody>
+                                    <tr class="subhead"><td colspan="3" style="color: var(--pos);">â– Receita do mÃªs (Fev)</td></tr>
+                                    <tr><td class="font-semibold">Receita Total de Vendas / Outros</td><td class="text-right font-semibold tnum" style="color: var(--pos);">R$ 54.923,58</td><td class="text-right text-[11px] text-[var(--muted)]">caixa Fev</td></tr>
+
+                                    <tr class="subhead"><td colspan="3" style="color: var(--coral);">â– Despesas competÃªncia Fev Â· pagas em MarÃ§o</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">Pessoas</td><td class="text-right tnum">R$ 3.857,69</td><td class="text-right text-[11px]" style="color: var(--coral);">pago Mar</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">Royalties</td><td class="text-right tnum">R$ 4.517,12</td><td class="text-right text-[11px]" style="color: var(--coral);">pago Mar</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">Simples Nacional - DAS</td><td class="text-right tnum">R$ 2.492,55</td><td class="text-right text-[11px]" style="color: var(--coral);">pago Mar</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">ComissÃµes de Vendedores</td><td class="text-right tnum">R$ 1.770,95</td><td class="text-right text-[11px]" style="color: var(--coral);">pago Mar</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">HonorÃ¡rios ContÃ¡beis</td><td class="text-right tnum">R$ 1.939,89</td><td class="text-right text-[11px]" style="color: var(--coral);">pago Mar</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">CartÃ£o de CrÃ©dito (Nubank + Outros)</td><td class="text-right tnum">R$ 1.124,37</td><td class="text-right text-[11px]" style="color: var(--coral);">pago Mar</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">INSS sobre SalÃ¡rios</td><td class="text-right tnum">R$ 356,62</td><td class="text-right text-[11px]" style="color: var(--coral);">pago Mar</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">DIFAL</td><td class="text-right tnum">R$ 0,00</td><td class="text-right text-[11px]" style="color: var(--coral);">pago Mar</td></tr>
+                                    <tr><td class="pl-8 font-semibold">Subtotal deferidas</td><td class="text-right font-semibold tnum">R$ 16.059,19</td><td></td></tr>
+
+                                    <tr class="subhead"><td colspan="3" style="color: var(--ink);">â– Demais despesas Â· caixa do prÃ³prio Fev</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">Produtos</td><td class="text-right tnum">R$ 37.215,22</td><td class="text-right text-[11px] text-[var(--muted)]">caixa Fev</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">Fretes e LogÃ­stica</td><td class="text-right tnum">R$ 1.123,55</td><td class="text-right text-[11px] text-[var(--muted)]">caixa Fev</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">TrÃ¡fego (Facebook + outros)</td><td class="text-right tnum">R$ 877,96</td><td class="text-right text-[11px] text-[var(--muted)]">caixa Fev</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">Software / LicenÃ§as</td><td class="text-right tnum">R$ 50,22</td><td class="text-right text-[11px] text-[var(--muted)]">caixa Fev</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">Outros</td><td class="text-right tnum">R$ 87,71</td><td class="text-right text-[11px] text-[var(--muted)]">caixa Fev</td></tr>
+                                    <tr><td class="pl-8 font-semibold">Subtotal demais</td><td class="text-right font-semibold tnum">R$ 39.354,66</td><td></td></tr>
+
+                                    <tr class="total-row"><td>RESULTADO LÃQUIDO (COMPETÃŠNCIA)</td><td class="text-right tnum">â€“ R$ 490,27</td><td></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="card p-5 mt-5" style="background: var(--paper); border-left: 3px solid var(--cyan);">
+                            <div class="flex items-start gap-3">
+                                <div class="kpi-icon flex-shrink-0" style="background: var(--cyan-soft); color: var(--cyan-deep);"><i data-lucide="lightbulb" class="w-4 h-4"></i></div>
+                                <div>
+                                    <div class="text-[12px] font-semibold mb-1">Leitura gerencial de Fevereiro</div>
+                                    <p class="text-[12.5px] text-[var(--muted)] leading-relaxed">No regime de caixa, Fev fechou em â€“R$ 1.097. No regime de competÃªncia, o resultado Ã© praticamente o mesmo (â€“R$ 490), porque as deferidas pagas em Mar (R$ 16,1k) sÃ£o menores que as deferidas pagas em Fev e jogadas para Jan (R$ 16,7k). <strong class="text-[var(--ink)]">ConclusÃ£o:</strong> Fevereiro foi um mÃªs operacionalmente equilibrado â€” o desempenho real Ã© coerente com o caixa.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MAR COMPETÃŠNCIA -->
+                    <div id="month-drecomp-mar" class="month-content">
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-5 mb-6">
+                            <div class="card p-5"><div class="kpi-label">Receita Operacional</div><div class="kpi-value tnum mt-1" style="color: var(--pos);">R$ 28.575,62</div><div class="text-[10.5px] text-[var(--muted)] mt-1">exclui emprÃ©stimo</div></div>
+                            <div class="card p-5"><div class="kpi-label">Despesas CompetÃªncia</div><div class="kpi-value tnum mt-1" style="color: var(--neg);">R$ 16.889,11</div><div class="text-[10.5px] text-[var(--muted)] mt-1">pagas em Abril</div></div>
+                            <div class="card p-5"><div class="kpi-label">Demais (Caixa Mar)</div><div class="kpi-value tnum mt-1" style="color: var(--neg);">R$ 15.621,06</div></div>
+                            <div class="card p-5" style="border-color: var(--neg);"><div class="kpi-label" style="color: var(--neg);">Resultado CompetÃªncia</div><div class="kpi-value tnum mt-1" style="color: var(--neg);">â€“ R$ 3.934,55</div></div>
+                        </div>
+                        <div class="card overflow-hidden">
+                            <table class="data-table">
+                                <thead><tr><th>Categoria</th><th class="text-right" style="width:18%;">Valor</th><th class="text-right" style="width:18%;">Regime</th></tr></thead>
+                                <tbody>
+                                    <tr class="subhead"><td colspan="3" style="color: var(--pos);">â– Receita operacional MarÃ§o (sem emprÃ©stimo)</td></tr>
+                                    <tr><td class="font-semibold">Receita de Vendas (PIX + Dinheiro + Online + Rendimentos)</td><td class="text-right font-semibold tnum" style="color: var(--pos);">R$ 28.575,62</td><td class="text-right text-[11px] text-[var(--muted)]">caixa Mar</td></tr>
+
+                                    <tr class="subhead"><td colspan="3" style="color: var(--coral);">â– Despesas competÃªncia Mar Â· pagas em Abril</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">Pessoas</td><td class="text-right tnum">R$ 5.330,38</td><td class="text-right text-[11px]" style="color: var(--coral);">pago Abr</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">Royalties</td><td class="text-right tnum">R$ 3.806,23</td><td class="text-right text-[11px]" style="color: var(--coral);">pago Abr</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">HonorÃ¡rios ContÃ¡beis</td><td class="text-right tnum">R$ 2.139,89</td><td class="text-right text-[11px]" style="color: var(--coral);">pago Abr</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">CartÃ£o de CrÃ©dito (Nubank + Outros)</td><td class="text-right tnum">R$ 2.053,17</td><td class="text-right text-[11px]" style="color: var(--coral);">pago Abr</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">Simples Nacional - DAS</td><td class="text-right tnum">R$ 1.853,12</td><td class="text-right text-[11px]" style="color: var(--coral);">pago Abr</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">ComissÃµes de Vendedores</td><td class="text-right tnum">R$ 1.349,70</td><td class="text-right text-[11px]" style="color: var(--coral);">pago Abr</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">INSS sobre SalÃ¡rios</td><td class="text-right tnum">R$ 356,62</td><td class="text-right text-[11px]" style="color: var(--coral);">pago Abr</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">DIFAL</td><td class="text-right tnum">R$ 0,00</td><td class="text-right text-[11px]" style="color: var(--coral);">pago Abr</td></tr>
+                                    <tr><td class="pl-8 font-semibold">Subtotal deferidas</td><td class="text-right font-semibold tnum">R$ 16.889,11</td><td></td></tr>
+
+                                    <tr class="subhead"><td colspan="3" style="color: var(--ink);">â– Demais despesas Â· caixa do prÃ³prio MarÃ§o</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">Produtos</td><td class="text-right tnum">R$ 14.220,20</td><td class="text-right text-[11px] text-[var(--muted)]">caixa Mar</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">Fretes e LogÃ­stica</td><td class="text-right tnum">R$ 608,54</td><td class="text-right text-[11px] text-[var(--muted)]">caixa Mar</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">TrÃ¡fego (Facebook + Google)</td><td class="text-right tnum">R$ 480,00</td><td class="text-right text-[11px] text-[var(--muted)]">caixa Mar</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">Outros</td><td class="text-right tnum">R$ 312,32</td><td class="text-right text-[11px] text-[var(--muted)]">caixa Mar</td></tr>
+                                    <tr><td class="pl-8 font-semibold">Subtotal demais</td><td class="text-right font-semibold tnum">R$ 15.621,06</td><td></td></tr>
+
+                                    <tr class="total-row"><td>RESULTADO LÃQUIDO (COMPETÃŠNCIA)</td><td class="text-right tnum">â€“ R$ 3.934,55</td><td></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="card p-5 mt-5" style="background: var(--paper); border-left: 3px solid var(--coral);">
+                            <div class="flex items-start gap-3">
+                                <div class="kpi-icon flex-shrink-0" style="background: var(--coral-soft); color: var(--coral-deep);"><i data-lucide="alert-triangle" class="w-4 h-4"></i></div>
+                                <div>
+                                    <div class="text-[12px] font-semibold mb-1">Leitura gerencial de MarÃ§o</div>
+                                    <p class="text-[12.5px] text-[var(--muted)] leading-relaxed">No caixa, MarÃ§o apareceu como o melhor mÃªs (+R$ 25,4k), mas <strong class="text-[var(--ink)]">o resultado operacional real Ã© deficitÃ¡rio em R$ 3,9k</strong>. O caixa positivo deveu-se exclusivamente ao emprÃ©stimo bancÃ¡rio (R$ 28,5k) e ao adiamento natural das despesas para Abril. <strong class="text-[var(--ink)]">Sinal de alerta:</strong> a operaÃ§Ã£o nÃ£o estÃ¡ se sustentando.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ABR COMPETÃŠNCIA -->
+                    <div id="month-drecomp-abr" class="month-content">
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-5 mb-6">
+                            <div class="card p-5"><div class="kpi-label">Receita</div><div class="kpi-value tnum mt-1" style="color: var(--pos);">R$ 35.800,78</div></div>
+                            <div class="card p-5" style="border-style: dashed;"><div class="kpi-label">Despesas CompetÃªncia</div><div class="kpi-value tnum mt-1" style="color: var(--neg);">~ R$ 21.796</div><div class="text-[10.5px] text-[var(--warn)] mt-1 font-semibold">estimativa Â· Mai nÃ£o disponÃ­vel</div></div>
+                            <div class="card p-5"><div class="kpi-label">Demais (Caixa Abr)</div><div class="kpi-value tnum mt-1" style="color: var(--neg);">R$ 48.220,64</div></div>
+                            <div class="card p-5" style="border-color: var(--neg);"><div class="kpi-label" style="color: var(--neg);">Resultado Estimado</div><div class="kpi-value tnum mt-1" style="color: var(--neg);">~ â€“ R$ 34.216</div></div>
+                        </div>
+                        <div class="card overflow-hidden">
+                            <table class="data-table">
+                                <thead><tr><th>Categoria</th><th class="text-right" style="width:18%;">Valor</th><th class="text-right" style="width:18%;">Regime</th></tr></thead>
+                                <tbody>
+                                    <tr class="subhead"><td colspan="3" style="color: var(--pos);">â– Receita do mÃªs (Abr)</td></tr>
+                                    <tr><td class="font-semibold">Receita Total de Vendas / Outros</td><td class="text-right font-semibold tnum" style="color: var(--pos);">R$ 35.800,78</td><td class="text-right text-[11px] text-[var(--muted)]">caixa Abr</td></tr>
+
+                                    <tr class="subhead"><td colspan="3" style="color: var(--warn);">â– Despesas competÃªncia Abr Â· estimadas (a serem pagas em Maio)</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">Pessoas (estimado pela mÃ©dia trimestral)</td><td class="text-right tnum">~ R$ 5.330,00</td><td class="text-right text-[11px]" style="color: var(--warn);">estim. Mai</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">Royalties (estimado)</td><td class="text-right tnum">~ R$ 4.700,00</td><td class="text-right text-[11px]" style="color: var(--warn);">estim. Mai</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">Simples Nacional - DAS (estimado)</td><td class="text-right tnum">~ R$ 2.500,00</td><td class="text-right text-[11px]" style="color: var(--warn);">estim. Mai</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">HonorÃ¡rios ContÃ¡beis (estimado)</td><td class="text-right tnum">~ R$ 2.000,00</td><td class="text-right text-[11px]" style="color: var(--warn);">estim. Mai</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">DIFAL (estimado Â· mÃ©dia)</td><td class="text-right tnum">~ R$ 2.155,00</td><td class="text-right text-[11px]" style="color: var(--warn);">estim. Mai</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">CartÃ£o de CrÃ©dito (estimado)</td><td class="text-right tnum">~ R$ 1.654,00</td><td class="text-right text-[11px]" style="color: var(--warn);">estim. Mai</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">ComissÃµes de Vendedores (estimado)</td><td class="text-right tnum">~ R$ 1.466,00</td><td class="text-right text-[11px]" style="color: var(--warn);">estim. Mai</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">INSS sobre SalÃ¡rios (estimado)</td><td class="text-right tnum">~ R$ 356,00</td><td class="text-right text-[11px]" style="color: var(--warn);">estim. Mai</td></tr>
+                                    <tr><td class="pl-8 font-semibold">Subtotal deferidas (estimado)</td><td class="text-right font-semibold tnum">~ R$ 21.796,31</td><td></td></tr>
+
+                                    <tr class="subhead"><td colspan="3" style="color: var(--ink);">â– Demais despesas Â· caixa do prÃ³prio Abril</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">Produtos</td><td class="text-right tnum">R$ 47.178,01</td><td class="text-right text-[11px] text-[var(--muted)]">caixa Abr</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">Fretes e LogÃ­stica</td><td class="text-right tnum">R$ 692,32</td><td class="text-right text-[11px] text-[var(--muted)]">caixa Abr</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">TrÃ¡fego</td><td class="text-right tnum">R$ 350,00</td><td class="text-right text-[11px] text-[var(--muted)]">caixa Abr</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">Outros</td><td class="text-right tnum">R$ 0,31</td><td class="text-right text-[11px] text-[var(--muted)]">caixa Abr</td></tr>
+                                    <tr><td class="pl-8 font-semibold">Subtotal demais</td><td class="text-right font-semibold tnum">R$ 48.220,64</td><td></td></tr>
+
+                                    <tr class="total-row"><td>RESULTADO LÃQUIDO ESTIMADO (COMPETÃŠNCIA)</td><td class="text-right tnum">~ â€“ R$ 35.223,67</td><td></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="card p-5 mt-5" style="background: var(--paper); border-left: 3px solid var(--warn);">
+                            <div class="flex items-start gap-3">
+                                <div class="kpi-icon flex-shrink-0" style="background: var(--warn-soft); color: var(--warn);"><i data-lucide="info" class="w-4 h-4"></i></div>
+                                <div>
+                                    <div class="text-[12px] font-semibold mb-1">Leitura gerencial de Abril</div>
+                                    <p class="text-[12.5px] text-[var(--muted)] leading-relaxed">As deferidas de Abr serÃ£o pagas em Maio â€” sem os dados desse mÃªs, a estimativa usa a mÃ©dia histÃ³rica dos 4 meses anteriores. Mesmo com essa aproximaÃ§Ã£o, o panorama Ã© claro: <strong class="text-[var(--ink)]">a compra de Produtos de R$ 47,2k consumiu sozinha 136% da receita do mÃªs</strong>. Quando os dados de Maio chegarem, o nÃºmero ficarÃ¡ exato.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div><!-- /regime-comp -->
+            </section>
+
+            <!-- ===================================================================================== -->
+            <!-- 5. RECEBIMENTOS -->
+            <!-- ===================================================================================== -->
+            <section id="view-recebimentos" class="view-section">
+                <div class="mb-8 flex flex-col md:flex-row md:items-end md:justify-between gap-6 pb-6 border-b border-[var(--line)]">
+                    <div>
+                        <div class="h-eyebrow mb-2">CapÃ­tulo V Â· Recebimentos</div>
+                        <h2 class="h-section">ANÃLISE DE RECEBIMENTOS</h2>
+                        <p class="text-[13px] text-[var(--muted)] mt-2 max-w-xl">ComposiÃ§Ã£o das entradas mensais por canal e meio de pagamento.</p>
+                    </div>
+                    <div class="pill-group no-print">
+                        <button onclick="switchMonth('recebimentos','jan')" id="btn-month-recebimentos-jan" class="pill-btn">Jan</button>
+                        <button onclick="switchMonth('recebimentos','fev')" id="btn-month-recebimentos-fev" class="pill-btn">Fev</button>
+                        <button onclick="switchMonth('recebimentos','mar')" id="btn-month-recebimentos-mar" class="pill-btn">Mar</button>
+                        <button onclick="switchMonth('recebimentos','abr')" id="btn-month-recebimentos-abr" class="pill-btn active">Abr</button>
+                    </div>
+                </div>
+
+                <!-- JAN -->
+                <div id="month-recebimentos-jan" class="month-content">
+                    <div class="card overflow-hidden">
+                        <table class="data-table">
+                            <thead><tr><th class="w-1/3">Categoria</th><th class="w-1/2">Representatividade</th><th class="text-right">Valor</th></tr></thead>
+                            <tbody>
+                                <tr><td class="font-bold">Receita de Vendas - PIX</td><td><div class="flex items-center gap-3"><div class="bar-track flex-1"><div class="bar-fill" style="width: 88.74%; background: var(--coral);"></div></div><span class="number-tag w-14 text-right">88,74%</span></div></td><td class="text-right font-semibold tnum">R$ 34.666,06</td></tr>
+                                <tr><td class="font-semibold">Receita de Vendas - DÃ©bito</td><td><div class="flex items-center gap-3"><div class="bar-track flex-1"><div class="bar-fill" style="width: 7.74%; background: var(--cyan);"></div></div><span class="number-tag w-14 text-right">7,74%</span></div></td><td class="text-right font-semibold tnum">R$ 3.022,81</td></tr>
+                                <tr><td>Venda em Dinheiro</td><td><div class="flex items-center gap-3"><div class="bar-track flex-1"><div class="bar-fill" style="width: 2.49%; background: var(--ink);"></div></div><span class="number-tag w-14 text-right">2,49%</span></div></td><td class="text-right tnum">R$ 973,62</td></tr>
+                                <tr><td>Receita de Vendas - CrÃ©dito</td><td class="number-tag">0,43%</td><td class="text-right tnum">R$ 166,47</td></tr>
+                                <tr><td>Receita de MÃºsica</td><td class="number-tag">0,37%</td><td class="text-right tnum">R$ 144,37</td></tr>
+                                <tr><td>Receitas de ServiÃ§os</td><td class="number-tag">0,19%</td><td class="text-right tnum">R$ 75,47</td></tr>
+                                <tr><td>Rendimentos de AplicaÃ§Ãµes</td><td class="number-tag">0,04%</td><td class="text-right tnum">R$ 16,88</td></tr>
+                                <tr class="total-row"><td>Total do PerÃ­odo</td><td></td><td class="text-right tnum">R$ 39.065,68</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- FEV -->
+                <div id="month-recebimentos-fev" class="month-content">
+                    <div class="card overflow-hidden">
+                        <table class="data-table">
+                            <thead><tr><th class="w-1/3">Categoria</th><th class="w-1/2">Representatividade</th><th class="text-right">Valor</th></tr></thead>
+                            <tbody>
+                                <tr><td class="font-bold">Receita de Vendas - PIX</td><td><div class="flex items-center gap-3"><div class="bar-track flex-1"><div class="bar-fill" style="width: 95.63%; background: var(--coral);"></div></div><span class="number-tag w-14 text-right">95,63%</span></div></td><td class="text-right font-semibold tnum">R$ 52.522,03</td></tr>
+                                <tr><td class="font-semibold">Venda em Dinheiro</td><td><div class="flex items-center gap-3"><div class="bar-track flex-1"><div class="bar-fill" style="width: 3.66%; background: var(--cyan);"></div></div><span class="number-tag w-14 text-right">3,66%</span></div></td><td class="text-right font-semibold tnum">R$ 2.008,80</td></tr>
+                                <tr><td>Receita de Vendas - DÃ©bito</td><td class="number-tag">0,64%</td><td class="text-right tnum">R$ 351,89</td></tr>
+                                <tr><td>Receita de Vendas Online</td><td class="number-tag">0,03%</td><td class="text-right tnum">R$ 18,46</td></tr>
+                                <tr><td>Receita de Vendas - CrÃ©dito</td><td class="number-tag">0,02%</td><td class="text-right tnum">R$ 9,83</td></tr>
+                                <tr><td>Receita de MÃºsica</td><td class="number-tag">0,01%</td><td class="text-right tnum">R$ 7,92</td></tr>
+                                <tr><td>Rendimentos de AplicaÃ§Ãµes</td><td class="number-tag">0,01%</td><td class="text-right tnum">R$ 4,65</td></tr>
+                                <tr class="total-row"><td>Total do PerÃ­odo</td><td></td><td class="text-right tnum">R$ 54.923,58</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- MAR -->
+                <div id="month-recebimentos-mar" class="month-content">
+                    <div class="card overflow-hidden">
+                        <table class="data-table">
+                            <thead><tr><th class="w-1/3">Categoria</th><th class="w-1/2">Representatividade</th><th class="text-right">Valor</th></tr></thead>
+                            <tbody>
+                                <tr style="background: #FFF8F9;"><td class="font-bold" style="color: var(--coral);">EmprÃ©stimos de Bancos âš </td><td><div class="flex items-center gap-3"><div class="bar-track flex-1"><div class="bar-fill" style="width: 49.97%; background: var(--coral);"></div></div><span class="number-tag w-14 text-right" style="color: var(--coral);">49,97%</span></div></td><td class="text-right font-semibold tnum" style="color: var(--coral);">R$ 28.537,79</td></tr>
+                                <tr><td class="font-bold">Receita de Vendas - PIX</td><td><div class="flex items-center gap-3"><div class="bar-track flex-1"><div class="bar-fill" style="width: 49.17%; background: var(--cyan);"></div></div><span class="number-tag w-14 text-right">49,17%</span></div></td><td class="text-right font-semibold tnum">R$ 28.081,07</td></tr>
+                                <tr><td>Venda em Dinheiro</td><td><div class="flex items-center gap-3"><div class="bar-track flex-1"><div class="bar-fill" style="width: 0.83%; background: var(--ink);"></div></div><span class="number-tag w-14 text-right">0,83%</span></div></td><td class="text-right tnum">R$ 475,70</td></tr>
+                                <tr><td>Receita de Vendas Online</td><td class="number-tag">0,03%</td><td class="text-right tnum">R$ 17,58</td></tr>
+                                <tr><td>Rendimentos de AplicaÃ§Ãµes</td><td class="number-tag">0,00%</td><td class="text-right tnum">R$ 1,27</td></tr>
+                                <tr class="total-row"><td>Total do PerÃ­odo</td><td></td><td class="text-right tnum">R$ 57.113,41</td></tr>
+                            </tbody>
+                        </table>
+                        <div class="px-5 py-4 bg-[#FFF8F9] border-t border-[var(--coral)]/30 flex items-start gap-3">
+                            <i data-lucide="info" class="w-4 h-4 mt-0.5" style="color: var(--coral);"></i>
+                            <p class="text-[12px] text-[var(--ink)]/80"><strong style="color: var(--coral);">AtenÃ§Ã£o:</strong> Quase metade das entradas de MarÃ§o sÃ£o emprÃ©stimo (capital de terceiros), nÃ£o receita operacional. O total operacional puro foi <strong class="tnum">R$ 28.575,62</strong> (queda de 47,9% vs Fevereiro).</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ABR -->
+                <div id="month-recebimentos-abr" class="month-content active">
+                    <div class="card overflow-hidden">
+                        <table class="data-table">
+                            <thead><tr><th class="w-1/3">Categoria</th><th class="w-1/2">Representatividade</th><th class="text-right">Valor</th></tr></thead>
+                            <tbody>
+                                <tr><td class="font-bold">Receita de Vendas - PIX</td><td><div class="flex items-center gap-3"><div class="bar-track flex-1"><div class="bar-fill" style="width: 97.12%; background: var(--coral);"></div></div><span class="number-tag w-14 text-right">97,12%</span></div></td><td class="text-right font-semibold tnum">R$ 34.768,25</td></tr>
+                                <tr><td>Venda em Dinheiro</td><td><div class="flex items-center gap-3"><div class="bar-track flex-1"><div class="bar-fill" style="width: 2.81%; background: var(--ink);"></div></div><span class="number-tag w-14 text-right">2,81%</span></div></td><td class="text-right tnum">R$ 1.007,50</td></tr>
+                                <tr><td>Receita de Vendas Online</td><td class="number-tag">0,05%</td><td class="text-right tnum">R$ 17,34</td></tr>
+                                <tr><td>Rendimentos de AplicaÃ§Ãµes</td><td class="number-tag">0,02%</td><td class="text-right tnum">R$ 7,69</td></tr>
+                                <tr class="total-row"><td>Total do PerÃ­odo</td><td></td><td class="text-right tnum">R$ 35.800,78</td></tr>
+                            </tbody>
+                        </table>
+                        <div class="px-5 py-4 bg-[var(--cyan-soft)] border-t border-[var(--cyan)]/30 flex items-start gap-3">
+                            <i data-lucide="info" class="w-4 h-4 mt-0.5" style="color: var(--cyan-deep);"></i>
+                            <p class="text-[12px] text-[var(--ink)]/80"><strong style="color: var(--cyan-deep);">PIX concentra 97,1% dos recebimentos:</strong> incluÃ­das as vendas em dinheiro de Abril (R$ 1.007,50), conforme o Fechamento de Caixa. O PIX segue como principal meio de recebimento do mÃªs.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===================================================================================== -->
+            <!-- 6. PAGAMENTOS -->
+            <!-- ===================================================================================== -->
+            <section id="view-pagamentos" class="view-section">
+                <div class="mb-8 flex flex-col md:flex-row md:items-end md:justify-between gap-6 pb-6 border-b border-[var(--line)]">
+                    <div>
+                        <div class="h-eyebrow mb-2">CapÃ­tulo VI Â· Pagamentos</div>
+                        <h2 class="h-section">ANÃLISE DE PAGAMENTOS</h2>
+                        <p class="text-[13px] text-[var(--muted)] mt-2 max-w-xl">CategorizaÃ§Ã£o detalhada das saÃ­das mensais com representatividade no total.</p>
+                    </div>
+                    <div class="pill-group no-print">
+                        <button onclick="switchMonth('pagamentos','jan')" id="btn-month-pagamentos-jan" class="pill-btn">Jan</button>
+                        <button onclick="switchMonth('pagamentos','fev')" id="btn-month-pagamentos-fev" class="pill-btn">Fev</button>
+                        <button onclick="switchMonth('pagamentos','mar')" id="btn-month-pagamentos-mar" class="pill-btn">Mar</button>
+                        <button onclick="switchMonth('pagamentos','abr')" id="btn-month-pagamentos-abr" class="pill-btn active">Abr</button>
+                    </div>
+                </div>
+
+                <!-- JAN -->
+                <div id="month-pagamentos-jan" class="month-content">
+                    <div class="card overflow-hidden">
+                        <table class="data-table">
+                            <thead><tr><th class="w-1/3">Categoria</th><th class="w-1/2">Representatividade</th><th class="text-right">Valor</th></tr></thead>
+                            <tbody>
+                                <tr><td class="font-bold">Produtos</td><td><div class="flex items-center gap-3"><div class="bar-track flex-1"><div class="bar-fill" style="width: 25.61%; background: var(--coral);"></div></div><span class="number-tag w-14 text-right">25,61%</span></div></td><td class="text-right font-semibold tnum">R$ 17.239,23</td></tr>
+                                <tr><td class="font-bold">DistribuiÃ§Ã£o de Lucros</td><td><div class="flex items-center gap-3"><div class="bar-track flex-1"><div class="bar-fill" style="width: 17.83%; background: var(--coral);"></div></div><span class="number-tag w-14 text-right">17,83%</span></div></td><td class="text-right font-semibold tnum">R$ 12.000,00</td></tr>
+                                <tr><td class="font-bold">Royalties</td><td><div class="flex items-center gap-3"><div class="bar-track flex-1"><div class="bar-fill" style="width: 15.67%; background: var(--cyan);"></div></div><span class="number-tag w-14 text-right">15,67%</span></div></td><td class="text-right font-semibold tnum">R$ 10.547,90</td></tr>
+                                <tr><td class="font-semibold">DIFAL</td><td><div class="flex items-center gap-3"><div class="bar-track flex-1"><div class="bar-fill" style="width: 11.31%; background: var(--cyan);"></div></div><span class="number-tag w-14 text-right">11,31%</span></div></td><td class="text-right font-semibold tnum">R$ 7.614,63</td></tr>
+                                <tr><td class="font-semibold">Pessoas</td><td><div class="flex items-center gap-3"><div class="bar-track flex-1"><div class="bar-fill" style="width: 10.41%; background: var(--ink);"></div></div><span class="number-tag w-14 text-right">10,41%</span></div></td><td class="text-right font-semibold tnum">R$ 7.008,17</td></tr>
+                                <tr><td>Simples Nacional - DAS</td><td><div class="flex items-center gap-3"><div class="bar-track flex-1"><div class="bar-fill" style="width: 7.52%; background: var(--ink);"></div></div><span class="number-tag w-14 text-right">7,52%</span></div></td><td class="text-right tnum">R$ 5.062,50</td></tr>
+                                <tr><td>ComissÃµes de Vendedores</td><td><div class="flex items-center gap-3"><div class="bar-track flex-1"><div class="bar-fill" style="width: 5.39%; background: var(--ink);"></div></div><span class="number-tag w-14 text-right">5,39%</span></div></td><td class="text-right tnum">R$ 3.630,04</td></tr>
+                                <tr><td>CartÃ£o de CrÃ©dito Nubank</td><td class="number-tag">2,86%</td><td class="text-right tnum">R$ 1.924,78</td></tr>
+                                <tr><td>HonorÃ¡rios ContÃ¡beis</td><td class="number-tag">1,12%</td><td class="text-right tnum">R$ 752,50</td></tr>
+                                <tr><td>Fretes e LogÃ­stica</td><td class="number-tag">0,74%</td><td class="text-right tnum">R$ 495,42</td></tr>
+                                <tr><td>INSS sobre PrÃ³-labore</td><td class="number-tag">0,53%</td><td class="text-right tnum">R$ 358,22</td></tr>
+                                <tr><td>CartÃ£o de CrÃ©dito - Outros</td><td class="number-tag">0,50%</td><td class="text-right tnum">R$ 337,82</td></tr>
+                                <tr><td>INSS sobre SalÃ¡rios - GPS</td><td class="number-tag">0,50%</td><td class="text-right tnum">R$ 333,96</td></tr>
+                                <tr class="total-row"><td>Total do PerÃ­odo</td><td></td><td class="text-right tnum">R$ 67.305,17</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- FEV -->
+                <div id="month-pagamentos-fev" class="month-content">
+                    <div class="card overflow-hidden">
+                        <table class="data-table">
+                            <thead><tr><th class="w-1/3">Categoria</th><th class="w-1/2">Representatividade</th><th class="text-right">Valor</th></tr></thead>
+                            <tbody>
+                                <tr><td class="font-bold">Produtos</td><td><div class="flex items-center gap-3"><div class="bar-track flex-1"><div class="bar-fill" style="width: 66.43%; background: var(--coral);"></div></div><span class="number-tag w-14 text-right">66,43%</span></div></td><td class="text-right font-semibold tnum">R$ 37.215,22</td></tr>
+                                <tr><td class="font-bold">Pessoas</td><td><div class="flex items-center gap-3"><div class="bar-track flex-1"><div class="bar-fill" style="width: 9.18%; background: var(--cyan);"></div></div><span class="number-tag w-14 text-right">9,18%</span></div></td><td class="text-right font-semibold tnum">R$ 5.140,38</td></tr>
+                                <tr><td class="font-semibold">Royalties</td><td><div class="flex items-center gap-3"><div class="bar-track flex-1"><div class="bar-fill" style="width: 8.54%; background: var(--cyan);"></div></div><span class="number-tag w-14 text-right">8,54%</span></div></td><td class="text-right font-semibold tnum">R$ 4.786,04</td></tr>
+                                <tr><td>Simples Nacional - DAS</td><td><div class="flex items-center gap-3"><div class="bar-track flex-1"><div class="bar-fill" style="width: 3.69%; background: var(--ink);"></div></div><span class="number-tag w-14 text-right">3,69%</span></div></td><td class="text-right tnum">R$ 2.069,83</td></tr>
+                                <tr><td>HonorÃ¡rios ContÃ¡beis</td><td><div class="flex items-center gap-3"><div class="bar-track flex-1"><div class="bar-fill" style="width: 3.32%; background: var(--ink);"></div></div><span class="number-tag w-14 text-right">3,32%</span></div></td><td class="text-right tnum">R$ 1.857,69</td></tr>
+                                <tr><td>Fretes e LogÃ­stica</td><td class="number-tag">2,01%</td><td class="text-right tnum">R$ 1.123,55</td></tr>
+                                <tr><td>ComissÃµes de Vendedores</td><td class="number-tag">1,99%</td><td class="text-right tnum">R$ 1.115,42</td></tr>
+                                <tr><td>DIFAL</td><td class="number-tag">1,79%</td><td class="text-right tnum">R$ 1.002,62</td></tr>
+                                <tr><td>TrÃ¡fego</td><td class="number-tag">1,57%</td><td class="text-right tnum">R$ 877,96</td></tr>
+                                <tr><td>INSS sobre SalÃ¡rios - GPS</td><td class="number-tag">0,64%</td><td class="text-right tnum">R$ 356,62</td></tr>
+                                <tr><td>CartÃ£o de CrÃ©dito - Outros</td><td class="number-tag">0,60%</td><td class="text-right tnum">R$ 337,82</td></tr>
+                                <tr><td>Software/LicenÃ§a de Uso</td><td class="number-tag">0,09%</td><td class="text-right tnum">R$ 50,22</td></tr>
+                                <tr><td>Juros pagos</td><td class="number-tag">0,07%</td><td class="text-right tnum">R$ 39,76</td></tr>
+                                <tr><td>Multas pagas</td><td class="number-tag">0,07%</td><td class="text-right tnum">R$ 38,64</td></tr>
+                                <tr><td>IOF</td><td class="number-tag">0,02%</td><td class="text-right tnum">R$ 9,31</td></tr>
+                                <tr class="total-row"><td>Total do PerÃ­odo</td><td></td><td class="text-right tnum">R$ 56.021,08</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- MAR -->
+                <div id="month-pagamentos-mar" class="month-content">
+                    <div class="card overflow-hidden">
+                        <table class="data-table">
+                            <thead><tr><th class="w-1/3">Categoria</th><th class="w-1/2">Representatividade</th><th class="text-right">Valor</th></tr></thead>
+                            <tbody>
+                                <tr><td class="font-bold">Produtos</td><td><div class="flex items-center gap-3"><div class="bar-track flex-1"><div class="bar-fill" style="width: 46.28%; background: var(--coral);"></div></div><span class="number-tag w-14 text-right">46,28%</span></div></td><td class="text-right font-semibold tnum">R$ 14.662,52</td></tr>
+                                <tr><td class="font-bold">Royalties</td><td><div class="flex items-center gap-3"><div class="bar-track flex-1"><div class="bar-fill" style="width: 14.26%; background: var(--cyan);"></div></div><span class="number-tag w-14 text-right">14,26%</span></div></td><td class="text-right font-semibold tnum">R$ 4.517,12</td></tr>
+                                <tr><td class="font-semibold">Pessoas</td><td><div class="flex items-center gap-3"><div class="bar-track flex-1"><div class="bar-fill" style="width: 12.18%; background: var(--cyan);"></div></div><span class="number-tag w-14 text-right">12,18%</span></div></td><td class="text-right font-semibold tnum">R$ 3.857,69</td></tr>
+                                <tr><td class="font-semibold">Simples Nacional - DAS</td><td><div class="flex items-center gap-3"><div class="bar-track flex-1"><div class="bar-fill" style="width: 7.87%; background: var(--ink);"></div></div><span class="number-tag w-14 text-right">7,87%</span></div></td><td class="text-right font-semibold tnum">R$ 2.492,55</td></tr>
+                                <tr><td>HonorÃ¡rios ContÃ¡beis</td><td><div class="flex items-center gap-3"><div class="bar-track flex-1"><div class="bar-fill" style="width: 6.12%; background: var(--ink);"></div></div><span class="number-tag w-14 text-right">6,12%</span></div></td><td class="text-right tnum">R$ 1.939,89</td></tr>
+                                <tr><td>ComissÃµes de Vendedores</td><td><div class="flex items-center gap-3"><div class="bar-track flex-1"><div class="bar-fill" style="width: 5.59%; background: var(--ink);"></div></div><span class="number-tag w-14 text-right">5,59%</span></div></td><td class="text-right tnum">R$ 1.770,95</td></tr>
+                                <tr><td>Fretes e LogÃ­stica</td><td class="number-tag">1,92%</td><td class="text-right tnum">R$ 608,54</td></tr>
+                                <tr><td>CartÃ£o de CrÃ©dito Nubank</td><td class="number-tag">1,87%</td><td class="text-right tnum">R$ 592,65</td></tr>
+                                <tr><td>CartÃ£o de CrÃ©dito - Outros</td><td class="number-tag">1,68%</td><td class="text-right tnum">R$ 531,72</td></tr>
+                                <tr><td>INSS sobre SalÃ¡rios - GPS</td><td class="number-tag">1,13%</td><td class="text-right tnum">R$ 356,62</td></tr>
+                                <tr><td>TrÃ¡fego</td><td class="number-tag">1,10%</td><td class="text-right tnum">R$ 350,00</td></tr>
+                                <tr class="total-row"><td>Total do PerÃ­odo</td><td></td><td class="text-right tnum">R$ 31.680,25</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- ABR -->
+                <div id="month-pagamentos-abr" class="month-content active">
+                    <div class="card overflow-hidden">
+                        <table class="data-table">
+                            <thead><tr><th class="w-1/3">Categoria</th><th class="w-1/2">Representatividade</th><th class="text-right">Valor</th></tr></thead>
+                            <tbody>
+                                <tr><td class="font-bold">Produtos</td><td><div class="flex items-center gap-3"><div class="bar-track flex-1"><div class="bar-fill" style="width: 72.46%; background: var(--coral);"></div></div><span class="number-tag w-14 text-right">72,46%</span></div></td><td class="text-right font-semibold tnum">R$ 47.178,32</td></tr>
+                                <tr><td class="font-bold">Pessoas</td><td><div class="flex items-center gap-3"><div class="bar-track flex-1"><div class="bar-fill" style="width: 8.19%; background: var(--cyan);"></div></div><span class="number-tag w-14 text-right">8,19%</span></div></td><td class="text-right font-semibold tnum">R$ 5.330,38</td></tr>
+                                <tr><td class="font-semibold">Royalties</td><td><div class="flex items-center gap-3"><div class="bar-track flex-1"><div class="bar-fill" style="width: 5.85%; background: var(--cyan);"></div></div><span class="number-tag w-14 text-right">5,85%</span></div></td><td class="text-right font-semibold tnum">R$ 3.806,23</td></tr>
+                                <tr><td class="font-semibold">HonorÃ¡rios ContÃ¡beis</td><td><div class="flex items-center gap-3"><div class="bar-track flex-1"><div class="bar-fill" style="width: 3.29%; background: var(--ink);"></div></div><span class="number-tag w-14 text-right">3,29%</span></div></td><td class="text-right font-semibold tnum">R$ 2.139,89</td></tr>
+                                <tr><td>Simples Nacional - DAS</td><td><div class="flex items-center gap-3"><div class="bar-track flex-1"><div class="bar-fill" style="width: 2.85%; background: var(--ink);"></div></div><span class="number-tag w-14 text-right">2,85%</span></div></td><td class="text-right tnum">R$ 1.853,12</td></tr>
+                                <tr><td>CartÃ£o de CrÃ©dito Nubank</td><td><div class="flex items-center gap-3"><div class="bar-track flex-1"><div class="bar-fill" style="width: 2.34%; background: var(--ink);"></div></div><span class="number-tag w-14 text-right">2,34%</span></div></td><td class="text-right tnum">R$ 1.521,45</td></tr>
+                                <tr><td>ComissÃµes de Vendedores</td><td class="number-tag">2,07%</td><td class="text-right tnum">R$ 1.349,70</td></tr>
+                                <tr><td>Fretes e LogÃ­stica</td><td class="number-tag">1,06%</td><td class="text-right tnum">R$ 692,32</td></tr>
+                                <tr><td>CartÃ£o de CrÃ©dito - Outros</td><td class="number-tag">0,82%</td><td class="text-right tnum">R$ 531,72</td></tr>
+                                <tr><td>INSS sobre SalÃ¡rios - GPS</td><td class="number-tag">0,55%</td><td class="text-right tnum">R$ 356,62</td></tr>
+                                <tr><td>TrÃ¡fego</td><td class="number-tag">0,54%</td><td class="text-right tnum">R$ 350,00</td></tr>
+                                <tr class="total-row"><td>Total do PerÃ­odo</td><td></td><td class="text-right tnum">R$ 65.109,75</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===================================================================================== -->
+            <!-- 7. NUVEMSHOP -->
+            <!-- ===================================================================================== -->
+            <section id="view-nuvemshop" class="view-section">
+                <div class="mb-8 flex flex-col md:flex-row md:items-end md:justify-between gap-6 pb-6 border-b border-[var(--line)]">
+                    <div>
+                        <div class="h-eyebrow mb-2">CapÃ­tulo VII Â· E-commerce</div>
+                        <h2 class="h-section">NUVEMSHOP Â· E-COMMERCE</h2>
+                        <p class="text-[13px] text-[var(--muted)] mt-2 max-w-xl">Demonstrativo de pedidos, taxas e margem lÃ­quida do canal digital, conciliado pedido a pedido.</p>
+                    </div>
+                    <div class="pill-group no-print">
+                        <button onclick="switchMonth('nuvemshop','jan')" id="btn-month-nuvemshop-jan" class="pill-btn">Jan</button>
+                        <button onclick="switchMonth('nuvemshop','fev')" id="btn-month-nuvemshop-fev" class="pill-btn">Fev</button>
+                        <button onclick="switchMonth('nuvemshop','mar')" id="btn-month-nuvemshop-mar" class="pill-btn">Mar</button>
+                        <button onclick="switchMonth('nuvemshop','abr')" id="btn-month-nuvemshop-abr" class="pill-btn active">Abr</button>
+                    </div>
+                </div>
+
+                <!-- Quadro evolutivo -->
+                <div class="card p-6 mb-6" style="background: var(--ink); color: white; border-color: var(--ink);">
+                    <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+                        <div>
+                            <div class="text-[10px] uppercase tracking-[0.18em] text-white/40">Total Pedidos Â· 4M</div>
+                            <div class="font-display text-[26px] mt-1 tnum text-white">97</div>
+                        </div>
+                        <div>
+                            <div class="text-[10px] uppercase tracking-[0.18em] text-white/40">Liquidados</div>
+                            <div class="font-display text-[26px] mt-1 tnum" style="color: var(--cyan);">93</div>
+                        </div>
+                        <div>
+                            <div class="text-[10px] uppercase tracking-[0.18em] text-white/40">Recusados/Pendentes</div>
+                            <div class="font-display text-[26px] mt-1 tnum" style="color: var(--coral);">4</div>
+                        </div>
+                        <div>
+                            <div class="text-[10px] uppercase tracking-[0.18em] text-white/40">Lucro LÃ­quido Â· 4M (c/ frete)</div>
+                            <div class="font-display text-[26px] mt-1 tnum text-white">R$ 17.980</div>
+                        </div>
+                        <div>
+                            <div class="text-[10px] uppercase tracking-[0.18em] text-white/40">Ticket MÃ©dio LÃ­quido</div>
+                            <div class="font-display text-[26px] mt-1 tnum text-white">R$ 224,69</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- JAN -->
+                <div id="month-nuvemshop-jan" class="month-content">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
+                        <div class="card p-5"><div class="kpi-label">Receita Bruta</div><div class="kpi-value tnum mt-1">R$ 5.152,23</div></div>
+                        <div class="card p-5"><div class="kpi-label">Receita LÃ­quida</div><div class="kpi-value tnum mt-1" style="color: var(--pos);">R$ 5.494,02</div></div>
+                        <div class="card p-5" style="border-color: var(--cyan); background: var(--cyan-soft);"><div class="kpi-label" style="color: var(--cyan-deep);">Lucro Final Â· apÃ³s frete</div><div class="kpi-value tnum mt-1" style="color: var(--cyan-deep);">R$ 4.664,67</div></div>
+                    </div>
+                    <div class="card overflow-hidden">
+                        <table class="data-table">
+                            <thead><tr><th>DescriÃ§Ã£o</th><th class="text-right">Valor</th></tr></thead>
+                            <tbody>
+                                <tr><td class="font-bold">Receita Bruta Â· Produtos</td><td class="text-right font-semibold tnum">R$ 5.152,23</td></tr>
+                                <tr><td class="pl-6 border-l-[3px] border-[var(--cyan)]">Frete (Recebido)</td><td class="text-right tnum">R$ 1.006,49</td></tr>
+                                <tr><td class="pl-6 border-l-[3px] border-[var(--coral)]">Descontos</td><td class="text-right tnum" style="color: var(--neg);">(R$ 314,71)</td></tr>
+                                <tr><td class="pl-6 border-l-[3px] border-[var(--coral)]">Estorno</td><td class="text-right tnum" style="color: var(--neg);">(R$ 12,08)</td></tr>
+                                <tr><td class="pl-6 border-l-[3px] border-[var(--coral)]">Taxas</td><td class="text-right tnum" style="color: var(--neg);">(R$ 214,74)</td></tr>
+                                <tr><td class="pl-6 border-l-[3px] border-[var(--coral)]">Juros</td><td class="text-right tnum" style="color: var(--neg);">(R$ 124,64)</td></tr>
+                                <tr><td class="pl-6 border-l-[3px] border-[var(--pos)]">DevoluÃ§Ã£o de Custos</td><td class="text-right tnum" style="color: var(--pos);">R$ 1,47</td></tr>
+                                <tr style="background: #FAFAF7;"><td class="font-bold">(=) Receita LÃ­quida</td><td class="text-right font-semibold tnum" style="color: var(--pos);">R$ 5.494,02</td></tr>
+                                <tr><td class="pl-6 border-l-[3px] border-[var(--warn)]">Pedidos Recusados</td><td class="text-right tnum" style="color: var(--warn);">(R$ 333,93)</td></tr>
+                                <tr><td class="pl-6 border-l-[3px] border-[var(--coral)]">Fretes e LogÃ­stica <span class="number-tag ml-1">custo de envio Â· caixa Jan</span></td><td class="text-right tnum" style="color: var(--neg);">(R$ 495,42)</td></tr>
+                                <tr class="total-row"><td>Lucro LÃ­quido E-commerce Â· apÃ³s frete</td><td class="text-right tnum">R$ 4.664,67</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- FEV -->
+                <div id="month-nuvemshop-fev" class="month-content">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
+                        <div class="card p-5"><div class="kpi-label">Receita Bruta</div><div class="kpi-value tnum mt-1">R$ 4.489,53</div></div>
+                        <div class="card p-5"><div class="kpi-label">Receita LÃ­quida</div><div class="kpi-value tnum mt-1" style="color: var(--pos);">R$ 4.475,02</div></div>
+                        <div class="card p-5" style="border-color: var(--cyan); background: var(--cyan-soft);"><div class="kpi-label" style="color: var(--cyan-deep);">Lucro Final Â· apÃ³s frete</div><div class="kpi-value tnum mt-1" style="color: var(--cyan-deep);">R$ 3.153,65</div></div>
+                    </div>
+                    <div class="card overflow-hidden">
+                        <table class="data-table">
+                            <thead><tr><th>DescriÃ§Ã£o</th><th class="text-right">Valor</th></tr></thead>
+                            <tbody>
+                                <tr><td class="font-bold">Receita Bruta Â· Produtos</td><td class="text-right font-semibold tnum">R$ 4.489,53</td></tr>
+                                <tr><td class="pl-6 border-l-[3px] border-[var(--cyan)]">Frete (Recebido)</td><td class="text-right tnum">R$ 567,98</td></tr>
+                                <tr><td class="pl-6 border-l-[3px] border-[var(--coral)]">Descontos (Frete GrÃ¡tis + Cupons)</td><td class="text-right tnum" style="color: var(--neg);">(R$ 265,63)</td></tr>
+                                <tr><td class="pl-6 border-l-[3px] border-[var(--coral)]">Estorno (Order #2185)</td><td class="text-right tnum" style="color: var(--neg);">(R$ 12,73)</td></tr>
+                                <tr><td class="pl-6 border-l-[3px] border-[var(--coral)]">Taxas (Nuvem Pago)</td><td class="text-right tnum" style="color: var(--neg);">(R$ 305,53)</td></tr>
+                                <tr><td class="pl-6 border-l-[3px] border-[var(--coral)]">Juros</td><td class="text-right tnum" style="color: var(--neg);">(R$ 0,00)</td></tr>
+                                <tr><td class="pl-6 border-l-[3px] border-[var(--pos)]">DevoluÃ§Ã£o de Custos</td><td class="text-right tnum" style="color: var(--pos);">R$ 1,40</td></tr>
+                                <tr style="background: #FAFAF7;"><td class="font-bold">(=) Receita LÃ­quida</td><td class="text-right font-semibold tnum" style="color: var(--pos);">R$ 4.475,02</td></tr>
+                                <tr><td class="pl-6 border-l-[3px] border-[var(--warn)]">Pedidos Pendentes (Boleto/Pix)</td><td class="text-right tnum" style="color: var(--warn);">(R$ 197,82)</td></tr>
+                                <tr><td class="pl-6 border-l-[3px] border-[var(--coral)]">Fretes e LogÃ­stica <span class="number-tag ml-1">custo de envio Â· caixa Fev</span></td><td class="text-right tnum" style="color: var(--neg);">(R$ 1.123,55)</td></tr>
+                                <tr class="total-row"><td>Lucro LÃ­quido E-commerce Â· apÃ³s frete</td><td class="text-right tnum">R$ 3.153,65</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- MAR -->
+                <div id="month-nuvemshop-mar" class="month-content">
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-5 mb-6">
+                        <div class="card p-5"><div class="kpi-label">Pedidos</div><div class="kpi-value tnum mt-1">26</div><div class="text-[10.5px] text-[var(--muted)] mt-1">100% liquidados</div></div>
+                        <div class="card p-5"><div class="kpi-label">Subtotal Bruto</div><div class="kpi-value tnum mt-1">R$ 3.388,89</div></div>
+                        <div class="card p-5"><div class="kpi-label">Total Pago p/ Cliente</div><div class="kpi-value tnum mt-1" style="color: var(--pos);">R$ 3.648,89</div></div>
+                        <div class="card p-5" style="border-color: var(--cyan); background: var(--cyan-soft);"><div class="kpi-label" style="color: var(--cyan-deep);">Lucro Final Â· apÃ³s frete</div><div class="kpi-value tnum mt-1" style="color: var(--cyan-deep);">R$ 2.736,27</div></div>
+                    </div>
+                    <div class="card overflow-hidden">
+                        <table class="data-table">
+                            <thead><tr><th>DescriÃ§Ã£o</th><th class="text-right">Valor</th></tr></thead>
+                            <tbody>
+                                <tr><td class="font-bold">Subtotal Â· Produtos</td><td class="text-right font-semibold tnum">R$ 3.388,89</td></tr>
+                                <tr><td class="pl-6 border-l-[3px] border-[var(--cyan)]">Frete (Recebido)</td><td class="text-right tnum">R$ 491,65</td></tr>
+                                <tr><td class="pl-6 border-l-[3px] border-[var(--coral)]">Cupom</td><td class="text-right tnum" style="color: var(--neg);">(R$ 168,85)</td></tr>
+                                <tr><td class="pl-6 border-l-[3px] border-[var(--coral)]">Desconto por Frete GrÃ¡tis</td><td class="text-right tnum" style="color: var(--neg);">(R$ 41,67)</td></tr>
+                                <tr><td class="pl-6 border-l-[3px] border-[var(--coral)]">Estorno</td><td class="text-right tnum" style="color: var(--neg);">(R$ 21,13)</td></tr>
+                                <tr style="background: #FAFAF7;"><td class="font-bold">(=) Total Pago pelo Cliente</td><td class="text-right font-semibold tnum" style="color: var(--pos);">R$ 3.648,89</td></tr>
+                                <tr><td class="pl-6 border-l-[3px] border-[var(--coral)]">Taxas Nuvem Pago</td><td class="text-right tnum" style="color: var(--neg);">(R$ 306,66)</td></tr>
+                                <tr><td class="pl-6 border-l-[3px] border-[var(--coral)]">Juros</td><td class="text-right tnum" style="color: var(--neg);">R$ 0,00</td></tr>
+                                <tr><td class="pl-6 border-l-[3px] border-[var(--pos)]">DevoluÃ§Ã£o de Custos</td><td class="text-right tnum" style="color: var(--pos);">R$ 2,58</td></tr>
+                                <tr><td class="pl-6 border-l-[3px] border-[var(--coral)]">Fretes e LogÃ­stica <span class="number-tag ml-1">custo de envio Â· caixa Mar</span></td><td class="text-right tnum" style="color: var(--neg);">(R$ 608,54)</td></tr>
+                                <tr class="total-row"><td>Lucro LÃ­quido E-commerce Â· apÃ³s frete</td><td class="text-right tnum">R$ 2.736,27</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- ABR -->
+                <div id="month-nuvemshop-abr" class="month-content active">
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-5 mb-6">
+                        <div class="card p-5"><div class="kpi-label">Pedidos</div><div class="kpi-value tnum mt-1">71</div><div class="text-[10.5px] mt-1" style="color: var(--pos);">+173% vs Mar</div></div>
+                        <div class="card p-5"><div class="kpi-label">Liquidados</div><div class="kpi-value tnum mt-1" style="color: var(--pos);">67</div><div class="text-[10.5px] text-[var(--muted)] mt-1">94,4% taxa de conversÃ£o</div></div>
+                        <div class="card p-5"><div class="kpi-label">Total Pago p/ Cliente</div><div class="kpi-value tnum mt-1" style="color: var(--pos);">R$ 8.757,75</div></div>
+                        <div class="card p-5" style="border-color: var(--cyan); background: var(--cyan-soft);"><div class="kpi-label" style="color: var(--cyan-deep);">Lucro Final Â· apÃ³s frete</div><div class="kpi-value tnum mt-1" style="color: var(--cyan-deep);">R$ 7.425,01</div></div>
+                    </div>
+                    <div class="card overflow-hidden mb-5">
+                        <table class="data-table">
+                            <thead><tr><th>DescriÃ§Ã£o</th><th class="text-right">Valor (liquidados)</th></tr></thead>
+                            <tbody>
+                                <tr><td class="font-bold">Subtotal Â· Produtos</td><td class="text-right font-semibold tnum">R$ 8.812,80</td></tr>
+                                <tr><td class="pl-6 border-l-[3px] border-[var(--cyan)]">Frete (Recebido)</td><td class="text-right tnum">R$ 451,64</td></tr>
+                                <tr><td class="pl-6 border-l-[3px] border-[var(--coral)]">Cupom</td><td class="text-right tnum" style="color: var(--neg);">(R$ 229,19)</td></tr>
+                                <tr><td class="pl-6 border-l-[3px] border-[var(--coral)]">Estorno</td><td class="text-right tnum" style="color: var(--neg);">(R$ 277,50)</td></tr>
+                                <tr style="background: #FAFAF7;"><td class="font-bold">(=) Total Pago pelo Cliente</td><td class="text-right font-semibold tnum" style="color: var(--pos);">R$ 8.757,75</td></tr>
+                                <tr><td class="pl-6 border-l-[3px] border-[var(--coral)]">Taxas Nuvem Pago</td><td class="text-right tnum" style="color: var(--neg);">(R$ 644,26)</td></tr>
+                                <tr><td class="pl-6 border-l-[3px] border-[var(--coral)]">Juros</td><td class="text-right tnum" style="color: var(--neg);">R$ 0,00</td></tr>
+                                <tr><td class="pl-6 border-l-[3px] border-[var(--pos)]">DevoluÃ§Ã£o de Custos</td><td class="text-right tnum" style="color: var(--pos);">R$ 3,84</td></tr>
+                                <tr><td class="pl-6 border-l-[3px] border-[var(--coral)]">Fretes e LogÃ­stica <span class="number-tag ml-1">custo de envio Â· caixa Abr</span></td><td class="text-right tnum" style="color: var(--neg);">(R$ 692,32)</td></tr>
+                                <tr class="total-row"><td>Lucro LÃ­quido E-commerce Â· apÃ³s frete</td><td class="text-right tnum">R$ 7.425,01</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Quadro de auditoria -->
+                    <div class="card p-6">
+                        <div class="flex items-center gap-2 mb-4">
+                            <div class="w-1 h-5 rounded-full" style="background: var(--cyan);"></div>
+                            <h3 class="h-card">Quadro de Auditoria Â· Abril</h3>
+                            <span class="number-tag ml-auto">ConciliaÃ§Ã£o pedido a pedido</span>
+                        </div>
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 text-[12px]">
+                            <div class="p-3 rounded border border-[var(--line)] bg-[#FAFAF7]"><div class="number-tag">Pedidos filtrados</div><div class="font-display text-[18px] tnum">71</div></div>
+                            <div class="p-3 rounded border border-[var(--line)] bg-[#FAFAF7]"><div class="number-tag">Liquidados</div><div class="font-display text-[18px] tnum" style="color: var(--pos);">67</div></div>
+                            <div class="p-3 rounded border border-[var(--line)] bg-[#FAFAF7]"><div class="number-tag">Pendentes</div><div class="font-display text-[18px] tnum" style="color: var(--warn);">2</div></div>
+                            <div class="p-3 rounded border border-[var(--line)] bg-[#FAFAF7]"><div class="number-tag">Recusados</div><div class="font-display text-[18px] tnum" style="color: var(--neg);">2</div></div>
+                            <div class="p-3 rounded border border-[var(--line)] bg-[#FAFAF7]"><div class="number-tag">Parcialm. estornados</div><div class="font-display text-[18px] tnum">4</div></div>
+                            <div class="p-3 rounded border border-[var(--pos)] bg-[var(--pos-soft)]"><div class="number-tag" style="color: var(--pos);">Status</div><div class="font-display text-[16px]" style="color: var(--pos);">CONCILIADO âœ“</div></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- Footer pÃ© de pÃ¡gina -->
+        <footer class="border-t border-[var(--line)] bg-[var(--paper-2)] no-print">
+            <div class="max-w-[1400px] mx-auto px-10 py-6 flex flex-col md:flex-row items-center justify-between gap-3">
+                <div class="flex items-center gap-3">
+                    <div class="brand-mark rounded" style="width: 28px; height: 28px; position: relative;">
+                        <div class="name" style="padding: 5px 5px; font-size: 7px;">C&amp;S</div>
+                    </div>
+                    <div>
+                        <div class="font-display text-[12px]">CANELLA &amp; SANTOS</div>
+                        <div class="text-[10px] text-[var(--muted)]">BPO Financeiro Â· InteligÃªncia ContÃ¡bil</div>
+                    </div>
+                </div>
+                <div class="text-[10.5px] text-[var(--muted)] number-tag">
+                    RelatÃ³rio gerado para PV EMPREENDIMENTOS CRIATIVOS LTDA Â· CNPJ 50.351.135/0001-70 Â· 1Âº Quadrimestre 2026
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <script>
+        const CORAL = '#FF4D5C';
+        const CORAL_DEEP = '#E63946';
+        const CYAN = '#1FC0D9';
+        const CYAN_DEEP = '#0FA3BA';
+        const INK = '#0E1116';
+        const MUTED = '#9CA3AF';
+        const POS = '#0A8754';
+        const NEG = '#B91C1C';
+
+        const formatBR = (v) => new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(v);
+        const formatBRshort = (v) => 'R$ ' + new Intl.NumberFormat('pt-BR', { maximumFractionDigits: 0 }).format(v);
+
+        const chartsInitialized = {
+            geral: false, rec: false, pag: false, nuvem: false,
+            fluxoJan: false, fluxoFev: false, fluxoAcum: false
+        };
+
+        // === Defaults globais Chart.js para tipografia premium ===
+        if (window.Chart) {
+            Chart.defaults.font.family = "'Inter Tight', system-ui, sans-serif";
+            Chart.defaults.font.size = 11.5;
+            Chart.defaults.color = '#4B5563';
+            Chart.defaults.plugins.legend.labels.usePointStyle = true;
+            Chart.defaults.plugins.legend.labels.pointStyle = 'circle';
+            Chart.defaults.plugins.legend.labels.padding = 14;
+            Chart.defaults.plugins.legend.labels.boxWidth = 8;
+            Chart.defaults.plugins.legend.labels.boxHeight = 8;
+            Chart.defaults.plugins.tooltip.backgroundColor = INK;
+            Chart.defaults.plugins.tooltip.titleColor = '#fff';
+            Chart.defaults.plugins.tooltip.bodyColor = '#fff';
+            Chart.defaults.plugins.tooltip.padding = 12;
+            Chart.defaults.plugins.tooltip.cornerRadius = 6;
+            Chart.defaults.plugins.tooltip.titleFont = { weight: '700', size: 12 };
+            Chart.defaults.plugins.tooltip.bodyFont = { weight: '500', size: 12 };
+            Chart.defaults.plugins.tooltip.boxPadding = 6;
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            lucide.createIcons();
+        });
+
+        // ================= NAVIGATION =================
+        function switchView(viewName) {
+            document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+            document.getElementById('view-' + viewName).classList.add('active');
+            document.getElementById('nav-' + viewName).classList.add('active');
+            setTimeout(() => lucide.createIcons(), 50);
+
+            if (viewName === 'charts') ensureChartLoaded('geral');
+            if (viewName === 'fluxo') {
+                // Re-render grÃ¡ficos do mÃªs ativo na seÃ§Ã£o fluxo
+                const activeMonth = document.querySelector('#view-fluxo .month-content.active');
+                if (activeMonth) {
+                    const id = activeMonth.id.replace('month-fluxo-','');
+                    initChartFluxo(id);
+                }
+            }
+        }
+
+        function switchMonth(view, month) {
+            let scope;
+            if (view === 'dre') scope = '#regime-caixa';
+            else if (view === 'drecomp') scope = '#regime-comp';
+            else scope = `#view-${view}`;
+
+            document.querySelectorAll(`${scope} .month-content`).forEach(el => el.classList.remove('active'));
+
+            if (view === 'dre') {
+                document.querySelectorAll('#dre-month-tabs .pill-btn').forEach(el => el.classList.remove('active'));
+                document.getElementById(`btn-month-dre-${month}`).classList.add('active');
+            } else if (view === 'drecomp') {
+                document.querySelectorAll('#dre-comp-month-tabs .pill-btn').forEach(el => el.classList.remove('active'));
+                document.getElementById(`btn-month-drecomp-${month}`).classList.add('active');
+            } else {
+                document.querySelectorAll(`#view-${view} .pill-btn`).forEach(el => el.classList.remove('active'));
+                document.getElementById(`btn-month-${view}-${month}`).classList.add('active');
+            }
+            document.getElementById(`month-${view}-${month}`).classList.add('active');
+            setTimeout(() => lucide.createIcons(), 50);
+
+            if (view === 'fluxo') initChartFluxo(month);
+        }
+
+        function switchRegime(regime) {
+            // 'caixa' ou 'comp'
+            document.querySelectorAll('#view-dre .regime-content').forEach(el => el.classList.remove('active'));
+            document.getElementById('regime-' + regime).classList.add('active');
+            document.getElementById('btn-regime-caixa').classList.remove('active');
+            document.getElementById('btn-regime-comp').classList.remove('active');
+            document.getElementById('btn-regime-' + regime).classList.add('active');
+
+            // Mostrar as abas de mÃªs corretas
+            if (regime === 'caixa') {
+                document.getElementById('dre-month-tabs').style.display = '';
+                document.getElementById('dre-comp-month-tabs').style.display = 'none';
+            } else {
+                document.getElementById('dre-month-tabs').style.display = 'none';
+                document.getElementById('dre-comp-month-tabs').style.display = '';
+            }
+            setTimeout(() => lucide.createIcons(), 50);
+        }
+
+        function switchChart(chartName) {
+            document.querySelectorAll('.chart-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('#view-charts .pill-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById('chart-' + chartName).classList.add('active');
+            document.getElementById('btn-chart-' + chartName).classList.add('active');
+            setTimeout(() => lucide.createIcons(), 50);
+            ensureChartLoaded(chartName);
+        }
+
+        function ensureChartLoaded(name) {
+            if (name === 'geral' && !chartsInitialized.geral) { initChartGeral(); chartsInitialized.geral = true; }
+            if (name === 'rec'   && !chartsInitialized.rec)   { initChartRecebimentos(); chartsInitialized.rec = true; }
+            if (name === 'pag'   && !chartsInitialized.pag)   { initChartPagamentos(); chartsInitialized.pag = true; }
+            if (name === 'nuvem' && !chartsInitialized.nuvem) { initChartNuvem(); chartsInitialized.nuvem = true; }
+        }
+
+        // ================= CHARTS =================
+        function initChartGeral() {
+            const ctx = document.getElementById('canvasGeral').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Janeiro', 'Fevereiro', 'MarÃ§o', 'Abril'],
+                    datasets: [
+                        {
+                            type: 'bar',
+                            label: 'Entradas',
+                            data: [39065.68, 54923.58, 57113.41, 35800.78],
+                            backgroundColor: CYAN,
+                            borderRadius: 4,
+                            borderSkipped: false,
+                            barPercentage: 0.55,
+                            categoryPercentage: 0.85,
+                            order: 2
+                        },
+                        {
+                            type: 'bar',
+                            label: 'SaÃ­das',
+                            data: [67305.17, 56021.08, 31680.25, 65109.75],
+                            backgroundColor: CORAL,
+                            borderRadius: 4,
+                            borderSkipped: false,
+                            barPercentage: 0.55,
+                            categoryPercentage: 0.85,
+                            order: 2
+                        },
+                        {
+                            type: 'line',
+                            label: 'Resultado',
+                            data: [-28239.49, -1097.50, 25433.16, -29308.97],
+                            borderColor: INK,
+                            backgroundColor: INK,
+                            borderWidth: 2.5,
+                            pointRadius: 6,
+                            pointBackgroundColor: INK,
+                            pointBorderColor: '#fff',
+                            pointBorderWidth: 2,
+                            tension: 0.25,
+                            order: 1,
+                            yAxisID: 'y'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        tooltip: { callbacks: { label: (c) => c.dataset.label + ': ' + formatBR(c.raw) } },
+                        legend: { position: 'top', align: 'end' }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: '#F2F3F5', drawBorder: false },
+                            ticks: { callback: (v) => formatBRshort(v), color: MUTED }
+                        },
+                        x: {
+                            grid: { display: false },
+                            ticks: { color: INK, font: { weight: '600' } }
+                        }
+                    }
+                }
+            });
+        }
+
+        function initChartRecebimentos() {
+            const donutOpts = {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '70%',
+                plugins: {
+                    tooltip: { callbacks: { label: (c) => c.label + ': ' + formatBR(c.raw) } },
+                    legend: { position: 'right', align: 'center', labels: { padding: 12, font: { size: 11 } } }
+                }
+            };
+
+            // Jan
+            new Chart(document.getElementById('canvasRecJan').getContext('2d'), {
+                type: 'doughnut',
+                data: {
+                    labels: ['PIX', 'DÃ©bito', 'Dinheiro', 'CrÃ©dito', 'MÃºsica', 'ServiÃ§os', 'AplicaÃ§Ãµes'],
+                    datasets: [{
+                        data: [34666.06, 3022.81, 973.62, 166.47, 144.37, 75.47, 16.88],
+                        backgroundColor: [CORAL, CYAN, INK, '#9CA3AF', '#D1D5DB', '#E5E7EB', '#F3F4F6'],
+                        borderWidth: 2, borderColor: '#fff'
+                    }]
+                },
+                options: donutOpts
+            });
+
+            // Fev
+            new Chart(document.getElementById('canvasRecFev').getContext('2d'), {
+                type: 'doughnut',
+                data: {
+                    labels: ['PIX', 'Dinheiro', 'DÃ©bito', 'Online', 'CrÃ©dito', 'MÃºsica', 'AplicaÃ§Ãµes'],
+                    datasets: [{
+                        data: [52522.03, 2008.80, 351.89, 18.46, 9.83, 7.92, 4.65],
+                        backgroundColor: [CORAL, CYAN, INK, '#9CA3AF', '#D1D5DB', '#E5E7EB', '#F3F4F6'],
+                        borderWidth: 2, borderColor: '#fff'
+                    }]
+                },
+                options: donutOpts
+            });
+
+            // Mar
+            new Chart(document.getElementById('canvasRecMar').getContext('2d'), {
+                type: 'doughnut',
+                data: {
+                    labels: ['EmprÃ©stimo BancÃ¡rio', 'PIX', 'Dinheiro', 'Online', 'AplicaÃ§Ãµes'],
+                    datasets: [{
+                        data: [28537.79, 28081.07, 475.70, 17.58, 1.27],
+                        backgroundColor: [CORAL_DEEP, CYAN, INK, '#9CA3AF', '#D1D5DB'],
+                        borderWidth: 2, borderColor: '#fff'
+                    }]
+                },
+                options: donutOpts
+            });
+
+            // Abr
+            new Chart(document.getElementById('canvasRecAbr').getContext('2d'), {
+                type: 'doughnut',
+                data: {
+                    labels: ['PIX', 'Dinheiro', 'Online', 'AplicaÃ§Ãµes'],
+                    datasets: [{
+                        data: [34768.25, 1007.50, 17.34, 7.69],
+                        backgroundColor: [CORAL, INK, CYAN, '#9CA3AF'],
+                        borderWidth: 2, borderColor: '#fff'
+                    }]
+                },
+                options: donutOpts
+            });
+        }
+
+        function initChartPagamentos() {
+            const ctx = document.getElementById('canvasPagamentos').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Produtos', 'Pessoas', 'Royalties', 'Simples DAS', 'Honor. ContÃ¡beis', 'DIFAL'],
+                    datasets: [
+                        { label: 'Jan/26', data: [17239.23, 7008.17, 10547.90, 5062.50, 752.50, 7614.63], backgroundColor: '#E5E7EB', borderRadius: 3 },
+                        { label: 'Fev/26', data: [37215.22, 5140.38, 4786.04, 2069.83, 1857.69, 1002.62], backgroundColor: '#9CA3AF', borderRadius: 3 },
+                        { label: 'Mar/26', data: [14662.52, 3857.69, 4517.12, 2492.55, 1939.89, 0], backgroundColor: CYAN, borderRadius: 3 },
+                        { label: 'Abr/26', data: [47178.32, 5330.38, 3806.23, 1853.12, 2139.89, 0], backgroundColor: CORAL, borderRadius: 3 }
+                    ]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        tooltip: { callbacks: { label: (c) => c.dataset.label + ': ' + formatBR(c.raw) } },
+                        legend: { position: 'top', align: 'end' }
+                    },
+                    scales: {
+                        x: {
+                            grid: { color: '#F2F3F5', drawBorder: false },
+                            ticks: { callback: (v) => formatBRshort(v), color: MUTED }
+                        },
+                        y: { grid: { display: false }, ticks: { color: INK, font: { weight: '700', size: 12 } } }
+                    }
+                }
+            });
+        }
+
+        function initChartNuvem() {
+            const ctx = document.getElementById('canvasNuvem').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Janeiro', 'Fevereiro', 'MarÃ§o', 'Abril'],
+                    datasets: [
+                        {
+                            label: 'Receita Bruta',
+                            data: [5152.23, 4489.53, 3388.89, 8812.80],
+                            borderColor: '#9CA3AF',
+                            backgroundColor: 'rgba(156,163,175,0.08)',
+                            borderWidth: 2, tension: 0.3,
+                            pointRadius: 4, pointBackgroundColor: '#fff', pointBorderColor: '#9CA3AF', pointBorderWidth: 2
+                        },
+                        {
+                            label: 'Total Pago p/ Cliente',
+                            data: [5494.02, 4475.02, 3648.89, 8757.75],
+                            borderColor: CYAN,
+                            backgroundColor: 'rgba(31,192,217,0.12)',
+                            borderWidth: 2.5, tension: 0.3, fill: true,
+                            pointRadius: 5, pointBackgroundColor: '#fff', pointBorderColor: CYAN, pointBorderWidth: 2.5
+                        },
+                        {
+                            label: 'LÃ­quido (lucro)',
+                            data: [4664.67, 3153.65, 2736.27, 7425.01],
+                            borderColor: CORAL,
+                            backgroundColor: CORAL,
+                            borderWidth: 3, tension: 0.3,
+                            pointRadius: 6, pointBackgroundColor: '#fff', pointBorderColor: CORAL, pointBorderWidth: 3
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        tooltip: { callbacks: { label: (c) => c.dataset.label + ': ' + formatBR(c.raw) } },
+                        legend: { position: 'top', align: 'end' }
+                    },
+                    scales: {
+                        y: { beginAtZero: true, grid: { color: '#F2F3F5' }, ticks: { callback: (v) => formatBRshort(v), color: MUTED } },
+                        x: { grid: { display: false }, ticks: { color: INK, font: { weight: '600' } } }
+                    }
+                }
+            });
+        }
+
+        // ============ FLUXO ============
+        // Dados diÃ¡rios completos (Conta Azul)
+        const fluxoData = {
+            jan: {
+                labels: ['01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31'],
+                rec:    [372.92,55757.21,0,0,7536.84,0,741.97,1044.98,588.94,0,0,3737.61,318.68,123.57,3565.14,78.85,0,0,1875.78,176.00,468.24,961.52,62.72,0,0,1759.04,9.83,540.64,568.62,283.00,0],
+                pag:    [0,0,0,0,8740.71,0,0,3582.70,17520.90,0,0,4031.93,0,12000.00,7845.27,2491.78,0,0,0,5746.46,495.42,0,0,0,0,910.00,0,3940.00,0,0,0],
+                saldo:  [372.92,56130.13,56130.13,56130.13,54926.26,54926.26,55668.23,53130.51,36198.55,36198.55,36198.55,35904.23,36222.91,24346.48,20066.35,17653.42,17653.42,17653.42,19529.20,13958.74,13931.56,14893.08,14955.80,14955.80,14955.80,15804.84,15814.67,12415.31,12983.93,13266.93,13266.93]
+            },
+            fev: {
+                labels: ['01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28'],
+                rec:    [140.00,5723.87,9.83,294.42,724.94,200.50,0,0,2706.22,0.20,609.33,944.81,212.57,110.00,368.90,199.80,280.80,13769.87,1015.69,3516.56,0,374.80,3230.76,19688.61,235.03,412.76,153.31,0],
+                pag:    [0,0,0,8194.22,0,4138.22,0,0,1165.89,6454.55,0,0,0,0,0,0,0,3223.20,0,3900.00,0,0,0,28945.00,0,0,0,0],
+                saldo:  [13406.93,19130.80,19140.63,11240.83,11965.77,8028.05,8028.05,8028.05,9568.38,3114.03,3723.36,4668.17,4880.74,4990.74,5359.64,5559.44,5840.24,16386.91,17402.60,17019.16,17019.16,17393.96,20624.72,11368.33,11603.36,12016.12,12169.43,12169.43]
+            },
+            mar: {
+                labels: ['01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31'],
+                rec:    [314.80,3319.82,0,450.71,834.48,0,0,0,3445.53,558.04,3848.05,209.53,31187.44,0,0,3574.81,89.90,19.87,780.52,0.27,0,0,3186.08,0.08,240.38,1210.06,0,0,0,3843.04,0],
+                pag:    [0,0,0,0,6125.84,0,0,0,0,5109.77,4328.07,0,7760.14,0,0,531.72,0,500.00,0,3807.71,0,0,0,3517.00,0,0,0,0,0,0,0],
+                saldo:  [12484.23,15804.05,15804.05,16254.76,10963.40,10963.40,10963.40,10963.40,14408.93,9857.20,9377.18,9586.71,33014.01,33014.01,33014.01,36057.10,36147.00,35666.87,36447.39,32639.95,32639.95,32639.95,35826.03,32309.11,32549.49,33759.55,33759.55,33759.55,33759.55,37602.59,37602.59]
+            },
+            abr: {
+                labels: ['01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30'],
+                rec:    [39.60,436.33,0,0,0,2563.39,0.02,1166.62,1616.71,479.27,0,0,7616.86,949.69,40.23,603.85,0,0,0,8018.24,0,4681.28,0,495.45,0,0,2128.08,3321.32,51.99,584.35],
+                pag:    [0,0,0,0,0,7682.64,150.79,0,0,5327.68,0,0,0,2139.89,3417.10,0,0,0,0,13259.74,0,33131.91,0,0,0,0,0,0,0,0],
+                saldo:  [37642.19,38078.52,38078.52,38078.52,38078.52,32959.27,32808.50,33975.12,35591.83,30743.42,30743.42,30743.42,38360.28,37170.08,33793.21,34397.06,34397.06,34397.06,34397.06,29155.56,29155.56,704.93,704.93,1200.38,1200.38,1200.38,3328.46,6649.78,6701.77,7286.12]
+            }
+        };
+
+        function renderFluxoDiario(month, canvasId) {
+            const d = fluxoData[month];
+            new Chart(document.getElementById(canvasId).getContext('2d'), {
+                data: {
+                    labels: d.labels,
+                    datasets: [
+                        {
+                            type: 'bar', label: 'Recebimentos', data: d.rec,
+                            backgroundColor: 'rgba(31,192,217,0.85)',
+                            borderColor: CYAN, borderWidth: 0,
+                            borderRadius: 3, barPercentage: 0.85, categoryPercentage: 0.92,
+                            yAxisID: 'y'
+                        },
+                        {
+                            type: 'bar', label: 'Pagamentos', data: d.pag.map(v => -v),
+                            backgroundColor: 'rgba(255,77,92,0.85)',
+                            borderColor: CORAL, borderWidth: 0,
+                            borderRadius: 3, barPercentage: 0.85, categoryPercentage: 0.92,
+                            yAxisID: 'y'
+                        },
+                        {
+                            type: 'line', label: 'Saldo', data: d.saldo,
+                            borderColor: INK, backgroundColor: 'rgba(14,17,22,0.04)',
+                            borderWidth: 2, tension: 0.35, fill: false,
+                            pointRadius: 0, pointHoverRadius: 5,
+                            pointBackgroundColor: '#fff', pointBorderColor: INK, pointBorderWidth: 2,
+                            yAxisID: 'y1'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    interaction: { mode: 'index', intersect: false },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: (c) => {
+                                    const v = c.dataset.label === 'Pagamentos' ? -c.raw : c.raw;
+                                    return c.dataset.label + ': ' + formatBR(v);
+                                }
+                            }
+                        },
+                        legend: { position: 'top', align: 'end', labels: { boxWidth: 10, boxHeight: 10, padding: 14, font: { size: 11 } } }
+                    },
+                    scales: {
+                        y: {
+                            position: 'left',
+                            grid: { color: '#F2F3F5', drawBorder: false },
+                            ticks: { callback: (v) => formatBRshort(Math.abs(v)), color: MUTED, font: { size: 10 } },
+                            title: { display: true, text: 'Movimento diÃ¡rio', color: MUTED, font: { size: 10, weight: '600' } }
+                        },
+                        y1: {
+                            position: 'right',
+                            beginAtZero: false,
+                            grid: { display: false },
+                            ticks: { callback: (v) => formatBRshort(v), color: INK, font: { size: 10, weight: '600' } },
+                            title: { display: true, text: 'Saldo final', color: INK, font: { size: 10, weight: '600' } }
+                        },
+                        x: { grid: { display: false }, ticks: { color: MUTED, font: { size: 10 } } }
+                    }
+                }
+            });
+        }
+
+        function initChartFluxo(month) {
+            if (month === 'jan' && !chartsInitialized.fluxoJan) {
+                renderFluxoDiario('jan', 'canvasFluxoJan');
+                chartsInitialized.fluxoJan = true;
+            }
+            if (month === 'fev' && !chartsInitialized.fluxoFev) {
+                renderFluxoDiario('fev', 'canvasFluxoFev');
+                chartsInitialized.fluxoFev = true;
+            }
+            if (month === 'mar' && !chartsInitialized.fluxoMar) {
+                renderFluxoDiario('mar', 'canvasFluxoMar');
+                chartsInitialized.fluxoMar = true;
+            }
+            if (month === 'abr' && !chartsInitialized.fluxoAbr) {
+                renderFluxoDiario('abr', 'canvasFluxoAbr');
+                chartsInitialized.fluxoAbr = true;
+            }
+            if (month === 'consolidado' && !chartsInitialized.fluxoAcum) {
+                const labels = ['Jan','Fev','Mar','Abr'];
+                const entradas = [39065.68, 54923.58, 57113.41, 35800.78];
+                const saidas = [67305.17, 56021.08, 31680.25, 65109.75];
+                let acumEntradas = 0, acumSaidas = 0, acumResultado = 0;
+                const cumEnt = entradas.map(v => (acumEntradas += v));
+                const cumSai = saidas.map(v => (acumSaidas += v));
+                const cumRes = entradas.map((v,i) => (acumResultado += (entradas[i] - saidas[i])));
+
+                new Chart(document.getElementById('canvasFluxoAcum').getContext('2d'), {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: [
+                            { label: 'Entradas Acumuladas', data: cumEnt, borderColor: CYAN, backgroundColor: 'rgba(31,192,217,0.15)', fill: true, tension: 0.3, pointRadius: 5, pointBackgroundColor: '#fff', pointBorderColor: CYAN, pointBorderWidth: 2.5, borderWidth: 2.5 },
+                            { label: 'SaÃ­das Acumuladas', data: cumSai, borderColor: CORAL, backgroundColor: 'rgba(255,77,92,0.10)', fill: true, tension: 0.3, pointRadius: 5, pointBackgroundColor: '#fff', pointBorderColor: CORAL, pointBorderWidth: 2.5, borderWidth: 2.5 },
+                            { label: 'Resultado Acumulado', data: cumRes, borderColor: INK, backgroundColor: INK, borderWidth: 3, tension: 0.3, pointRadius: 6, pointBackgroundColor: '#fff', pointBorderColor: INK, pointBorderWidth: 3, fill: false }
+                        ]
+                    },
+                    options: {
+                        responsive: true, maintainAspectRatio: false,
+                        plugins: {
+                            tooltip: { callbacks: { label: (c) => c.dataset.label + ': ' + formatBR(c.raw) } },
+                            legend: { position: 'top', align: 'end' }
+                        },
+                        scales: {
+                            y: { grid: { color: '#F2F3F5' }, ticks: { callback: (v) => formatBRshort(v), color: MUTED } },
+                            x: { grid: { display: false }, ticks: { color: INK, font: { weight: '600' } } }
+                        }
+                    }
+                });
+                chartsInitialized.fluxoAcum = true;
+            }
+        }
+    </script>
+</body>
+</html>
+
