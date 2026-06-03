@@ -16,10 +16,11 @@ if (-not (Test-Path -LiteralPath $Source)) {
 
 New-Item -ItemType Directory -Force -Path $DocsDir | Out-Null
 Copy-Item -LiteralPath $Source -Destination $Target -Force
-$Html = Get-Content -LiteralPath $Target -Raw
+$Utf8NoBom = New-Object System.Text.UTF8Encoding($false)
+$Html = [System.IO.File]::ReadAllText($Target, [System.Text.Encoding]::UTF8)
 if ($Html -notmatch 'name=["'']robots["'']') {
     $Html = $Html -replace '<head>', "<head>`r`n    <meta name=`"robots`" content=`"noindex,nofollow`">"
-    Set-Content -LiteralPath $Target -Value $Html -Encoding UTF8
+    [System.IO.File]::WriteAllText($Target, $Html, $Utf8NoBom)
 }
 Write-Host "Dashboard atualizado em: $Target"
 
