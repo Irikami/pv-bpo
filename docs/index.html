@@ -1258,7 +1258,8 @@
                             <button onclick="switchMonth('drecomp','fev')" id="btn-month-drecomp-fev" class="pill-btn">Fev</button>
                             <button onclick="switchMonth('drecomp','mar')" id="btn-month-drecomp-mar" class="pill-btn">Mar</button>
                             <button onclick="switchMonth('drecomp','abr')" id="btn-month-drecomp-abr" class="pill-btn">Abr</button>
-                            <button onclick="switchMonth('drecomp','mai')" id="btn-month-drecomp-mai" class="pill-btn active">Mai</button>
+                            <button onclick="switchMonth('drecomp','mai')" id="btn-month-drecomp-mai" class="pill-btn">Mai</button>
+                            <button onclick="switchMonth('drecomp','jun')" id="btn-month-drecomp-jun" class="pill-btn active">Jun</button>
                         </div>
                     </div>
                 </div>
@@ -1497,7 +1498,7 @@
                         </table>
                     </div>
                     <div class="card p-5 mt-5" style="background: var(--paper); border-left: 3px solid var(--warn);">
-                        <p class="text-[12.5px] text-[var(--muted)] leading-relaxed"><strong class="text-[var(--ink)]">Competência de Junho ainda não fechada:</strong> parte das despesas geradas em Junho será paga em Julho. O painel mantém Junho completo no regime de caixa e evita estimar o regime de competência sem o relatório seguinte.</p>
+                        <p class="text-[12.5px] text-[var(--muted)] leading-relaxed"><strong class="text-[var(--ink)]">Receita de Junho fechada por competência:</strong> o PGDAS-D registra R$ 33.644,49. As despesas geradas em Junho e pagas em Julho ainda não estão disponíveis; por isso, o resultado de competência permanece pendente.</p>
                     </div>
                 </div>
                 </div><!-- /regime-caixa -->
@@ -1666,19 +1667,19 @@
                     </div>
 
                     <!-- MAI COMPETÊNCIA -->
-                    <div id="month-drecomp-mai" class="month-content active">
+                    <div id="month-drecomp-mai" class="month-content">
                         <div class="grid grid-cols-1 md:grid-cols-4 gap-5 mb-6">
-                            <div class="card p-5"><div class="kpi-label">Receita</div><div class="kpi-value tnum mt-1" style="color: var(--pos);">R$ 61.043,00</div></div>
+                            <div class="card p-5"><div class="kpi-label">Receita por Competência</div><div class="kpi-value tnum mt-1" style="color: var(--pos);">R$ 92.636,81</div><div class="text-[10.5px] text-[var(--muted)] mt-1">PGDAS-D · Maio/2026</div></div>
                             <div class="card p-5"><div class="kpi-label">Despesas Competência</div><div class="kpi-value tnum mt-1" style="color: var(--neg);">R$ 29.798,70</div><div class="text-[10.5px] text-[var(--muted)] mt-1">pagas em Junho</div></div>
                             <div class="card p-5"><div class="kpi-label">Demais (Caixa Mai)</div><div class="kpi-value tnum mt-1" style="color: var(--neg);">R$ 30.190,79</div></div>
-                            <div class="card p-5" style="border-color: var(--pos);"><div class="kpi-label" style="color: var(--pos);">Resultado Competência</div><div class="kpi-value tnum mt-1" style="color: var(--pos);">+ R$ 1.053,51</div></div>
+                            <div class="card p-5" style="border-color: var(--pos);"><div class="kpi-label" style="color: var(--pos);">Resultado Competência</div><div class="kpi-value tnum mt-1" style="color: var(--pos);">+ R$ 32.647,32</div></div>
                         </div>
                         <div class="card overflow-hidden">
                             <table class="data-table">
                                 <thead><tr><th>Categoria</th><th class="text-right" style="width:18%;">Valor</th><th class="text-right" style="width:18%;">Regime</th></tr></thead>
                                 <tbody>
                                     <tr class="subhead"><td colspan="3" style="color: var(--pos);">▍ Receita do mês (Mai)</td></tr>
-                                    <tr><td class="font-semibold">Receita Total de Vendas</td><td class="text-right font-semibold tnum" style="color: var(--pos);">R$ 61.043,00</td><td class="text-right text-[11px] text-[var(--muted)]">caixa Mai</td></tr>
+                                    <tr><td class="font-semibold">Receita Bruta Declarada</td><td class="text-right font-semibold tnum" style="color: var(--pos);">R$ 92.636,81</td><td class="text-right text-[11px] text-[var(--muted)]">PGDAS-D Mai</td></tr>
 
                                     <tr class="subhead"><td colspan="3" style="color: var(--coral);">▍ Despesas competência Mai · pagas em Junho</td></tr>
                                     <tr><td class="pl-8 text-[var(--muted)]">Royalties</td><td class="text-right tnum">R$ 9.871,30</td><td class="text-right text-[11px]" style="color: var(--coral);">pago Jun</td></tr>
@@ -1697,12 +1698,35 @@
                                     <tr><td class="pl-8 text-[var(--muted)]">IOF</td><td class="text-right tnum">R$ 19,82</td><td class="text-right text-[11px] text-[var(--muted)]">caixa Mai</td></tr>
                                     <tr><td class="pl-8 font-semibold">Subtotal demais</td><td class="text-right font-semibold tnum">R$ 30.190,79</td><td></td></tr>
 
-                                    <tr class="total-row"><td>RESULTADO LÍQUIDO (COMPETÊNCIA)</td><td class="text-right tnum">+ R$ 1.053,51</td><td></td></tr>
+                                    <tr class="total-row"><td>RESULTADO LÍQUIDO (COMPETÊNCIA)</td><td class="text-right tnum">+ R$ 32.647,32</td><td></td></tr>
                                 </tbody>
                             </table>
                         </div>
                         <div class="card p-5 mt-5" style="background: var(--paper); border-left: 3px solid var(--pos);">
-                            <p class="text-[12.5px] text-[var(--muted)] leading-relaxed">Maio teve superávit de caixa de R$ 13,8k, mas o resultado por competência cai para <strong class="text-[var(--ink)]">+R$ 1,1k</strong> quando são reconhecidas as despesas de Maio pagas em Junho. A operação ficou positiva, porém com margem estreita.</p>
+                            <p class="text-[12.5px] text-[var(--muted)] leading-relaxed">O caixa de Maio registrou R$ 61,0k de entradas líquidas, enquanto o PGDAS-D declarou <strong class="text-[var(--ink)]">R$ 92,6k de receita bruta por competência</strong>. Com R$ 60,0k de despesas alocadas ao período, Maio fecha em <strong class="text-[var(--ink)]">+R$ 32,6k por competência</strong>. A diferença entre as visões decorre principalmente do momento de liquidação das vendas e das taxas financeiras.</p>
+                        </div>
+                    </div>
+
+                    <!-- JUN COMPETÊNCIA -->
+                    <div id="month-drecomp-jun" class="month-content active">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
+                            <div class="card p-5"><div class="kpi-label">Receita por Competência</div><div class="kpi-value tnum mt-1" style="color: var(--pos);">R$ 33.644,49</div><div class="text-[10.5px] text-[var(--muted)] mt-1">PGDAS-D · Junho/2026</div></div>
+                            <div class="card p-5"><div class="kpi-label">Despesas Competência</div><div class="kpi-value tnum mt-1" style="color: var(--warn);">A fechar</div><div class="text-[10.5px] text-[var(--muted)] mt-1">dependem dos pagamentos de Julho</div></div>
+                            <div class="card p-5" style="border-color: var(--warn);"><div class="kpi-label" style="color: var(--warn);">Resultado Competência</div><div class="kpi-value tnum mt-1" style="color: var(--warn);">Pendente</div></div>
+                        </div>
+                        <div class="card overflow-hidden">
+                            <table class="data-table">
+                                <thead><tr><th>Categoria</th><th class="text-right" style="width:18%;">Valor</th><th class="text-right" style="width:18%;">Regime</th></tr></thead>
+                                <tbody>
+                                    <tr class="subhead"><td colspan="3" style="color: var(--pos);">▍ Receita do mês (Jun)</td></tr>
+                                    <tr><td class="font-semibold">Receita Bruta Declarada</td><td class="text-right font-semibold tnum" style="color: var(--pos);">R$ 33.644,49</td><td class="text-right text-[11px] text-[var(--muted)]">PGDAS-D Jun</td></tr>
+                                    <tr class="subhead"><td colspan="3" style="color: var(--warn);">▍ Despesas competência Jun · pagas em Julho</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">Relatório de pagamentos de Julho necessário para a alocação</td><td class="text-right tnum">—</td><td class="text-right text-[11px]" style="color: var(--warn);">pendente</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="card p-5 mt-5" style="background: var(--paper); border-left: 3px solid var(--warn);">
+                            <p class="text-[12.5px] text-[var(--muted)] leading-relaxed">A receita de Junho está fechada em <strong class="text-[var(--ink)]">R$ 33.644,49 por competência</strong>, conforme o PGDAS-D transmitido em 16/07/2026. O resultado ficará disponível quando as despesas de Junho pagas em Julho forem incorporadas.</p>
                         </div>
                     </div>
 
