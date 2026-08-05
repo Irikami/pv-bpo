@@ -425,7 +425,7 @@
             </button>
             <div class="mt-4 text-center">
                 <div class="number-tag text-white/40">RELATÓRIO · 1º SEMESTRE / 2026</div>
-                <div class="text-[10px] text-white/30 mt-1">Atualizado em 04/08/2026</div>
+                <div class="text-[10px] text-white/30 mt-1">Atualizado em 05/08/2026</div>
             </div>
         </div>
     </aside>
@@ -1255,6 +1255,7 @@
                             <button onclick="switchMonth('dre','jun')" id="btn-month-dre-jun" class="pill-btn active">Jun</button>
                         </div>
                         <div class="pill-group no-print" id="dre-comp-month-tabs" style="display:none;">
+                            <button onclick="switchMonth('drecomp','jan')" id="btn-month-drecomp-jan" class="pill-btn">Jan</button>
                             <button onclick="switchMonth('drecomp','fev')" id="btn-month-drecomp-fev" class="pill-btn">Fev</button>
                             <button onclick="switchMonth('drecomp','mar')" id="btn-month-drecomp-mar" class="pill-btn">Mar</button>
                             <button onclick="switchMonth('drecomp','abr')" id="btn-month-drecomp-abr" class="pill-btn">Abr</button>
@@ -1511,31 +1512,68 @@
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                             <div class="md:col-span-2">
                                 <div class="h-eyebrow mb-2" style="color: var(--cyan-deep);">Como ler esta DRE</div>
-                                <h3 class="font-display text-[20px] leading-tight mb-3">Despesas alocadas no <span style="color: var(--coral);">mês de origem</span>, não no mês do pagamento.</h3>
-                                <p class="text-[13px] text-[var(--muted)] leading-relaxed">As categorias <strong class="text-[var(--ink)]">Pessoas, Pró-labore, Royalties, DAS, INSS, Cartão de Crédito, Comissões, Honorários Contábeis e DIFAL</strong> são pagas no mês seguinte ao da competência. Aqui, elas voltam para o mês a que se referem. As demais despesas (Produtos, Tráfego, Fretes, etc.) permanecem no mês de pagamento.</p>
+                                <h3 class="font-display text-[20px] leading-tight mb-3">Receitas e custos reconhecidos no <span style="color: var(--coral);">mês de origem</span>, não no pagamento.</h3>
+                                <p class="text-[13px] text-[var(--muted)] leading-relaxed">As receitas seguem o regime de competência declarado no PGDAS-D. As compras de produtos não são tratadas como despesa imediata: foram substituídas pelo <strong class="text-[var(--ink)]">CMV informado</strong>. Pessoas, Pró-labore, Royalties, DAS, INSS, Cartão de Crédito, Comissões, Honorários Contábeis e DIFAL voltam para o mês a que se referem.</p>
                             </div>
                             <div class="grid grid-cols-1 gap-2 text-[12px]">
-                                <div class="flex items-center gap-2"><span class="inline-block w-2 h-2 rounded-full" style="background: var(--cyan);"></span><span class="text-[var(--muted)]">Mês N · receita do próprio mês</span></div>
+                                <div class="flex items-center gap-2"><span class="inline-block w-2 h-2 rounded-full" style="background: var(--cyan);"></span><span class="text-[var(--muted)]">Receita por competência · PGDAS-D</span></div>
                                 <div class="flex items-center gap-2"><span class="inline-block w-2 h-2 rounded-full" style="background: var(--coral);"></span><span class="text-[var(--muted)]">Despesas deferidas · pagas em N+1</span></div>
-                                <div class="flex items-center gap-2"><span class="inline-block w-2 h-2 rounded-full" style="background: var(--ink);"></span><span class="text-[var(--muted)]">Demais despesas · caixa do próprio mês</span></div>
+                                <div class="flex items-center gap-2"><span class="inline-block w-2 h-2 rounded-full" style="background: var(--ink);"></span><span class="text-[var(--muted)]">CMV informado + demais despesas do mês</span></div>
                             </div>
+                        </div>
+                    </div>
+
+                    <!-- JAN COMPETÊNCIA -->
+                    <div id="month-drecomp-jan" class="month-content">
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-5 mb-6">
+                            <div class="card p-5"><div class="kpi-label">Receita por Competência</div><div class="kpi-value tnum mt-1" style="color: var(--pos);">R$ 32.299,82</div><div class="text-[10.5px] text-[var(--muted)] mt-1">PGDAS-D · Janeiro/2026</div></div>
+                            <div class="card p-5"><div class="kpi-label">Despesas Competência</div><div class="kpi-value tnum mt-1" style="color: var(--neg);">R$ 16.666,42</div><div class="text-[10.5px] text-[var(--muted)] mt-1">pagas em Fevereiro</div></div>
+                            <div class="card p-5"><div class="kpi-label">CMV + Demais</div><div class="kpi-value tnum mt-1" style="color: var(--neg);">R$ 9.550,02</div></div>
+                            <div class="card p-5" style="border-color: var(--pos);"><div class="kpi-label" style="color: var(--pos);">Resultado Competência</div><div class="kpi-value tnum mt-1" style="color: var(--pos);">+ R$ 6.083,38</div></div>
+                        </div>
+                        <div class="card overflow-hidden">
+                            <table class="data-table">
+                                <thead><tr><th>Categoria</th><th class="text-right" style="width:18%;">Valor</th><th class="text-right" style="width:18%;">Regime</th></tr></thead>
+                                <tbody>
+                                    <tr class="subhead"><td colspan="3" style="color: var(--pos);">▍ Receita do mês (Jan)</td></tr>
+                                    <tr><td class="font-semibold">Receita Bruta Declarada</td><td class="text-right font-semibold tnum" style="color: var(--pos);">R$ 32.299,82</td><td class="text-right text-[11px] text-[var(--muted)]">PGDAS-D Jan</td></tr>
+                                    <tr class="subhead"><td colspan="3" style="color: var(--coral);">▍ Despesas competência Jan · pagas em Fevereiro</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">Pessoas + Pró-labore</td><td class="text-right tnum">R$ 5.140,38</td><td class="text-right text-[11px]" style="color: var(--coral);">pago Fev</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">Royalties</td><td class="text-right tnum">R$ 4.786,04</td><td class="text-right text-[11px]" style="color: var(--coral);">pago Fev</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">Simples Nacional - DAS</td><td class="text-right tnum">R$ 2.069,83</td><td class="text-right text-[11px]" style="color: var(--coral);">pago Fev</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">Honorários Contábeis</td><td class="text-right tnum">R$ 1.857,69</td><td class="text-right text-[11px]" style="color: var(--coral);">pago Fev</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">Comissões de Vendedores</td><td class="text-right tnum">R$ 1.115,42</td><td class="text-right text-[11px]" style="color: var(--coral);">pago Fev</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">DIFAL</td><td class="text-right tnum">R$ 1.002,62</td><td class="text-right text-[11px]" style="color: var(--coral);">pago Fev</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">INSS sobre Salários</td><td class="text-right tnum">R$ 356,62</td><td class="text-right text-[11px]" style="color: var(--coral);">pago Fev</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">Cartão de Crédito</td><td class="text-right tnum">R$ 337,82</td><td class="text-right text-[11px]" style="color: var(--coral);">pago Fev</td></tr>
+                                    <tr><td class="pl-8 font-semibold">Subtotal deferidas</td><td class="text-right font-semibold tnum">R$ 16.666,42</td><td></td></tr>
+                                    <tr class="subhead"><td colspan="3" style="color: var(--ink);">▍ CMV e demais despesas do próprio Janeiro</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">CMV informado</td><td class="text-right tnum">R$ 9.054,60</td><td class="text-right text-[11px] text-[var(--muted)]">CMV Jan</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">Fretes e Logística</td><td class="text-right tnum">R$ 495,42</td><td class="text-right text-[11px] text-[var(--muted)]">caixa Jan</td></tr>
+                                    <tr><td class="pl-8 font-semibold">Subtotal CMV + demais</td><td class="text-right font-semibold tnum">R$ 9.550,02</td><td></td></tr>
+                                    <tr class="total-row"><td>RESULTADO LÍQUIDO (COMPETÊNCIA)</td><td class="text-right tnum">+ R$ 6.083,38</td><td></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="card p-5 mt-5" style="background: var(--paper); border-left: 3px solid var(--pos);">
+                            <p class="text-[12.5px] text-[var(--muted)] leading-relaxed">Janeiro passa a fechar em <strong class="text-[var(--ink)]">+R$ 6,1k por competência</strong>. A distribuição de lucros de R$ 12,0k permanece no fluxo de caixa e não reduz o resultado operacional da DRE.</p>
                         </div>
                     </div>
 
                     <!-- FEV COMPETÊNCIA -->
                     <div id="month-drecomp-fev" class="month-content">
                         <div class="grid grid-cols-1 md:grid-cols-4 gap-5 mb-6">
-                            <div class="card p-5"><div class="kpi-label">Receita</div><div class="kpi-value tnum mt-1" style="color: var(--pos);">R$ 54.923,58</div></div>
+                            <div class="card p-5"><div class="kpi-label">Receita por Competência</div><div class="kpi-value tnum mt-1" style="color: var(--pos);">R$ 39.619,58</div><div class="text-[10.5px] text-[var(--muted)] mt-1">PGDAS-D · Fevereiro/2026</div></div>
                             <div class="card p-5"><div class="kpi-label">Despesas Competência</div><div class="kpi-value tnum mt-1" style="color: var(--neg);">R$ 16.059,19</div><div class="text-[10.5px] text-[var(--muted)] mt-1">pagas em Março</div></div>
-                            <div class="card p-5"><div class="kpi-label">Demais (Caixa Fev)</div><div class="kpi-value tnum mt-1" style="color: var(--neg);">R$ 39.354,66</div></div>
-                            <div class="card p-5" style="border-color: var(--warn);"><div class="kpi-label" style="color: var(--warn);">Resultado Competência</div><div class="kpi-value tnum mt-1" style="color: var(--neg);">– R$ 490,27</div></div>
+                            <div class="card p-5"><div class="kpi-label">CMV + Demais</div><div class="kpi-value tnum mt-1" style="color: var(--neg);">R$ 14.243,59</div></div>
+                            <div class="card p-5" style="border-color: var(--pos);"><div class="kpi-label" style="color: var(--pos);">Resultado Competência</div><div class="kpi-value tnum mt-1" style="color: var(--pos);">+ R$ 9.316,80</div></div>
                         </div>
                         <div class="card overflow-hidden">
                             <table class="data-table">
                                 <thead><tr><th>Categoria</th><th class="text-right" style="width:18%;">Valor</th><th class="text-right" style="width:18%;">Regime</th></tr></thead>
                                 <tbody>
                                     <tr class="subhead"><td colspan="3" style="color: var(--pos);">▍ Receita do mês (Fev)</td></tr>
-                                    <tr><td class="font-semibold">Receita Total de Vendas / Outros</td><td class="text-right font-semibold tnum" style="color: var(--pos);">R$ 54.923,58</td><td class="text-right text-[11px] text-[var(--muted)]">caixa Fev</td></tr>
+                                    <tr><td class="font-semibold">Receita Bruta Declarada</td><td class="text-right font-semibold tnum" style="color: var(--pos);">R$ 39.619,58</td><td class="text-right text-[11px] text-[var(--muted)]">PGDAS-D Fev</td></tr>
 
                                     <tr class="subhead"><td colspan="3" style="color: var(--coral);">▍ Despesas competência Fev · pagas em Março</td></tr>
                                     <tr><td class="pl-8 text-[var(--muted)]">Pessoas</td><td class="text-right tnum">R$ 3.857,69</td><td class="text-right text-[11px]" style="color: var(--coral);">pago Mar</td></tr>
@@ -1548,15 +1586,15 @@
                                     <tr><td class="pl-8 text-[var(--muted)]">DIFAL</td><td class="text-right tnum">R$ 0,00</td><td class="text-right text-[11px]" style="color: var(--coral);">pago Mar</td></tr>
                                     <tr><td class="pl-8 font-semibold">Subtotal deferidas</td><td class="text-right font-semibold tnum">R$ 16.059,19</td><td></td></tr>
 
-                                    <tr class="subhead"><td colspan="3" style="color: var(--ink);">▍ Demais despesas · caixa do próprio Fev</td></tr>
-                                    <tr><td class="pl-8 text-[var(--muted)]">Produtos</td><td class="text-right tnum">R$ 37.215,22</td><td class="text-right text-[11px] text-[var(--muted)]">caixa Fev</td></tr>
+                                    <tr class="subhead"><td colspan="3" style="color: var(--ink);">▍ CMV e demais despesas do próprio Fevereiro</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">CMV informado</td><td class="text-right tnum">R$ 12.104,15</td><td class="text-right text-[11px] text-[var(--muted)]">CMV Fev</td></tr>
                                     <tr><td class="pl-8 text-[var(--muted)]">Fretes e Logística</td><td class="text-right tnum">R$ 1.123,55</td><td class="text-right text-[11px] text-[var(--muted)]">caixa Fev</td></tr>
                                     <tr><td class="pl-8 text-[var(--muted)]">Tráfego (Facebook + outros)</td><td class="text-right tnum">R$ 877,96</td><td class="text-right text-[11px] text-[var(--muted)]">caixa Fev</td></tr>
                                     <tr><td class="pl-8 text-[var(--muted)]">Software / Licenças</td><td class="text-right tnum">R$ 50,22</td><td class="text-right text-[11px] text-[var(--muted)]">caixa Fev</td></tr>
                                     <tr><td class="pl-8 text-[var(--muted)]">Outros</td><td class="text-right tnum">R$ 87,71</td><td class="text-right text-[11px] text-[var(--muted)]">caixa Fev</td></tr>
-                                    <tr><td class="pl-8 font-semibold">Subtotal demais</td><td class="text-right font-semibold tnum">R$ 39.354,66</td><td></td></tr>
+                                    <tr><td class="pl-8 font-semibold">Subtotal CMV + demais</td><td class="text-right font-semibold tnum">R$ 14.243,59</td><td></td></tr>
 
-                                    <tr class="total-row"><td>RESULTADO LÍQUIDO (COMPETÊNCIA)</td><td class="text-right tnum">– R$ 490,27</td><td></td></tr>
+                                    <tr class="total-row"><td>RESULTADO LÍQUIDO (COMPETÊNCIA)</td><td class="text-right tnum">+ R$ 9.316,80</td><td></td></tr>
                                 </tbody>
                             </table>
                         </div>
@@ -1565,7 +1603,7 @@
                                 <div class="kpi-icon flex-shrink-0" style="background: var(--cyan-soft); color: var(--cyan-deep);"><i data-lucide="lightbulb" class="w-4 h-4"></i></div>
                                 <div>
                                     <div class="text-[12px] font-semibold mb-1">Leitura gerencial de Fevereiro</div>
-                                    <p class="text-[12.5px] text-[var(--muted)] leading-relaxed">No regime de caixa, Fev fechou em –R$ 1.097. No regime de competência, o resultado é praticamente o mesmo (–R$ 490), porque as deferidas pagas em Mar (R$ 16,1k) são menores que as deferidas pagas em Fev e jogadas para Jan (R$ 16,7k). <strong class="text-[var(--ink)]">Conclusão:</strong> Fevereiro foi um mês operacionalmente equilibrado — o desempenho real é coerente com o caixa.</p>
+                                    <p class="text-[12.5px] text-[var(--muted)] leading-relaxed">Com receita declarada de R$ 39,6k e CMV informado de R$ 12,1k, Fevereiro fecha em <strong class="text-[var(--ink)]">+R$ 9,3k por competência</strong>. As compras de R$ 37,2k continuam visíveis no caixa, mas não são repetidas como custo na DRE.</p>
                                 </div>
                             </div>
                         </div>
@@ -1574,17 +1612,17 @@
                     <!-- MAR COMPETÊNCIA -->
                     <div id="month-drecomp-mar" class="month-content">
                         <div class="grid grid-cols-1 md:grid-cols-4 gap-5 mb-6">
-                            <div class="card p-5"><div class="kpi-label">Receita Operacional</div><div class="kpi-value tnum mt-1" style="color: var(--pos);">R$ 28.575,62</div><div class="text-[10.5px] text-[var(--muted)] mt-1">exclui empréstimo</div></div>
+                            <div class="card p-5"><div class="kpi-label">Receita por Competência</div><div class="kpi-value tnum mt-1" style="color: var(--pos);">R$ 29.678,41</div><div class="text-[10.5px] text-[var(--muted)] mt-1">PGDAS-D · Março/2026</div></div>
                             <div class="card p-5"><div class="kpi-label">Despesas Competência</div><div class="kpi-value tnum mt-1" style="color: var(--neg);">R$ 16.889,11</div><div class="text-[10.5px] text-[var(--muted)] mt-1">pagas em Abril</div></div>
-                            <div class="card p-5"><div class="kpi-label">Demais (Caixa Mar)</div><div class="kpi-value tnum mt-1" style="color: var(--neg);">R$ 15.621,06</div></div>
-                            <div class="card p-5" style="border-color: var(--neg);"><div class="kpi-label" style="color: var(--neg);">Resultado Competência</div><div class="kpi-value tnum mt-1" style="color: var(--neg);">– R$ 3.934,55</div></div>
+                            <div class="card p-5"><div class="kpi-label">CMV + Demais</div><div class="kpi-value tnum mt-1" style="color: var(--neg);">R$ 11.131,31</div></div>
+                            <div class="card p-5" style="border-color: var(--pos);"><div class="kpi-label" style="color: var(--pos);">Resultado Competência</div><div class="kpi-value tnum mt-1" style="color: var(--pos);">+ R$ 1.657,99</div></div>
                         </div>
                         <div class="card overflow-hidden">
                             <table class="data-table">
                                 <thead><tr><th>Categoria</th><th class="text-right" style="width:18%;">Valor</th><th class="text-right" style="width:18%;">Regime</th></tr></thead>
                                 <tbody>
-                                    <tr class="subhead"><td colspan="3" style="color: var(--pos);">▍ Receita operacional Março (sem empréstimo)</td></tr>
-                                    <tr><td class="font-semibold">Receita de Vendas (PIX + Dinheiro + Online + Rendimentos)</td><td class="text-right font-semibold tnum" style="color: var(--pos);">R$ 28.575,62</td><td class="text-right text-[11px] text-[var(--muted)]">caixa Mar</td></tr>
+                                    <tr class="subhead"><td colspan="3" style="color: var(--pos);">▍ Receita do mês (Mar)</td></tr>
+                                    <tr><td class="font-semibold">Receita Bruta Declarada</td><td class="text-right font-semibold tnum" style="color: var(--pos);">R$ 29.678,41</td><td class="text-right text-[11px] text-[var(--muted)]">PGDAS-D Mar</td></tr>
 
                                     <tr class="subhead"><td colspan="3" style="color: var(--coral);">▍ Despesas competência Mar · pagas em Abril</td></tr>
                                     <tr><td class="pl-8 text-[var(--muted)]">Pessoas</td><td class="text-right tnum">R$ 5.330,38</td><td class="text-right text-[11px]" style="color: var(--coral);">pago Abr</td></tr>
@@ -1597,14 +1635,14 @@
                                     <tr><td class="pl-8 text-[var(--muted)]">DIFAL</td><td class="text-right tnum">R$ 0,00</td><td class="text-right text-[11px]" style="color: var(--coral);">pago Abr</td></tr>
                                     <tr><td class="pl-8 font-semibold">Subtotal deferidas</td><td class="text-right font-semibold tnum">R$ 16.889,11</td><td></td></tr>
 
-                                    <tr class="subhead"><td colspan="3" style="color: var(--ink);">▍ Demais despesas · caixa do próprio Março</td></tr>
-                                    <tr><td class="pl-8 text-[var(--muted)]">Produtos</td><td class="text-right tnum">R$ 14.220,20</td><td class="text-right text-[11px] text-[var(--muted)]">caixa Mar</td></tr>
+                                    <tr class="subhead"><td colspan="3" style="color: var(--ink);">▍ CMV e demais despesas do próprio Março</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">CMV informado</td><td class="text-right tnum">R$ 9.730,45</td><td class="text-right text-[11px] text-[var(--muted)]">CMV Mar</td></tr>
                                     <tr><td class="pl-8 text-[var(--muted)]">Fretes e Logística</td><td class="text-right tnum">R$ 608,54</td><td class="text-right text-[11px] text-[var(--muted)]">caixa Mar</td></tr>
                                     <tr><td class="pl-8 text-[var(--muted)]">Tráfego (Facebook + Google)</td><td class="text-right tnum">R$ 480,00</td><td class="text-right text-[11px] text-[var(--muted)]">caixa Mar</td></tr>
                                     <tr><td class="pl-8 text-[var(--muted)]">Outros</td><td class="text-right tnum">R$ 312,32</td><td class="text-right text-[11px] text-[var(--muted)]">caixa Mar</td></tr>
-                                    <tr><td class="pl-8 font-semibold">Subtotal demais</td><td class="text-right font-semibold tnum">R$ 15.621,06</td><td></td></tr>
+                                    <tr><td class="pl-8 font-semibold">Subtotal CMV + demais</td><td class="text-right font-semibold tnum">R$ 11.131,31</td><td></td></tr>
 
-                                    <tr class="total-row"><td>RESULTADO LÍQUIDO (COMPETÊNCIA)</td><td class="text-right tnum">– R$ 3.934,55</td><td></td></tr>
+                                    <tr class="total-row"><td>RESULTADO LÍQUIDO (COMPETÊNCIA)</td><td class="text-right tnum">+ R$ 1.657,99</td><td></td></tr>
                                 </tbody>
                             </table>
                         </div>
@@ -1613,7 +1651,7 @@
                                 <div class="kpi-icon flex-shrink-0" style="background: var(--coral-soft); color: var(--coral-deep);"><i data-lucide="alert-triangle" class="w-4 h-4"></i></div>
                                 <div>
                                     <div class="text-[12px] font-semibold mb-1">Leitura gerencial de Março</div>
-                                    <p class="text-[12.5px] text-[var(--muted)] leading-relaxed">No caixa, Março apareceu como o melhor mês (+R$ 25,4k), mas <strong class="text-[var(--ink)]">o resultado operacional real é deficitário em R$ 3,9k</strong>. O caixa positivo deveu-se exclusivamente ao empréstimo bancário (R$ 28,5k) e ao adiamento natural das despesas para Abril. <strong class="text-[var(--ink)]">Sinal de alerta:</strong> a operação não está se sustentando.</p>
+                                    <p class="text-[12.5px] text-[var(--muted)] leading-relaxed">O empréstimo bancário permanece fora da receita da DRE. Com receita declarada de R$ 29,7k e CMV informado de R$ 9,7k, Março fecha em <strong class="text-[var(--ink)]">+R$ 1,7k por competência</strong>, uma margem positiva, mas estreita.</p>
                                 </div>
                             </div>
                         </div>
@@ -1622,17 +1660,17 @@
                     <!-- ABR COMPETÊNCIA -->
                     <div id="month-drecomp-abr" class="month-content">
                         <div class="grid grid-cols-1 md:grid-cols-4 gap-5 mb-6">
-                            <div class="card p-5"><div class="kpi-label">Receita</div><div class="kpi-value tnum mt-1" style="color: var(--pos);">R$ 35.800,78</div></div>
+                            <div class="card p-5"><div class="kpi-label">Receita por Competência</div><div class="kpi-value tnum mt-1" style="color: var(--pos);">R$ 27.690,15</div><div class="text-[10.5px] text-[var(--muted)] mt-1">PGDAS-D · Abril/2026</div></div>
                             <div class="card p-5"><div class="kpi-label">Despesas Competência</div><div class="kpi-value tnum mt-1" style="color: var(--neg);">R$ 17.010,18</div><div class="text-[10.5px] text-[var(--muted)] mt-1">pagas em Maio</div></div>
-                            <div class="card p-5"><div class="kpi-label">Demais (Caixa Abr)</div><div class="kpi-value tnum mt-1" style="color: var(--neg);">R$ 48.220,64</div></div>
-                            <div class="card p-5" style="border-color: var(--neg);"><div class="kpi-label" style="color: var(--neg);">Resultado Competência</div><div class="kpi-value tnum mt-1" style="color: var(--neg);">– R$ 29.430,04</div></div>
+                            <div class="card p-5"><div class="kpi-label">CMV + Demais</div><div class="kpi-value tnum mt-1" style="color: var(--neg);">R$ 10.590,23</div></div>
+                            <div class="card p-5" style="border-color: var(--pos);"><div class="kpi-label" style="color: var(--pos);">Resultado Competência</div><div class="kpi-value tnum mt-1" style="color: var(--pos);">+ R$ 89,74</div></div>
                         </div>
                         <div class="card overflow-hidden">
                             <table class="data-table">
                                 <thead><tr><th>Categoria</th><th class="text-right" style="width:18%;">Valor</th><th class="text-right" style="width:18%;">Regime</th></tr></thead>
                                 <tbody>
                                     <tr class="subhead"><td colspan="3" style="color: var(--pos);">▍ Receita do mês (Abr)</td></tr>
-                                    <tr><td class="font-semibold">Receita Total de Vendas / Outros</td><td class="text-right font-semibold tnum" style="color: var(--pos);">R$ 35.800,78</td><td class="text-right text-[11px] text-[var(--muted)]">caixa Abr</td></tr>
+                                    <tr><td class="font-semibold">Receita Bruta Declarada</td><td class="text-right font-semibold tnum" style="color: var(--pos);">R$ 27.690,15</td><td class="text-right text-[11px] text-[var(--muted)]">PGDAS-D Abr</td></tr>
 
                                     <tr class="subhead"><td colspan="3" style="color: var(--coral);">▍ Despesas competência Abr · pagas em Maio</td></tr>
                                     <tr><td class="pl-8 text-[var(--muted)]">Pessoas + Pró-labore</td><td class="text-right tnum">R$ 5.240,38</td><td class="text-right text-[11px]" style="color: var(--coral);">pago Mai</td></tr>
@@ -1645,13 +1683,13 @@
                                     <tr><td class="pl-8 text-[var(--muted)]">DIFAL</td><td class="text-right tnum">R$ 0,00</td><td class="text-right text-[11px]" style="color: var(--coral);">pago Mai</td></tr>
                                     <tr><td class="pl-8 font-semibold">Subtotal deferidas</td><td class="text-right font-semibold tnum">R$ 17.010,18</td><td></td></tr>
 
-                                    <tr class="subhead"><td colspan="3" style="color: var(--ink);">▍ Demais despesas · caixa do próprio Abril</td></tr>
-                                    <tr><td class="pl-8 text-[var(--muted)]">Produtos</td><td class="text-right tnum">R$ 47.178,32</td><td class="text-right text-[11px] text-[var(--muted)]">caixa Abr</td></tr>
+                                    <tr class="subhead"><td colspan="3" style="color: var(--ink);">▍ CMV e demais despesas do próprio Abril</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">CMV informado</td><td class="text-right tnum">R$ 9.547,91</td><td class="text-right text-[11px] text-[var(--muted)]">CMV Abr</td></tr>
                                     <tr><td class="pl-8 text-[var(--muted)]">Fretes e Logística</td><td class="text-right tnum">R$ 692,32</td><td class="text-right text-[11px] text-[var(--muted)]">caixa Abr</td></tr>
                                     <tr><td class="pl-8 text-[var(--muted)]">Tráfego</td><td class="text-right tnum">R$ 350,00</td><td class="text-right text-[11px] text-[var(--muted)]">caixa Abr</td></tr>
-                                    <tr><td class="pl-8 font-semibold">Subtotal demais</td><td class="text-right font-semibold tnum">R$ 48.220,64</td><td></td></tr>
+                                    <tr><td class="pl-8 font-semibold">Subtotal CMV + demais</td><td class="text-right font-semibold tnum">R$ 10.590,23</td><td></td></tr>
 
-                                    <tr class="total-row"><td>RESULTADO LÍQUIDO (COMPETÊNCIA)</td><td class="text-right tnum">– R$ 29.430,04</td><td></td></tr>
+                                    <tr class="total-row"><td>RESULTADO LÍQUIDO (COMPETÊNCIA)</td><td class="text-right tnum">+ R$ 89,74</td><td></td></tr>
                                 </tbody>
                             </table>
                         </div>
@@ -1660,7 +1698,7 @@
                                 <div class="kpi-icon flex-shrink-0" style="background: var(--coral-soft); color: var(--coral-deep);"><i data-lucide="info" class="w-4 h-4"></i></div>
                                 <div>
                                     <div class="text-[12px] font-semibold mb-1">Leitura gerencial de Abril</div>
-                                    <p class="text-[12.5px] text-[var(--muted)] leading-relaxed">Com os pagamentos de Maio disponíveis, a estimativa anterior foi substituída pelo valor real. Abril fechou em <strong class="text-[var(--ink)]">–R$ 29,4k por competência</strong>, muito próximo do déficit de caixa de –R$ 29,3k.</p>
+                                    <p class="text-[12.5px] text-[var(--muted)] leading-relaxed">A compra de produtos pressionou o caixa, mas o CMV informado do mês foi R$ 9,5k. Com receita declarada de R$ 27,7k, Abril fecha praticamente no ponto de equilíbrio: <strong class="text-[var(--ink)]">+R$ 89,74 por competência</strong>.</p>
                                 </div>
                             </div>
                         </div>
@@ -1671,8 +1709,8 @@
                         <div class="grid grid-cols-1 md:grid-cols-4 gap-5 mb-6">
                             <div class="card p-5"><div class="kpi-label">Receita por Competência</div><div class="kpi-value tnum mt-1" style="color: var(--pos);">R$ 92.636,81</div><div class="text-[10.5px] text-[var(--muted)] mt-1">PGDAS-D · Maio/2026</div></div>
                             <div class="card p-5"><div class="kpi-label">Despesas Competência</div><div class="kpi-value tnum mt-1" style="color: var(--neg);">R$ 29.798,70</div><div class="text-[10.5px] text-[var(--muted)] mt-1">pagas em Junho</div></div>
-                            <div class="card p-5"><div class="kpi-label">Demais (Caixa Mai)</div><div class="kpi-value tnum mt-1" style="color: var(--neg);">R$ 30.190,79</div></div>
-                            <div class="card p-5" style="border-color: var(--pos);"><div class="kpi-label" style="color: var(--pos);">Resultado Competência</div><div class="kpi-value tnum mt-1" style="color: var(--pos);">+ R$ 32.647,32</div></div>
+                            <div class="card p-5"><div class="kpi-label">CMV + Demais</div><div class="kpi-value tnum mt-1" style="color: var(--neg);">R$ 42.536,06</div></div>
+                            <div class="card p-5" style="border-color: var(--pos);"><div class="kpi-label" style="color: var(--pos);">Resultado Competência</div><div class="kpi-value tnum mt-1" style="color: var(--pos);">+ R$ 20.302,05</div></div>
                         </div>
                         <div class="card overflow-hidden">
                             <table class="data-table">
@@ -1691,26 +1729,27 @@
                                     <tr><td class="pl-8 text-[var(--muted)]">INSS sobre Salários</td><td class="text-right tnum">R$ 356,62</td><td class="text-right text-[11px]" style="color: var(--coral);">pago Jun</td></tr>
                                     <tr><td class="pl-8 font-semibold">Subtotal deferidas</td><td class="text-right font-semibold tnum">R$ 29.798,70</td><td></td></tr>
 
-                                    <tr class="subhead"><td colspan="3" style="color: var(--ink);">▍ Demais despesas · caixa do próprio Maio</td></tr>
-                                    <tr><td class="pl-8 text-[var(--muted)]">Produtos</td><td class="text-right tnum">R$ 29.171,75</td><td class="text-right text-[11px] text-[var(--muted)]">caixa Mai</td></tr>
+                                    <tr class="subhead"><td colspan="3" style="color: var(--ink);">▍ CMV e demais despesas do próprio Maio</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">CMV informado</td><td class="text-right tnum">R$ 41.517,02</td><td class="text-right text-[11px] text-[var(--muted)]">CMV Mai</td></tr>
                                     <tr><td class="pl-8 text-[var(--muted)]">Tarifas Bancárias</td><td class="text-right tnum">R$ 649,22</td><td class="text-right text-[11px] text-[var(--muted)]">caixa Mai</td></tr>
                                     <tr><td class="pl-8 text-[var(--muted)]">Tráfego</td><td class="text-right tnum">R$ 350,00</td><td class="text-right text-[11px] text-[var(--muted)]">caixa Mai</td></tr>
                                     <tr><td class="pl-8 text-[var(--muted)]">IOF</td><td class="text-right tnum">R$ 19,82</td><td class="text-right text-[11px] text-[var(--muted)]">caixa Mai</td></tr>
-                                    <tr><td class="pl-8 font-semibold">Subtotal demais</td><td class="text-right font-semibold tnum">R$ 30.190,79</td><td></td></tr>
+                                    <tr><td class="pl-8 font-semibold">Subtotal CMV + demais</td><td class="text-right font-semibold tnum">R$ 42.536,06</td><td></td></tr>
 
-                                    <tr class="total-row"><td>RESULTADO LÍQUIDO (COMPETÊNCIA)</td><td class="text-right tnum">+ R$ 32.647,32</td><td></td></tr>
+                                    <tr class="total-row"><td>RESULTADO LÍQUIDO (COMPETÊNCIA)</td><td class="text-right tnum">+ R$ 20.302,05</td><td></td></tr>
                                 </tbody>
                             </table>
                         </div>
                         <div class="card p-5 mt-5" style="background: var(--paper); border-left: 3px solid var(--pos);">
-                            <p class="text-[12.5px] text-[var(--muted)] leading-relaxed">O caixa de Maio registrou R$ 61,0k de entradas líquidas, enquanto o PGDAS-D declarou <strong class="text-[var(--ink)]">R$ 92,6k de receita bruta por competência</strong>. Com R$ 60,0k de despesas alocadas ao período, Maio fecha em <strong class="text-[var(--ink)]">+R$ 32,6k por competência</strong>. A diferença entre as visões decorre principalmente do momento de liquidação das vendas e das taxas financeiras.</p>
+                            <p class="text-[12.5px] text-[var(--muted)] leading-relaxed">Maio concentrou o maior CMV do semestre, R$ 41,5k. Ainda assim, a receita declarada de R$ 92,6k sustenta um resultado de <strong class="text-[var(--ink)]">+R$ 20,3k por competência</strong>, após R$ 72,3k de custos e despesas.</p>
                         </div>
                     </div>
 
                     <!-- JUN COMPETÊNCIA -->
                     <div id="month-drecomp-jun" class="month-content active">
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-5 mb-6">
                             <div class="card p-5"><div class="kpi-label">Receita por Competência</div><div class="kpi-value tnum mt-1" style="color: var(--pos);">R$ 33.644,49</div><div class="text-[10.5px] text-[var(--muted)] mt-1">PGDAS-D · Junho/2026</div></div>
+                            <div class="card p-5"><div class="kpi-label">CMV Informado</div><div class="kpi-value tnum mt-1" style="color: var(--neg);">R$ 13.060,01</div></div>
                             <div class="card p-5"><div class="kpi-label">Despesas Competência</div><div class="kpi-value tnum mt-1" style="color: var(--warn);">A fechar</div><div class="text-[10.5px] text-[var(--muted)] mt-1">dependem dos pagamentos de Julho</div></div>
                             <div class="card p-5" style="border-color: var(--warn);"><div class="kpi-label" style="color: var(--warn);">Resultado Competência</div><div class="kpi-value tnum mt-1" style="color: var(--warn);">Pendente</div></div>
                         </div>
@@ -1720,13 +1759,18 @@
                                 <tbody>
                                     <tr class="subhead"><td colspan="3" style="color: var(--pos);">▍ Receita do mês (Jun)</td></tr>
                                     <tr><td class="font-semibold">Receita Bruta Declarada</td><td class="text-right font-semibold tnum" style="color: var(--pos);">R$ 33.644,49</td><td class="text-right text-[11px] text-[var(--muted)]">PGDAS-D Jun</td></tr>
+                                    <tr class="subhead"><td colspan="3" style="color: var(--ink);">▍ CMV e demais despesas conhecidas de Junho</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">CMV informado</td><td class="text-right tnum">R$ 13.060,01</td><td class="text-right text-[11px] text-[var(--muted)]">CMV Jun</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">Fretes e Logística</td><td class="text-right tnum">R$ 550,55</td><td class="text-right text-[11px] text-[var(--muted)]">caixa Jun</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">Tráfego</td><td class="text-right tnum">R$ 350,00</td><td class="text-right text-[11px] text-[var(--muted)]">caixa Jun</td></tr>
+                                    <tr><td class="pl-8 font-semibold">Subtotal conhecido</td><td class="text-right font-semibold tnum">R$ 13.960,56</td><td></td></tr>
                                     <tr class="subhead"><td colspan="3" style="color: var(--warn);">▍ Despesas competência Jun · pagas em Julho</td></tr>
                                     <tr><td class="pl-8 text-[var(--muted)]">Relatório de pagamentos de Julho necessário para a alocação</td><td class="text-right tnum">—</td><td class="text-right text-[11px]" style="color: var(--warn);">pendente</td></tr>
                                 </tbody>
                             </table>
                         </div>
                         <div class="card p-5 mt-5" style="background: var(--paper); border-left: 3px solid var(--warn);">
-                            <p class="text-[12.5px] text-[var(--muted)] leading-relaxed">A receita de Junho está fechada em <strong class="text-[var(--ink)]">R$ 33.644,49 por competência</strong>, conforme o PGDAS-D transmitido em 16/07/2026. O resultado ficará disponível quando as despesas de Junho pagas em Julho forem incorporadas.</p>
+                            <p class="text-[12.5px] text-[var(--muted)] leading-relaxed">A receita de Junho está fechada em R$ 33,6k e o CMV informado é R$ 13,1k. O resultado permanece pendente até que as despesas de Junho pagas em Julho sejam incorporadas, evitando apresentar uma margem incompleta como definitiva.</p>
                         </div>
                     </div>
 
