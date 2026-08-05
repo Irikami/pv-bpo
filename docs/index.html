@@ -170,6 +170,9 @@
             height: 3px;
             background: linear-gradient(90deg, var(--coral), var(--cyan));
         }
+        .card-accent-top.accent-solid::before {
+            background: var(--accent);
+        }
         .kpi-label {
             font-size: 10.5px;
             font-weight: 800;
@@ -402,6 +405,10 @@
             </button>
 
             <div class="px-3 pt-5 pb-2 section-label">Operação</div>
+            <button onclick="switchView('saldos')" id="nav-saldos" class="nav-item w-full flex items-center gap-3 px-4 py-3 text-[13px] font-semibold text-left">
+                <i data-lucide="wallet-cards" class="nav-icon w-[18px] h-[18px]"></i>
+                Saldos
+            </button>
             <button onclick="switchView('recebimentos')" id="nav-recebimentos" class="nav-item w-full flex items-center gap-3 px-4 py-3 text-[13px] font-semibold text-left">
                 <i data-lucide="arrow-down-left" class="nav-icon w-[18px] h-[18px]"></i>
                 Recebimentos
@@ -1812,6 +1819,103 @@
                     </div>
 
                 </div><!-- /regime-comp -->
+            </section>
+
+            <!-- ===================================================================================== -->
+            <!-- SALDOS · POSIÇÃO ATUAL -->
+            <!-- ===================================================================================== -->
+            <section id="view-saldos" class="view-section">
+                <div class="mb-8 flex flex-col md:flex-row md:items-end md:justify-between gap-6 pb-6 border-b border-[var(--line)]">
+                    <div>
+                        <div class="h-eyebrow mb-2">Posição Financeira · 05/08/2026</div>
+                        <h2 class="h-section">SALDOS DISPONÍVEIS</h2>
+                        <p class="text-[13px] text-[var(--muted)] mt-2 max-w-xl">Posição informada das contas financeiras da empresa na data de referência.</p>
+                    </div>
+                    <div class="stamp" style="border-color: var(--cyan); color: var(--cyan-deep);">
+                        <i data-lucide="calendar-check" class="w-3 h-3"></i> Posição em 05/08/2026
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
+                    <div class="card p-6" style="background: var(--ink); color: white; border-color: var(--ink);">
+                        <div class="text-[10px] uppercase tracking-[0.16em] text-white/50">Saldo total disponível</div>
+                        <div class="font-display tnum text-white mt-2" style="font-size: 34px;">R$ 43.578,35</div>
+                        <div class="text-[10.5px] text-white/40 mt-2">soma de 3 instituições</div>
+                    </div>
+                    <div class="card p-6">
+                        <div class="kpi-label">Contas com saldo</div>
+                        <div class="kpi-value tnum mt-2" style="color: var(--pos);">2 de 3</div>
+                        <div class="text-[10.5px] text-[var(--muted)] mt-2">Stone e Nubank</div>
+                    </div>
+                    <div class="card p-6" style="border-color: var(--coral); background: var(--coral-soft);">
+                        <div class="kpi-label" style="color: var(--coral-deep);">Concentração principal</div>
+                        <div class="kpi-value tnum mt-2" style="color: var(--coral-deep);">98,10%</div>
+                        <div class="text-[10.5px] text-[var(--muted)] mt-2">do disponível está na Stone</div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 mb-6">
+                    <div class="card p-6 card-accent-top accent-solid" style="--accent: var(--cyan);">
+                        <div class="flex items-center justify-between mb-5">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-md flex items-center justify-center" style="background: var(--cyan-soft); color: var(--cyan-deep);"><i data-lucide="landmark" class="w-5 h-5"></i></div>
+                                <div><div class="font-display text-[18px]">STONE</div><div class="number-tag">Conta financeira</div></div>
+                            </div>
+                            <span class="number-tag" style="color: var(--pos);">COM SALDO</span>
+                        </div>
+                        <div class="kpi-value tnum" style="font-size: 28px;">R$ 42.750,19</div>
+                        <div class="mt-5">
+                            <div class="flex justify-between text-[10.5px] mb-2"><span class="text-[var(--muted)]">Participação</span><span class="font-bold tnum">98,10%</span></div>
+                            <div class="bar-track"><div class="bar-fill" style="width: 98.10%; background: var(--cyan);"></div></div>
+                        </div>
+                    </div>
+
+                    <div class="card p-6 card-accent-top accent-solid" style="--accent: #CC092F;">
+                        <div class="flex items-center justify-between mb-5">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-md flex items-center justify-center" style="background: #FFF1F3; color: #CC092F;"><i data-lucide="landmark" class="w-5 h-5"></i></div>
+                                <div><div class="font-display text-[18px]">BRADESCO</div><div class="number-tag">Conta bancária</div></div>
+                            </div>
+                            <span class="number-tag text-[var(--muted)]">SEM SALDO</span>
+                        </div>
+                        <div class="kpi-value tnum" style="font-size: 28px; color: var(--muted);">R$ 0,00</div>
+                        <div class="mt-5">
+                            <div class="flex justify-between text-[10.5px] mb-2"><span class="text-[var(--muted)]">Participação</span><span class="font-bold tnum">0,00%</span></div>
+                            <div class="bar-track"><div class="bar-fill" style="width: 0%; background: #CC092F;"></div></div>
+                        </div>
+                    </div>
+
+                    <div class="card p-6 card-accent-top accent-solid" style="--accent: #820AD1;">
+                        <div class="flex items-center justify-between mb-5">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-md flex items-center justify-center" style="background: #F5EAFC; color: #820AD1;"><i data-lucide="landmark" class="w-5 h-5"></i></div>
+                                <div><div class="font-display text-[18px]">NUBANK</div><div class="number-tag">Conta bancária</div></div>
+                            </div>
+                            <span class="number-tag" style="color: var(--pos);">COM SALDO</span>
+                        </div>
+                        <div class="kpi-value tnum" style="font-size: 28px;">R$ 828,16</div>
+                        <div class="mt-5">
+                            <div class="flex justify-between text-[10.5px] mb-2"><span class="text-[var(--muted)]">Participação</span><span class="font-bold tnum">1,90%</span></div>
+                            <div class="bar-track"><div class="bar-fill" style="width: 1.90%; background: #820AD1;"></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card overflow-hidden">
+                    <table class="data-table">
+                        <thead><tr><th>Instituição</th><th class="text-right">Saldo em 05/08/2026</th><th class="text-right">Participação</th></tr></thead>
+                        <tbody>
+                            <tr><td class="font-semibold">Stone</td><td class="text-right font-semibold tnum">R$ 42.750,19</td><td class="text-right tnum">98,10%</td></tr>
+                            <tr><td class="font-semibold">Bradesco</td><td class="text-right tnum">R$ 0,00</td><td class="text-right tnum">0,00%</td></tr>
+                            <tr><td class="font-semibold">Nubank</td><td class="text-right font-semibold tnum">R$ 828,16</td><td class="text-right tnum">1,90%</td></tr>
+                            <tr class="total-row"><td>Saldo Total</td><td class="text-right tnum">R$ 43.578,35</td><td class="text-right tnum">100,00%</td></tr>
+                        </tbody>
+                    </table>
+                    <div class="px-5 py-4 bg-[var(--coral-soft)] border-t border-[var(--coral)]/30 flex items-start gap-3">
+                        <i data-lucide="info" class="w-4 h-4 mt-0.5" style="color: var(--coral-deep);"></i>
+                        <p class="text-[12px] text-[var(--ink)]/80"><strong style="color: var(--coral-deep);">Leitura:</strong> a disponibilidade está concentrada na Stone. Esta área representa uma fotografia das contas em 05/08/2026 e não altera os saldos históricos nem os resultados mensais do dashboard.</p>
+                    </div>
+                </div>
             </section>
 
             <!-- ===================================================================================== -->
