@@ -450,11 +450,11 @@
                     <span class="w-1.5 h-1.5 rounded-full bg-[var(--coral)] animate-pulse"></span>
                     Painel ao vivo
                 </span>
-                <span class="hidden md:inline">Período: Jan – Jun 2026</span>
+                <span class="hidden md:inline">Financeiro: Jan–Jun · Nuvemshop: Jan–Jul 2026</span>
                 <span class="hidden lg:inline">Moeda: BRL</span>
             </div>
             <div class="flex items-center gap-2 text-[11px] text-white/50">
-                <span class="number-tag">v2.1 · 6 MESES</span>
+                <span class="number-tag">v2.2 · E-COMMERCE 7M</span>
             </div>
         </div>
 
@@ -719,8 +719,8 @@
                                     <i data-lucide="zap" class="w-4 h-4"></i>
                                 </div>
                                 <div>
-                                    <div class="font-bold text-[var(--ink)] mb-0.5">NuvemShop teve pico em Maio e forte recuo em Junho</div>
-                                    Maio somou 91 pedidos e R$ 14,0k após frete. Em Junho foram 22 pedidos e <strong>R$ 1,1k após frete</strong>, pressionados pelo custo logístico de R$ 1,6k.
+                                    <div class="font-bold text-[var(--ink)] mb-0.5">NuvemShop reagiu em Julho</div>
+                                    O canal avançou de 22 para <strong>41 pedidos (+86,4%)</strong>, com R$ 5,9k pagos pelos clientes e <strong>R$ 5,3k após taxas e etiquetas</strong>. Todos os pedidos foram liquidados e conciliados.
                                 </div>
                             </li>
 
@@ -935,13 +935,13 @@
                         <div class="flex items-start justify-between mb-6">
                             <div>
                                 <h3 class="h-card">E-commerce NuvemShop · Curva de receita</h3>
-                                <p class="text-[12px] text-[var(--muted)] mt-1">Maio marcou o pico do semestre; Junho recuou em volume e teve maior pressão do custo de frete.</p>
+                                <p class="text-[12px] text-[var(--muted)] mt-1">Maio segue como pico; Julho recuperou volume após o recuo de Junho e fechou 100% conciliado.</p>
                             </div>
                             <span class="number-tag">FIG. 03</span>
                         </div>
                         <div class="chart-box"><canvas id="canvasNuvem"></canvas></div>
                     </div>
-                    <div class="grid grid-cols-2 md:grid-cols-6 gap-4">
+                    <div class="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-7 gap-4">
                         <div class="card p-5 text-center">
                             <div class="number-tag">JAN</div>
                             <div class="font-display text-[22px] mt-1">—</div>
@@ -977,6 +977,12 @@
                             <div class="font-display text-[22px] mt-1 tnum">22</div>
                             <div class="text-[11px] text-[var(--muted)]">pedidos · 100% liquidados</div>
                             <div class="text-[12px] mt-2 font-bold tnum">R$ 1.118</div>
+                        </div>
+                        <div class="card p-5 text-center" style="border-color: var(--pos);">
+                            <div class="number-tag" style="color: var(--pos);">JUL</div>
+                            <div class="font-display text-[22px] mt-1 tnum">41</div>
+                            <div class="text-[11px] text-[var(--muted)]">pedidos · 100% liquidados</div>
+                            <div class="text-[12px] mt-2 font-bold tnum">R$ 5.315</div>
                         </div>
                     </div>
                 </div>
@@ -2130,7 +2136,7 @@
                     <div>
                         <div class="h-eyebrow mb-2">Capítulo VII · E-commerce</div>
                         <h2 class="h-section">NUVEMSHOP · E-COMMERCE</h2>
-                        <p class="text-[13px] text-[var(--muted)] mt-2 max-w-xl">Demonstrativo de pedidos, taxas e margem líquida do canal digital, conciliado pedido a pedido. Atualizado até Junho/2026.</p>
+                        <p class="text-[13px] text-[var(--muted)] mt-2 max-w-xl">Demonstrativo de pedidos, taxas e margem líquida do canal digital, conciliado pedido a pedido. Atualizado até Julho/2026.</p>
                     </div>
                     <div class="pill-group no-print">
                         <button onclick="switchMonth('nuvemshop','jan')" id="btn-month-nuvemshop-jan" class="pill-btn">Jan</button>
@@ -2138,7 +2144,8 @@
                         <button onclick="switchMonth('nuvemshop','mar')" id="btn-month-nuvemshop-mar" class="pill-btn">Mar</button>
                         <button onclick="switchMonth('nuvemshop','abr')" id="btn-month-nuvemshop-abr" class="pill-btn">Abr</button>
                         <button onclick="switchMonth('nuvemshop','mai')" id="btn-month-nuvemshop-mai" class="pill-btn">Mai</button>
-                        <button onclick="switchMonth('nuvemshop','jun')" id="btn-month-nuvemshop-jun" class="pill-btn active">Jun</button>
+                        <button onclick="switchMonth('nuvemshop','jun')" id="btn-month-nuvemshop-jun" class="pill-btn">Jun</button>
+                        <button onclick="switchMonth('nuvemshop','jul')" id="btn-month-nuvemshop-jul" class="pill-btn active">Jul</button>
                     </div>
                 </div>
 
@@ -2146,24 +2153,24 @@
                 <div class="card p-6 mb-6" style="background: var(--ink); color: white; border-color: var(--ink);">
                     <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
                         <div>
-                            <div class="text-[10px] uppercase tracking-[0.18em] text-white/40">Total Pedidos · 6M</div>
-                            <div class="font-display text-[26px] mt-1 tnum text-white">210</div>
+                            <div class="text-[10px] uppercase tracking-[0.18em] text-white/40">Total Pedidos · 7M</div>
+                            <div class="font-display text-[26px] mt-1 tnum text-white">251</div>
                         </div>
                         <div>
                             <div class="text-[10px] uppercase tracking-[0.18em] text-white/40">Liquidados</div>
-                            <div class="font-display text-[26px] mt-1 tnum" style="color: var(--cyan);">206</div>
+                            <div class="font-display text-[26px] mt-1 tnum" style="color: var(--cyan);">247</div>
                         </div>
                         <div>
                             <div class="text-[10px] uppercase tracking-[0.18em] text-white/40">Recusados/Pendentes</div>
                             <div class="font-display text-[26px] mt-1 tnum" style="color: var(--coral);">4</div>
                         </div>
                         <div>
-                            <div class="text-[10px] uppercase tracking-[0.18em] text-white/40">Lucro Líquido · 6M (c/ frete)</div>
-                            <div class="font-display text-[26px] mt-1 tnum text-white">R$ 33.063</div>
+                            <div class="text-[10px] uppercase tracking-[0.18em] text-white/40">Líquido · 7M (frete/etiquetas)</div>
+                            <div class="font-display text-[26px] mt-1 tnum text-white">R$ 38.378</div>
                         </div>
                         <div>
                             <div class="text-[10px] uppercase tracking-[0.18em] text-white/40">Ticket Médio · após frete</div>
-                            <div class="font-display text-[26px] mt-1 tnum text-white">R$ 160,50</div>
+                            <div class="font-display text-[26px] mt-1 tnum text-white">R$ 155,38</div>
                         </div>
                     </div>
                 </div>
@@ -2337,7 +2344,7 @@
                 </div>
 
                 <!-- JUN -->
-                <div id="month-nuvemshop-jun" class="month-content active">
+                <div id="month-nuvemshop-jun" class="month-content">
                     <div class="grid grid-cols-1 md:grid-cols-4 gap-5 mb-6">
                         <div class="card p-5"><div class="kpi-label">Pedidos</div><div class="kpi-value tnum mt-1">22</div><div class="text-[10.5px] mt-1" style="color: var(--warn);">−75,8% vs Mai</div></div>
                         <div class="card p-5"><div class="kpi-label">Liquidados</div><div class="kpi-value tnum mt-1" style="color: var(--pos);">22</div><div class="text-[10.5px] text-[var(--muted)] mt-1">100% dos pedidos</div></div>
@@ -2376,6 +2383,51 @@
                             <div class="p-3 rounded border border-[var(--line)] bg-[#FAFAF7]"><div class="number-tag">Parcialm. estornados</div><div class="font-display text-[18px] tnum">3</div></div>
                             <div class="p-3 rounded border border-[var(--pos)] bg-[var(--pos-soft)]"><div class="number-tag" style="color: var(--pos);">Status</div><div class="font-display text-[16px]" style="color: var(--pos);">CONCILIADO ✓</div></div>
                         </div>
+                    </div>
+                </div>
+
+                <!-- JUL -->
+                <div id="month-nuvemshop-jul" class="month-content active">
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-5 mb-6">
+                        <div class="card p-5"><div class="kpi-label">Pedidos</div><div class="kpi-value tnum mt-1">41</div><div class="text-[10.5px] mt-1" style="color: var(--pos);">+86,4% vs Jun</div></div>
+                        <div class="card p-5"><div class="kpi-label">Liquidados</div><div class="kpi-value tnum mt-1" style="color: var(--pos);">41</div><div class="text-[10.5px] text-[var(--muted)] mt-1">100% dos pedidos</div></div>
+                        <div class="card p-5"><div class="kpi-label">Total Pago p/ Cliente</div><div class="kpi-value tnum mt-1" style="color: var(--pos);">R$ 5.881,50</div></div>
+                        <div class="card p-5" style="border-color: var(--cyan); background: var(--cyan-soft);"><div class="kpi-label" style="color: var(--cyan-deep);">Resultado · após etiquetas</div><div class="kpi-value tnum mt-1" style="color: var(--cyan-deep);">R$ 5.315,01</div></div>
+                    </div>
+                    <div class="card overflow-hidden mb-5">
+                        <table class="data-table">
+                            <thead><tr><th>Descrição</th><th class="text-right">Valor (liquidados)</th></tr></thead>
+                            <tbody>
+                                <tr><td class="font-bold">Subtotal · Produtos</td><td class="text-right font-semibold tnum">R$ 5.809,90</td></tr>
+                                <tr><td class="pl-6 border-l-[3px] border-[var(--cyan)]">Frete (Recebido)</td><td class="text-right tnum">R$ 228,22</td></tr>
+                                <tr><td class="pl-6 border-l-[3px] border-[var(--coral)]">Cupom</td><td class="text-right tnum" style="color: var(--neg);">(R$ 97,94)</td></tr>
+                                <tr><td class="pl-6 border-l-[3px] border-[var(--coral)]">Desconto por Frete Grátis</td><td class="text-right tnum" style="color: var(--neg);">(R$ 23,35)</td></tr>
+                                <tr><td class="pl-6 border-l-[3px] border-[var(--coral)]">Estorno</td><td class="text-right tnum" style="color: var(--neg);">(R$ 35,33)</td></tr>
+                                <tr style="background: #FAFAF7;"><td class="font-bold">(=) Total Pago pelo Cliente</td><td class="text-right font-semibold tnum" style="color: var(--pos);">R$ 5.881,50</td></tr>
+                                <tr><td class="pl-6 border-l-[3px] border-[var(--coral)]">Taxas Nuvem Pago</td><td class="text-right tnum" style="color: var(--neg);">(R$ 304,77)</td></tr>
+                                <tr><td class="pl-6 border-l-[3px] border-[var(--coral)]">Juros</td><td class="text-right tnum" style="color: var(--neg);">R$ 0,00</td></tr>
+                                <tr><td class="pl-6 border-l-[3px] border-[var(--pos)]">Devolução de Custos</td><td class="text-right tnum" style="color: var(--pos);">R$ 3,03</td></tr>
+                                <tr style="background: #FAFAF7;"><td class="font-bold">(=) Total Líquido Nuvem Pago</td><td class="text-right font-semibold tnum" style="color: var(--pos);">R$ 5.579,76</td></tr>
+                                <tr><td class="pl-6 border-l-[3px] border-[var(--coral)]">Etiquetas Nuvem Envio <span class="number-tag ml-1">14 envios · valor dos pedidos</span></td><td class="text-right tnum" style="color: var(--neg);">(R$ 264,75)</td></tr>
+                                <tr class="total-row"><td>Resultado E-commerce · após etiquetas</td><td class="text-right tnum">R$ 5.315,01</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card p-6">
+                        <div class="flex items-center gap-2 mb-4">
+                            <div class="w-1 h-5 rounded-full" style="background: var(--cyan);"></div>
+                            <h3 class="h-card">Quadro de Auditoria · Julho</h3>
+                            <span class="number-tag ml-auto">Conciliação pedido a pedido</span>
+                        </div>
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 text-[12px]">
+                            <div class="p-3 rounded border border-[var(--line)] bg-[#FAFAF7]"><div class="number-tag">Pedidos filtrados</div><div class="font-display text-[18px] tnum">41</div></div>
+                            <div class="p-3 rounded border border-[var(--line)] bg-[#FAFAF7]"><div class="number-tag">Liquidados</div><div class="font-display text-[18px] tnum" style="color: var(--pos);">41</div></div>
+                            <div class="p-3 rounded border border-[var(--line)] bg-[#FAFAF7]"><div class="number-tag">Recebidos</div><div class="font-display text-[18px] tnum" style="color: var(--pos);">38</div></div>
+                            <div class="p-3 rounded border border-[var(--line)] bg-[#FAFAF7]"><div class="number-tag">Pendentes/Recusados</div><div class="font-display text-[18px] tnum">0</div></div>
+                            <div class="p-3 rounded border border-[var(--line)] bg-[#FAFAF7]"><div class="number-tag">Parcialm. estornados</div><div class="font-display text-[18px] tnum">3</div></div>
+                            <div class="p-3 rounded border border-[var(--pos)] bg-[var(--pos-soft)]"><div class="number-tag" style="color: var(--pos);">Status</div><div class="font-display text-[16px]" style="color: var(--pos);">CONCILIADO ✓</div></div>
+                        </div>
+                        <p class="text-[11.5px] text-[var(--muted)] mt-4">As 41 vendas e os 14 valores de etiqueta foram lidos no painel. As duas equações financeiras de cada pedido fecharam com diferença acumulada de R$ 0,00.</p>
                     </div>
                 </div>
 
@@ -2727,11 +2779,11 @@
             new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho'],
+                    labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho'],
                     datasets: [
                         {
                             label: 'Receita Bruta',
-                            data: [5152.23, 4489.53, 3388.89, 8812.80, 14879.26, 2760.80],
+                            data: [5152.23, 4489.53, 3388.89, 8812.80, 14879.26, 2760.80, 5809.90],
                             borderColor: '#9CA3AF',
                             backgroundColor: 'rgba(156,163,175,0.08)',
                             borderWidth: 2, tension: 0.3,
@@ -2739,15 +2791,15 @@
                         },
                         {
                             label: 'Total Pago p/ Cliente',
-                            data: [5494.02, 4475.02, 3648.89, 8757.75, 15762.25, 2876.36],
+                            data: [5494.02, 4475.02, 3648.89, 8757.75, 15762.25, 2876.36, 5881.50],
                             borderColor: CYAN,
                             backgroundColor: 'rgba(31,192,217,0.12)',
                             borderWidth: 2.5, tension: 0.3, fill: true,
                             pointRadius: 5, pointBackgroundColor: '#fff', pointBorderColor: CYAN, pointBorderWidth: 2.5
                         },
                         {
-                            label: 'Líquido (lucro)',
-                            data: [4664.67, 3153.65, 2736.27, 7425.01, 13965.74, 1118.00],
+                            label: 'Líquido após frete/etiquetas',
+                            data: [4664.67, 3153.65, 2736.27, 7425.01, 13965.74, 1118.00, 5315.01],
                             borderColor: CORAL,
                             backgroundColor: CORAL,
                             borderWidth: 3, tension: 0.3,
