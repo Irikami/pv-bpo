@@ -631,7 +631,7 @@
                             <div><div class="kpi-label text-[9.5px]">Entradas</div><div class="kpi-value tnum" style="font-size:22px;">R$ 32.432</div></div>
                             <div><div class="kpi-label text-[9.5px]">Saídas</div><div class="kpi-value tnum" style="font-size:22px;">R$ 73.380</div></div>
                             <div class="pt-2 border-t border-[var(--line)]"><div class="kpi-label text-[9.5px]">Resultado Caixa</div><div class="font-display tnum" style="font-size: 20px; color: var(--neg);">– R$ 40.949</div></div>
-                            <div class="pt-2 border-t border-[var(--line)]"><div class="kpi-label text-[9.5px]">Resultado Competência</div><div class="font-display" style="font-size: 20px; color: var(--warn);">Pendente</div></div>
+                            <div class="pt-2 border-t border-[var(--line)]"><div class="kpi-label text-[9.5px]">Resultado Competência</div><div class="font-display tnum" style="font-size: 20px; color: var(--pos);">+ R$ 4.376</div></div>
                         </div>
                     </div>
                 </div>
@@ -662,8 +662,8 @@
                             </div>
                             <div class="pl-8 border-l border-white/15">
                                 <div class="text-[10px] uppercase tracking-[0.16em]" style="color: var(--cyan);">Resultado Competência</div>
-                                <div class="font-display tnum" style="font-size: 26px; color: var(--cyan);">+ R$ 37.450</div>
-                                <div class="text-[10.5px] text-white/40 mt-1">acumulado Jan–Mai · Junho pendente</div>
+                                <div class="font-display tnum" style="font-size: 26px; color: var(--cyan);">+ R$ 41.826</div>
+                                <div class="text-[10.5px] text-white/40 mt-1">acumulado Jan–Jun</div>
                             </div>
                         </div>
                     </div>
@@ -690,7 +690,7 @@
                                 </div>
                                 <div>
                                     <div class="font-bold text-[var(--ink)] mb-0.5">Junho concentrou o maior déficit de caixa</div>
-                                    Depois da recuperação de Maio (+R$ 13,8k), <strong>Junho fechou em –R$ 40,9k no caixa</strong>. O resultado por competência permanece pendente até a incorporação das despesas pagas em Julho.
+                                    Depois da recuperação de Maio (+R$ 13,8k), <strong>Junho fechou em –R$ 40,9k no caixa</strong>, mas apresentou <strong>+R$ 4,4k por competência</strong> após reconhecer o CMV e as despesas pagas em Julho.
                                 </div>
                             </li>
 
@@ -1522,7 +1522,7 @@
                         </table>
                     </div>
                     <div class="card p-5 mt-5" style="background: var(--paper); border-left: 3px solid var(--warn);">
-                        <p class="text-[12.5px] text-[var(--muted)] leading-relaxed"><strong class="text-[var(--ink)]">Receita de Junho fechada por competência:</strong> o PGDAS-D registra R$ 33.644,49. As despesas geradas em Junho e pagas em Julho ainda não estão disponíveis; por isso, o resultado de competência permanece pendente.</p>
+                        <p class="text-[12.5px] text-[var(--muted)] leading-relaxed"><strong class="text-[var(--ink)]">Junho fechado por competência:</strong> o PGDAS-D registra R$ 33.644,49 de receita e a DRE reconhece R$ 29.268,67 de custos e despesas, resultando em <strong class="text-[var(--ink)]">+R$ 4.375,82</strong>. O déficit de R$ 40.948,79 acima permanece a leitura de caixa.</p>
                     </div>
                 </div>
                 </div><!-- /regime-caixa -->
@@ -1773,8 +1773,8 @@
                         <div class="grid grid-cols-1 md:grid-cols-4 gap-5 mb-6">
                             <div class="card p-5"><div class="kpi-label">Receita por Competência</div><div class="kpi-value tnum mt-1" style="color: var(--pos);">R$ 33.644,49</div><div class="text-[10.5px] text-[var(--muted)] mt-1">PGDAS-D · Junho/2026</div></div>
                             <div class="card p-5"><div class="kpi-label">CMV Informado</div><div class="kpi-value tnum mt-1" style="color: var(--neg);">R$ 13.060,01</div></div>
-                            <div class="card p-5"><div class="kpi-label">Despesas Competência</div><div class="kpi-value tnum mt-1" style="color: var(--warn);">A fechar</div><div class="text-[10.5px] text-[var(--muted)] mt-1">dependem dos pagamentos de Julho</div></div>
-                            <div class="card p-5" style="border-color: var(--warn);"><div class="kpi-label" style="color: var(--warn);">Resultado Competência</div><div class="kpi-value tnum mt-1" style="color: var(--warn);">Pendente</div></div>
+                            <div class="card p-5"><div class="kpi-label">Despesas Competência</div><div class="kpi-value tnum mt-1" style="color: var(--neg);">R$ 16.208,66</div><div class="text-[10.5px] text-[var(--muted)] mt-1">pagas em Julho</div></div>
+                            <div class="card p-5" style="border-color: var(--pos);"><div class="kpi-label" style="color: var(--pos);">Resultado Competência</div><div class="kpi-value tnum mt-1" style="color: var(--pos);">+ R$ 4.375,82</div></div>
                         </div>
                         <div class="card overflow-hidden">
                             <table class="data-table">
@@ -1782,18 +1782,26 @@
                                 <tbody>
                                     <tr class="subhead"><td colspan="3" style="color: var(--pos);">▍ Receita do mês (Jun)</td></tr>
                                     <tr><td class="font-semibold">Receita Bruta Declarada</td><td class="text-right font-semibold tnum" style="color: var(--pos);">R$ 33.644,49</td><td class="text-right text-[11px] text-[var(--muted)]">PGDAS-D Jun</td></tr>
-                                    <tr class="subhead"><td colspan="3" style="color: var(--ink);">▍ CMV e demais despesas conhecidas de Junho</td></tr>
+                                    <tr class="subhead"><td colspan="3" style="color: var(--coral);">▍ Despesas competência Jun · pagas em Julho</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">Royalties</td><td class="text-right tnum">R$ 3.642,98</td><td class="text-right text-[11px]" style="color: var(--coral);">pago Jul</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">Simples Nacional - DAS</td><td class="text-right tnum">R$ 2.384,73</td><td class="text-right text-[11px]" style="color: var(--coral);">pago Jul</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">Pessoas + Pró-labore</td><td class="text-right tnum">R$ 2.317,69</td><td class="text-right text-[11px]" style="color: var(--coral);">pago Jul</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">Fretes e Logística</td><td class="text-right tnum">R$ 2.186,09</td><td class="text-right text-[11px]" style="color: var(--coral);">pago Jul</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">Honorários Contábeis</td><td class="text-right tnum">R$ 2.089,89</td><td class="text-right text-[11px]" style="color: var(--coral);">pago Jul</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">Cartão de Crédito Nubank</td><td class="text-right tnum">R$ 1.454,78</td><td class="text-right text-[11px]" style="color: var(--coral);">pago Jul</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">Comissões de Vendedores</td><td class="text-right tnum">R$ 1.425,88</td><td class="text-right text-[11px]" style="color: var(--coral);">pago Jul</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">INSS sobre Salários</td><td class="text-right tnum">R$ 356,62</td><td class="text-right text-[11px]" style="color: var(--coral);">pago Jul</td></tr>
+                                    <tr><td class="pl-8 text-[var(--muted)]">Tráfego</td><td class="text-right tnum">R$ 350,00</td><td class="text-right text-[11px]" style="color: var(--coral);">pago Jul</td></tr>
+                                    <tr><td class="pl-8 font-semibold">Subtotal pagas em Julho</td><td class="text-right font-semibold tnum">R$ 16.208,66</td><td></td></tr>
+                                    <tr class="subhead"><td colspan="3" style="color: var(--ink);">▍ Custo da mercadoria vendida</td></tr>
                                     <tr><td class="pl-8 text-[var(--muted)]">CMV informado</td><td class="text-right tnum">R$ 13.060,01</td><td class="text-right text-[11px] text-[var(--muted)]">CMV Jun</td></tr>
-                                    <tr><td class="pl-8 text-[var(--muted)]">Fretes e Logística</td><td class="text-right tnum">R$ 550,55</td><td class="text-right text-[11px] text-[var(--muted)]">caixa Jun</td></tr>
-                                    <tr><td class="pl-8 text-[var(--muted)]">Tráfego</td><td class="text-right tnum">R$ 350,00</td><td class="text-right text-[11px] text-[var(--muted)]">caixa Jun</td></tr>
-                                    <tr><td class="pl-8 font-semibold">Subtotal conhecido</td><td class="text-right font-semibold tnum">R$ 13.960,56</td><td></td></tr>
-                                    <tr class="subhead"><td colspan="3" style="color: var(--warn);">▍ Despesas competência Jun · pagas em Julho</td></tr>
-                                    <tr><td class="pl-8 text-[var(--muted)]">Relatório de pagamentos de Julho necessário para a alocação</td><td class="text-right tnum">—</td><td class="text-right text-[11px]" style="color: var(--warn);">pendente</td></tr>
+                                    <tr><td class="pl-8 font-semibold">Despesas totais de competência</td><td class="text-right font-semibold tnum">R$ 29.268,67</td><td></td></tr>
+                                    <tr class="total-row"><td>RESULTADO LÍQUIDO (COMPETÊNCIA)</td><td class="text-right tnum">+ R$ 4.375,82</td><td></td></tr>
                                 </tbody>
                             </table>
                         </div>
-                        <div class="card p-5 mt-5" style="background: var(--paper); border-left: 3px solid var(--warn);">
-                            <p class="text-[12.5px] text-[var(--muted)] leading-relaxed">A receita de Junho está fechada em R$ 33,6k e o CMV informado é R$ 13,1k. O resultado permanece pendente até que as despesas de Junho pagas em Julho sejam incorporadas, evitando apresentar uma margem incompleta como definitiva.</p>
+                        <div class="card p-5 mt-5" style="background: var(--paper); border-left: 3px solid var(--pos);">
+                            <p class="text-[12.5px] text-[var(--muted)] leading-relaxed">Junho fecha em <strong class="text-[var(--ink)]">+R$ 4.375,82 por competência</strong>. Do relatório de Julho, R$ 18.854,76 de compras foram excluídos porque o CMV já substitui aquisições; R$ 2.942,69 identificados como competência 5/24 e R$ 42,98 sem indicação de Junho também não foram apropriados ao mês.</p>
                         </div>
                     </div>
 
