@@ -457,11 +457,11 @@
                     <span class="w-1.5 h-1.5 rounded-full bg-[var(--coral)] animate-pulse"></span>
                     Painel ao vivo
                 </span>
-                <span class="hidden md:inline">Financeiro: Jan–Jun fechado · Jul receitas parciais</span>
+                <span class="hidden md:inline">Financeiro: Jan–Jul fechado por caixa · Competência até Jun</span>
                 <span class="hidden lg:inline">Moeda: BRL</span>
             </div>
             <div class="flex items-center gap-2 text-[11px] text-white/50">
-                <span class="number-tag">v2.4 · DRE CAIXA JUL</span>
+                <span class="number-tag">v2.5 · JULHO CAIXA FECHADO</span>
             </div>
         </div>
 
@@ -478,19 +478,19 @@
                         <div class="h-eyebrow mb-3">Relatório Gerencial · Jan–Jul 2026</div>
                         <h1 class="h-section" style="font-size: 38px;">VISÃO EXECUTIVA<br><span style="color: var(--coral);">PV EMPREENDIMENTOS</span></h1>
                         <p class="text-[13.5px] text-[var(--muted)] mt-3 max-w-xl leading-relaxed">
-                            Consolidação financeira fechada de Janeiro a Junho de 2026, com atualização parcial de Julho para receitas Cielo e dinheiro — despesas e resultado do mês aguardam os dados complementares.
+                            Consolidação financeira de Janeiro a Julho de 2026. Julho está fechado pelo regime de caixa, com receitas conciliadas e 18 pagamentos efetivamente realizados; a leitura por competência permanece atualizada até Junho.
                         </p>
                     </div>
                     <div class="flex items-center gap-3">
                         <div class="stamp"><i data-lucide="shield-check" class="w-3 h-3"></i> Jan–Jun auditado</div>
                         <div class="stamp" style="border-color: var(--cyan); color: var(--cyan);">
-                            <i data-lucide="badge-check" class="w-3 h-3"></i> Julho receitas conciliadas
+                            <i data-lucide="badge-check" class="w-3 h-3"></i> Julho caixa conciliado
                         </div>
                     </div>
                 </div>
 
-                <!-- KPI grid: 6 meses -->
-                <div class="grid grid-cols-2 lg:grid-cols-3 gap-5 mb-6">
+                <!-- KPI grid: 7 meses -->
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-5 mb-6">
 
                     <!-- JAN -->
                     <div class="card card-accent-top p-5">
@@ -641,30 +641,47 @@
                             <div class="pt-2 border-t border-[var(--line)]"><div class="kpi-label text-[9.5px]">Resultado Competência</div><div class="font-display tnum" style="font-size: 20px; color: var(--pos);">+ R$ 4.376</div></div>
                         </div>
                     </div>
+
+                    <!-- JUL -->
+                    <div class="card card-accent-top p-5" style="background: linear-gradient(180deg, #F0FDFA 0%, #fff 70%); border-color: var(--cyan);">
+                        <div class="flex items-center justify-between mb-4">
+                            <div>
+                                <div class="font-condensed text-[22px] text-[var(--ink)] leading-none">JULHO</div>
+                                <div class="number-tag mt-1">01 — 31 · 2026</div>
+                            </div>
+                            <span class="text-[10px] font-bold uppercase tracking-widest" style="color: var(--pos);">M7</span>
+                        </div>
+                        <div class="space-y-3">
+                            <div><div class="kpi-label text-[9.5px]">Entradas</div><div class="kpi-value tnum" style="font-size:22px;">R$ 45.241</div></div>
+                            <div><div class="kpi-label text-[9.5px]">Saídas</div><div class="kpi-value tnum" style="font-size:22px;">R$ 38.049</div></div>
+                            <div class="pt-2 border-t border-[var(--line)]"><div class="kpi-label text-[9.5px]">Resultado Caixa</div><div class="font-display tnum" style="font-size: 20px; color: var(--pos);">+ R$ 7.192</div></div>
+                            <div class="pt-2 border-t border-[var(--line)]"><div class="kpi-label text-[9.5px]">Resultado Competência</div><div class="text-[11px] text-[var(--muted)] mt-1">Aguardando fechamento</div></div>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- Consolidado semestre -->
+                <!-- Consolidado Jan–Jul -->
                 <div class="card p-7 mb-8" style="background: var(--ink); color: white; border-color: var(--ink);">
                     <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
                         <div>
-                            <div class="h-eyebrow mb-2" style="color: var(--cyan);">Consolidado · 6 meses</div>
-                            <div class="font-display text-[26px] tracking-tight">RADIOGRAFIA DO SEMESTRE</div>
-                            <p class="text-[12.5px] text-white/60 mt-2 max-w-md">Volume movimentado e impacto líquido das operações entre Janeiro e Junho de 2026.</p>
+                            <div class="h-eyebrow mb-2" style="color: var(--cyan);">Consolidado · 7 meses</div>
+                            <div class="font-display text-[26px] tracking-tight">RADIOGRAFIA JAN–JUL</div>
+                            <p class="text-[12.5px] text-white/60 mt-2 max-w-md">Volume movimentado e impacto líquido das operações entre Janeiro e Julho de 2026.</p>
                         </div>
                         <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
                             <div>
                                 <div class="text-[10px] uppercase tracking-[0.16em] text-white/50">Entradas Totais</div>
-                                <div class="font-display tnum text-white" style="font-size: 26px;">R$ 280.378</div>
-                                <div class="text-[10.5px] text-white/40 mt-1 tnum">média R$ 46.730/mês</div>
+                                <div class="font-display tnum text-white" style="font-size: 26px;">R$ 325.619</div>
+                                <div class="text-[10.5px] text-white/40 mt-1 tnum">média R$ 46.517/mês</div>
                             </div>
                             <div>
                                 <div class="text-[10px] uppercase tracking-[0.16em] text-white/50">Saídas Totais</div>
-                                <div class="font-display tnum text-white" style="font-size: 26px;">R$ 340.698</div>
-                                <div class="text-[10.5px] text-white/40 mt-1 tnum">média R$ 56.783/mês</div>
+                                <div class="font-display tnum text-white" style="font-size: 26px;">R$ 378.747</div>
+                                <div class="text-[10.5px] text-white/40 mt-1 tnum">média R$ 54.107/mês</div>
                             </div>
                             <div class="pl-8 border-l border-white/15">
                                 <div class="text-[10px] uppercase tracking-[0.16em]" style="color: var(--coral);">Resultado Líquido</div>
-                                <div class="font-display tnum" style="font-size: 26px; color: var(--coral);">– R$ 60.320</div>
+                                <div class="font-display tnum" style="font-size: 26px; color: var(--coral);">– R$ 53.127</div>
                                 <div class="text-[10.5px] text-white/40 mt-1">déficit acumulado de caixa</div>
                             </div>
                             <div class="pl-8 border-l border-white/15">
@@ -706,8 +723,8 @@
                                     <i data-lucide="banknote" class="w-4 h-4"></i>
                                 </div>
                                 <div>
-                                    <div class="font-bold text-[var(--ink)] mb-0.5">Maio liderou também por competência</div>
-                                    O mês fechou em <strong>+R$ 20,3k por competência</strong>, após substituir as compras pelo CMV informado. No caixa, o superávit foi de R$ 13,8k.
+                                    <div class="font-bold text-[var(--ink)] mb-0.5">Julho retomou o superávit de caixa</div>
+                                    Com <strong>R$ 45,2k de entradas</strong> e R$ 38,0k de pagamentos, Julho fechou em <strong>+R$ 7,2k</strong>. Produtos respondeu por 49,55% das saídas do mês.
                                 </div>
                             </li>
 
@@ -843,7 +860,7 @@
                     <div>
                         <div class="h-eyebrow mb-2">Capítulo II · Tendências</div>
                         <h2 class="h-section">EVOLUÇÃO &amp; TENDÊNCIAS</h2>
-                        <p class="text-[13px] text-[var(--muted)] mt-2 max-w-xl">Trajetória visual do semestre com destaque para os pontos de virada de caixa.</p>
+                        <p class="text-[13px] text-[var(--muted)] mt-2 max-w-xl">Trajetória visual de Janeiro a Julho com destaque para os pontos de virada de caixa.</p>
                     </div>
                     <div class="pill-group no-print">
                         <button onclick="switchChart('geral')" id="btn-chart-geral" class="pill-btn active">Visão DRE</button>
@@ -858,8 +875,8 @@
                     <div class="card p-7">
                         <div class="flex items-start justify-between mb-6">
                             <div>
-                                <h3 class="h-card">Entradas, Saídas e Resultado · 6 meses</h3>
-                                <p class="text-[12px] text-[var(--muted)] mt-1">Linha de resultado mostra a recuperação operacional de Maio e a forte pressão de caixa em Junho.</p>
+                                <h3 class="h-card">Entradas, Saídas e Resultado · 7 meses</h3>
+                                <p class="text-[12px] text-[var(--muted)] mt-1">A linha de resultado mostra a pressão de caixa em Junho e a recuperação para +R$ 7,2 mil em Julho.</p>
                             </div>
                             <span class="number-tag">FIG. 01</span>
                         </div>
@@ -933,7 +950,7 @@
                         <div class="flex items-start justify-between mb-6">
                             <div>
                                 <h3 class="h-card">Top 6 categorias de saída · Comparativo mensal</h3>
-                                <p class="text-[12px] text-[var(--muted)] mt-1">Produtos lidera todos os meses com folga; Junho concentra também royalties e Simples Nacional elevados.</p>
+                                <p class="text-[12px] text-[var(--muted)] mt-1">Produtos lidera todos os meses; Julho fechou com R$ 38,0 mil em pagamentos, abaixo das entradas do período.</p>
                             </div>
                             <span class="number-tag">FIG. 02</span>
                         </div>
@@ -1257,29 +1274,29 @@
                     </div>
                 </div>
 
-                <!-- JUL · PARCIAL DE RECEITAS -->
+                <!-- JUL · CAIXA FECHADO -->
                 <div id="month-fluxo-jul" class="month-content active">
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-5">
                         <div class="card p-5" style="border-color: var(--pos); background: linear-gradient(135deg, var(--pos-soft) 0%, #fff 65%);">
-                            <div class="kpi-label" style="color: var(--pos);">Entradas apuradas (Jul)</div>
+                            <div class="kpi-label" style="color: var(--pos);">Entradas Totais</div>
                             <div class="kpi-value tnum mt-1" style="color: var(--pos);">R$ 45.241,16</div>
                             <div class="text-[10.5px] text-[var(--muted)] mt-1">Cielo líquida + dinheiro</div>
                         </div>
-                        <div class="card p-5">
-                            <div class="kpi-label">Vendas brutas Cielo</div>
-                            <div class="kpi-value tnum mt-1">R$ 44.686,72</div>
-                            <div class="text-[10.5px] text-[var(--muted)] mt-1">antes das tarifas</div>
+                        <div class="card p-5" style="border-color: var(--neg);">
+                            <div class="kpi-label" style="color: var(--neg);">Saídas Pagas</div>
+                            <div class="kpi-value tnum mt-1" style="color: var(--neg);">R$ 38.049,09</div>
+                            <div class="text-[10.5px] text-[var(--muted)] mt-1">18 pagamentos no período</div>
                         </div>
-                        <div class="card p-5" style="border-color: var(--coral);">
-                            <div class="kpi-label" style="color: var(--coral-deep);">Tarifas descontadas</div>
-                            <div class="kpi-value tnum mt-1" style="color: var(--coral-deep);">R$ 2.019,08</div>
-                            <div class="text-[10.5px] text-[var(--muted)] mt-1">taxa efetiva de 4,52%</div>
+                        <div class="card p-5" style="border-color: var(--pos); background: linear-gradient(135deg, var(--pos-soft) 0%, #fff 65%);">
+                            <div class="kpi-label" style="color: var(--pos);">Resultado de Caixa</div>
+                            <div class="kpi-value tnum mt-1" style="color: var(--pos);">+ R$ 7.192,07</div>
+                            <div class="text-[10.5px] text-[var(--muted)] mt-1">margem de caixa de 15,90%</div>
                         </div>
                     </div>
 
-                    <div class="mb-5 px-5 py-4 rounded-md border border-[var(--warn)]/30 bg-[var(--warn-soft)] flex items-start gap-3">
-                        <i data-lucide="clock-3" class="w-4 h-4 mt-0.5 shrink-0" style="color: var(--warn);"></i>
-                        <p class="text-[12px] text-[var(--ink)]/80"><strong style="color: var(--warn);">Julho parcial:</strong> este quadro contém receitas líquidas da Cielo e R$ 2.573,52 em dinheiro. Despesas e resultado do mês não foram calculados porque os dados ainda estão em levantamento. Dois aluguéis de máquina, no total de <strong class="tnum">R$ 199,80</strong>, foram separados das receitas.</p>
+                    <div class="mb-5 px-5 py-4 rounded-md border border-[var(--cyan)]/30 bg-[var(--cyan-soft)] flex items-start gap-3">
+                        <i data-lucide="badge-check" class="w-4 h-4 mt-0.5 shrink-0" style="color: var(--cyan-deep);"></i>
+                        <p class="text-[12px] text-[var(--ink)]/80"><strong style="color: var(--cyan-deep);">Julho fechado por caixa:</strong> receitas líquidas da Cielo e R$ 2.573,52 em dinheiro, confrontadas com R$ 38.049,09 de contas efetivamente pagas. Dois aluguéis de máquina, no total de <strong class="tnum">R$ 199,80</strong>, foram separados das receitas.</p>
                     </div>
 
                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
@@ -1304,12 +1321,12 @@
                 <!-- CONSOLIDADO -->
                 <div id="month-fluxo-consolidado" class="month-content">
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
-                        <div class="card p-5"><div class="kpi-label">Entradas (6 meses)</div><div class="kpi-value tnum mt-1" style="color: var(--pos);">R$ 280.378</div></div>
-                        <div class="card p-5"><div class="kpi-label">Saídas (6 meses)</div><div class="kpi-value tnum mt-1" style="color: var(--neg);">R$ 340.698</div></div>
-                        <div class="card p-5" style="border-color: var(--neg); background: linear-gradient(135deg, #FFF8F9 0%, #fff 100%);"><div class="kpi-label" style="color: var(--neg);">Déficit Acumulado</div><div class="kpi-value tnum mt-1" style="color: var(--neg);">– R$ 60.320</div></div>
+                        <div class="card p-5"><div class="kpi-label">Entradas (7 meses)</div><div class="kpi-value tnum mt-1" style="color: var(--pos);">R$ 325.619</div></div>
+                        <div class="card p-5"><div class="kpi-label">Saídas (7 meses)</div><div class="kpi-value tnum mt-1" style="color: var(--neg);">R$ 378.747</div></div>
+                        <div class="card p-5" style="border-color: var(--neg); background: linear-gradient(135deg, #FFF8F9 0%, #fff 100%);"><div class="kpi-label" style="color: var(--neg);">Déficit Acumulado</div><div class="kpi-value tnum mt-1" style="color: var(--neg);">– R$ 53.127</div></div>
                     </div>
                     <div class="card p-6">
-                        <h3 class="h-card mb-4">Curva acumulada · Jan a Jun</h3>
+                        <h3 class="h-card mb-4">Curva acumulada · Jan a Jul</h3>
                         <div class="chart-box"><canvas id="canvasFluxoAcum"></canvas></div>
                     </div>
                 </div>
@@ -1589,17 +1606,17 @@
                         <p class="text-[12.5px] text-[var(--muted)] leading-relaxed"><strong class="text-[var(--ink)]">Junho fechado por competência:</strong> o PGDAS-D registra R$ 33.644,49 de receita e a DRE reconhece R$ 29.268,67 de custos e despesas, resultando em <strong class="text-[var(--ink)]">+R$ 4.375,82</strong>. O déficit de R$ 40.948,79 acima permanece a leitura de caixa.</p>
                     </div>
                 </div>
-                <!-- JUL DRE · PARCIAL DE RECEITAS -->
+                <!-- JUL DRE · CAIXA FECHADO -->
                 <div id="month-dre-jul" class="month-content active">
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-5">
-                        <div class="card p-5" style="border-color: var(--pos); background: linear-gradient(135deg, var(--pos-soft) 0%, #fff 65%);"><div class="kpi-label" style="color: var(--pos);">Receitas Apuradas</div><div class="kpi-value tnum mt-1" style="color: var(--pos);">R$ 45.241,16</div><div class="text-[10.5px] text-[var(--muted)] mt-1">Cielo líquida + dinheiro</div></div>
-                        <div class="card p-5"><div class="kpi-label">Despesas Totais</div><div class="kpi-value mt-1" style="color: var(--muted); font-size: 22px;">Aguardando dados</div></div>
-                        <div class="card p-5" style="border-color: var(--warn); background: var(--warn-soft);"><div class="kpi-label" style="color: var(--warn);">Resultado Caixa</div><div class="kpi-value mt-1" style="color: var(--warn); font-size: 22px;">Não calculado</div><div class="text-[10.5px] text-[var(--muted)] mt-1">parcial de receitas</div></div>
+                        <div class="card p-5" style="border-color: var(--pos); background: linear-gradient(135deg, var(--pos-soft) 0%, #fff 65%);"><div class="kpi-label" style="color: var(--pos);">Receitas Totais</div><div class="kpi-value tnum mt-1" style="color: var(--pos);">R$ 45.241,16</div><div class="text-[10.5px] text-[var(--muted)] mt-1">Cielo líquida + dinheiro</div></div>
+                        <div class="card p-5" style="border-color: var(--neg);"><div class="kpi-label" style="color: var(--neg);">Despesas Totais</div><div class="kpi-value tnum mt-1" style="color: var(--neg);">R$ 38.049,09</div><div class="text-[10.5px] text-[var(--muted)] mt-1">18 contas pagas</div></div>
+                        <div class="card p-5" style="border-color: var(--pos); background: linear-gradient(135deg, var(--pos-soft) 0%, #fff 65%);"><div class="kpi-label" style="color: var(--pos);">Resultado Líquido</div><div class="kpi-value tnum mt-1" style="color: var(--pos);">+ R$ 7.192,07</div><div class="text-[10.5px] text-[var(--muted)] mt-1">margem de caixa de 15,90%</div></div>
                     </div>
 
-                    <div class="mb-5 px-5 py-4 rounded-md border border-[var(--warn)]/30 bg-[var(--warn-soft)] flex items-start gap-3">
-                        <i data-lucide="clock-3" class="w-4 h-4 mt-0.5 shrink-0" style="color: var(--warn);"></i>
-                        <p class="text-[12px] text-[var(--ink)]/80"><strong style="color: var(--warn);">DRE Caixa provisória:</strong> julho contém somente as receitas já informadas. Custos, despesas e resultado serão completados quando o levantamento das saídas for recebido.</p>
+                    <div class="mb-5 px-5 py-4 rounded-md border border-[var(--cyan)]/30 bg-[var(--cyan-soft)] flex items-start gap-3">
+                        <i data-lucide="badge-check" class="w-4 h-4 mt-0.5 shrink-0" style="color: var(--cyan-deep);"></i>
+                        <p class="text-[12px] text-[var(--ink)]/80"><strong style="color: var(--cyan-deep);">DRE Caixa fechada:</strong> despesas extraídas do Relatório de Contas a Pagar, com 18 lançamentos marcados como pagos entre 01/07 e 31/07/2026. “Correios” e “Fretes e Logística” foram agrupados em uma única categoria gerencial.</p>
                     </div>
 
                     <div class="card overflow-hidden">
@@ -1611,9 +1628,22 @@
                                 <tr><td class="pl-8">Receita de Vendas - Débito</td><td class="text-right tnum" style="color: var(--pos);">R$ 12.972,37</td></tr>
                                 <tr><td class="pl-8">Receita de Vendas - PIX</td><td class="text-right tnum" style="color: var(--pos);">R$ 10.451,73</td></tr>
                                 <tr><td class="pl-8">Venda em Dinheiro</td><td class="text-right tnum">R$ 2.573,52</td></tr>
-                                <tr class="subhead"><td colspan="2" style="color: var(--muted);">▍ Custos e despesas pendentes de levantamento</td></tr>
-                                <tr><td class="pl-8 text-[var(--muted)]">Total de saídas</td><td class="text-right text-[var(--muted)]">Aguardando dados</td></tr>
-                                <tr class="total-row"><td>RECEITAS PARCIAIS (CAIXA)</td><td class="text-right tnum">R$ 45.241,16</td></tr>
+                                <tr class="subhead"><td colspan="2" style="color: var(--neg);">▍ Custos variáveis &amp; impostos</td></tr>
+                                <tr><td class="pl-8 text-[var(--muted)]">Produtos</td><td class="text-right font-semibold tnum" style="color: var(--neg);">R$ 18.854,76</td></tr>
+                                <tr><td class="pl-8 text-[var(--muted)]">Royalties</td><td class="text-right tnum">R$ 3.642,98</td></tr>
+                                <tr><td class="pl-8 text-[var(--muted)]">Simples Nacional - DAS</td><td class="text-right tnum">R$ 2.384,73</td></tr>
+                                <tr><td class="pl-8 text-[var(--muted)]">Fretes e Logística</td><td class="text-right tnum">R$ 2.186,09</td></tr>
+                                <tr><td class="pl-8 text-[var(--muted)]">Comissões de Vendedores</td><td class="text-right tnum">R$ 1.425,88</td></tr>
+
+                                <tr class="subhead"><td colspan="2" style="color: var(--warn);">▍ Despesas operacionais &amp; financeiras</td></tr>
+                                <tr><td class="pl-8 text-[var(--muted)]">Pessoas</td><td class="text-right tnum">R$ 5.260,38</td></tr>
+                                <tr><td class="pl-8 text-[var(--muted)]">Honorários Contábeis</td><td class="text-right tnum">R$ 2.089,89</td></tr>
+                                <tr><td class="pl-8 text-[var(--muted)]">Cartão de Crédito Nubank</td><td class="text-right tnum">R$ 1.454,78</td></tr>
+                                <tr><td class="pl-8 text-[var(--muted)]">INSS sobre Salários - GPS</td><td class="text-right tnum">R$ 356,62</td></tr>
+                                <tr><td class="pl-8 text-[var(--muted)]">Tráfego</td><td class="text-right tnum">R$ 350,00</td></tr>
+                                <tr><td class="pl-8 text-[var(--muted)]">Despesas Diversas</td><td class="text-right tnum">R$ 42,98</td></tr>
+
+                                <tr class="total-row"><td>RESULTADO LÍQUIDO (CAIXA)</td><td class="text-right tnum" style="color: var(--pos);">+ R$ 7.192,07</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -2236,7 +2266,8 @@
                         <button onclick="switchMonth('pagamentos','mar')" id="btn-month-pagamentos-mar" class="pill-btn">Mar</button>
                         <button onclick="switchMonth('pagamentos','abr')" id="btn-month-pagamentos-abr" class="pill-btn">Abr</button>
                         <button onclick="switchMonth('pagamentos','mai')" id="btn-month-pagamentos-mai" class="pill-btn">Mai</button>
-                        <button onclick="switchMonth('pagamentos','jun')" id="btn-month-pagamentos-jun" class="pill-btn active">Jun</button>
+                        <button onclick="switchMonth('pagamentos','jun')" id="btn-month-pagamentos-jun" class="pill-btn">Jun</button>
+                        <button onclick="switchMonth('pagamentos','jul')" id="btn-month-pagamentos-jul" class="pill-btn active">Jul</button>
                     </div>
                 </div>
 
@@ -2363,7 +2394,7 @@
                 </div>
 
                 <!-- JUN -->
-                <div id="month-pagamentos-jun" class="month-content active">
+                <div id="month-pagamentos-jun" class="month-content">
                     <div class="card overflow-hidden">
                         <table class="data-table">
                             <thead><tr><th class="w-1/3">Categoria</th><th class="w-1/2">Representatividade</th><th class="text-right">Valor</th></tr></thead>
@@ -2386,6 +2417,33 @@
                         <div class="px-5 py-4 bg-[var(--coral-soft)] border-t border-[var(--coral)]/30 flex items-start gap-3">
                             <i data-lucide="alert-triangle" class="w-4 h-4 mt-0.5" style="color:var(--coral-deep);"></i>
                             <p class="text-[12px] text-[var(--ink)]/80"><strong style="color:var(--coral-deep);">Leitura:</strong> Produtos, Royalties e Simples Nacional somaram R$ 58.966,69, equivalentes a 80,36% de todas as saídas de Junho.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- JUL -->
+                <div id="month-pagamentos-jul" class="month-content active">
+                    <div class="card overflow-hidden">
+                        <table class="data-table">
+                            <thead><tr><th class="w-1/3">Categoria</th><th class="w-1/2">Representatividade</th><th class="text-right">Valor</th></tr></thead>
+                            <tbody>
+                                <tr><td class="font-bold">Produtos</td><td><div class="flex items-center gap-3"><div class="bar-track flex-1"><div class="bar-fill" style="width:49.55%; background:var(--coral);"></div></div><span class="number-tag w-14 text-right">49,55%</span></div></td><td class="text-right font-semibold tnum">R$ 18.854,76</td></tr>
+                                <tr><td class="font-bold">Pessoas</td><td><div class="flex items-center gap-3"><div class="bar-track flex-1"><div class="bar-fill" style="width:13.83%; background:var(--cyan);"></div></div><span class="number-tag w-14 text-right">13,83%</span></div></td><td class="text-right font-semibold tnum">R$ 5.260,38</td></tr>
+                                <tr><td class="font-semibold">Royalties</td><td><div class="flex items-center gap-3"><div class="bar-track flex-1"><div class="bar-fill" style="width:9.57%; background:var(--ink);"></div></div><span class="number-tag w-14 text-right">9,57%</span></div></td><td class="text-right font-semibold tnum">R$ 3.642,98</td></tr>
+                                <tr><td>Simples Nacional - DAS</td><td class="number-tag">6,27%</td><td class="text-right tnum">R$ 2.384,73</td></tr>
+                                <tr><td>Fretes e Logística</td><td class="number-tag">5,75%</td><td class="text-right tnum">R$ 2.186,09</td></tr>
+                                <tr><td>Honorários Contábeis</td><td class="number-tag">5,49%</td><td class="text-right tnum">R$ 2.089,89</td></tr>
+                                <tr><td>Cartão de Crédito Nubank</td><td class="number-tag">3,82%</td><td class="text-right tnum">R$ 1.454,78</td></tr>
+                                <tr><td>Comissões de Vendedores</td><td class="number-tag">3,75%</td><td class="text-right tnum">R$ 1.425,88</td></tr>
+                                <tr><td>INSS sobre Salários - GPS</td><td class="number-tag">0,94%</td><td class="text-right tnum">R$ 356,62</td></tr>
+                                <tr><td>Tráfego</td><td class="number-tag">0,92%</td><td class="text-right tnum">R$ 350,00</td></tr>
+                                <tr><td>Despesas Diversas</td><td class="number-tag">0,11%</td><td class="text-right tnum">R$ 42,98</td></tr>
+                                <tr class="total-row"><td>Total do Período</td><td></td><td class="text-right tnum">R$ 38.049,09</td></tr>
+                            </tbody>
+                        </table>
+                        <div class="px-5 py-4 bg-[var(--cyan-soft)] border-t border-[var(--cyan)]/30 flex items-start gap-3">
+                            <i data-lucide="badge-check" class="w-4 h-4 mt-0.5" style="color:var(--cyan-deep);"></i>
+                            <p class="text-[12px] text-[var(--ink)]/80"><strong style="color:var(--cyan-deep);">Conciliação:</strong> 18 contas marcadas como pagas somam R$ 38.049,09. Para a leitura gerencial, R$ 1.557,41 de “Correios” foi agrupado com R$ 628,68 de “Fretes e Logística”.</p>
                         </div>
                     </div>
                 </div>
@@ -2718,7 +2776,7 @@
                     </div>
                 </div>
                 <div class="text-[10.5px] text-[var(--muted)] number-tag">
-                    Relatório gerado para PV EMPREENDIMENTOS CRIATIVOS LTDA · CNPJ 50.351.135/0001-70 · Jan–Jul 2026 · Julho parcial (Cielo + dinheiro)
+                    Relatório gerado para PV EMPREENDIMENTOS CRIATIVOS LTDA · CNPJ 50.351.135/0001-70 · Jan–Jul 2026 · Julho fechado por caixa
                 </div>
             </div>
         </footer>
@@ -2851,12 +2909,12 @@
             new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho'],
+                    labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho'],
                     datasets: [
                         {
                             type: 'bar',
                             label: 'Entradas',
-                            data: [39065.68, 54923.58, 57113.41, 35800.78, 61043.00, 32431.67],
+                            data: [39065.68, 54923.58, 57113.41, 35800.78, 61043.00, 32431.67, 45241.16],
                             backgroundColor: CYAN,
                             borderRadius: 4,
                             borderSkipped: false,
@@ -2867,7 +2925,7 @@
                         {
                             type: 'bar',
                             label: 'Saídas',
-                            data: [67305.17, 56021.08, 31680.25, 65109.75, 47200.97, 73380.46],
+                            data: [67305.17, 56021.08, 31680.25, 65109.75, 47200.97, 73380.46, 38049.09],
                             backgroundColor: CORAL,
                             borderRadius: 4,
                             borderSkipped: false,
@@ -2878,7 +2936,7 @@
                         {
                             type: 'line',
                             label: 'Resultado',
-                            data: [-28239.49, -1097.50, 25433.16, -29308.97, 13842.03, -40948.79],
+                            data: [-28239.49, -1097.50, 25433.16, -29308.97, 13842.03, -40948.79, 7192.07],
                             borderColor: INK,
                             backgroundColor: INK,
                             borderWidth: 2.5,
@@ -3009,7 +3067,7 @@
                 options: donutOpts
             });
 
-            // Jul · parcial Cielo
+            // Jul · receitas conciliadas
             new Chart(document.getElementById('canvasRecJul').getContext('2d'), {
                 type: 'doughnut',
                 data: {
@@ -3036,7 +3094,8 @@
                         { label: 'Mar/26', data: [14662.52, 3857.69, 4517.12, 2492.55, 1770.95, 1939.89], backgroundColor: '#9CA3AF', borderRadius: 3 },
                         { label: 'Abr/26', data: [47178.32, 5330.38, 3806.23, 1853.12, 1349.70, 2139.89], backgroundColor: '#64748B', borderRadius: 3 },
                         { label: 'Mai/26', data: [29171.75, 5240.38, 3912.41, 1941.80, 1169.66, 1939.89], backgroundColor: CYAN, borderRadius: 3 },
-                        { label: 'Jun/26', data: [42681.21, 5507.98, 9871.30, 6414.18, 3676.96, 1939.89], backgroundColor: CORAL, borderRadius: 3 }
+                        { label: 'Jun/26', data: [42681.21, 5507.98, 9871.30, 6414.18, 3676.96, 1939.89], backgroundColor: CORAL, borderRadius: 3 },
+                        { label: 'Jul/26', data: [18854.76, 5260.38, 3642.98, 2384.73, 1425.88, 2089.89], backgroundColor: INK, borderRadius: 3 }
                     ]
                 },
                 options: {
@@ -3261,9 +3320,9 @@
                 chartsInitialized.fluxoJul = true;
             }
             if (month === 'consolidado' && !chartsInitialized.fluxoAcum) {
-                const labels = ['Jan','Fev','Mar','Abr','Mai','Jun'];
-                const entradas = [39065.68, 54923.58, 57113.41, 35800.78, 61043.00, 32431.67];
-                const saidas = [67305.17, 56021.08, 31680.25, 65109.75, 47200.97, 73380.46];
+                const labels = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul'];
+                const entradas = [39065.68, 54923.58, 57113.41, 35800.78, 61043.00, 32431.67, 45241.16];
+                const saidas = [67305.17, 56021.08, 31680.25, 65109.75, 47200.97, 73380.46, 38049.09];
                 let acumEntradas = 0, acumSaidas = 0, acumResultado = 0;
                 const cumEnt = entradas.map(v => (acumEntradas += v));
                 const cumSai = saidas.map(v => (acumSaidas += v));
