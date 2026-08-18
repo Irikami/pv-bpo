@@ -431,8 +431,8 @@
                 <i data-lucide="printer" class="w-4 h-4"></i> Exportar / Imprimir
             </button>
             <div class="mt-4 text-center">
-                <div class="number-tag text-white/40">RELATÓRIO · 1º SEMESTRE / 2026</div>
-                <div class="text-[10px] text-white/30 mt-1">Atualizado em 05/08/2026</div>
+                <div class="number-tag text-white/40">RELATÓRIO · JAN–JUL / 2026</div>
+                <div class="text-[10px] text-white/30 mt-1">Atualizado em 18/08/2026</div>
             </div>
         </div>
     </aside>
@@ -457,11 +457,11 @@
                     <span class="w-1.5 h-1.5 rounded-full bg-[var(--coral)] animate-pulse"></span>
                     Painel ao vivo
                 </span>
-                <span class="hidden md:inline">Financeiro: Jan–Jun · Nuvemshop: Jan–Jul 2026</span>
+                <span class="hidden md:inline">Financeiro: Jan–Jun fechado · Jul receitas Cielo</span>
                 <span class="hidden lg:inline">Moeda: BRL</span>
             </div>
             <div class="flex items-center gap-2 text-[11px] text-white/50">
-                <span class="number-tag">v2.2 · E-COMMERCE 7M</span>
+                <span class="number-tag">v2.3 · RECEITAS JUL</span>
             </div>
         </div>
 
@@ -475,16 +475,16 @@
                 <!-- Hero -->
                 <div class="mb-10 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
                     <div>
-                        <div class="h-eyebrow mb-3">Relatório Gerencial · 1º Semestre</div>
+                        <div class="h-eyebrow mb-3">Relatório Gerencial · Jan–Jul 2026</div>
                         <h1 class="h-section" style="font-size: 38px;">VISÃO EXECUTIVA<br><span style="color: var(--coral);">PV EMPREENDIMENTOS</span></h1>
                         <p class="text-[13.5px] text-[var(--muted)] mt-3 max-w-xl leading-relaxed">
-                            Consolidação financeira de Janeiro a Junho de 2026 — fluxo de caixa, DRE gerencial, performance de e-commerce e radiografia de pagamentos &amp; recebimentos.
+                            Consolidação financeira fechada de Janeiro a Junho de 2026, com atualização parcial de Julho para receitas Cielo — despesas e resultado do mês aguardam os dados complementares.
                         </p>
                     </div>
                     <div class="flex items-center gap-3">
-                        <div class="stamp"><i data-lucide="shield-check" class="w-3 h-3"></i> Auditado</div>
+                        <div class="stamp"><i data-lucide="shield-check" class="w-3 h-3"></i> Jan–Jun auditado</div>
                         <div class="stamp" style="border-color: var(--cyan); color: var(--cyan);">
-                            <i data-lucide="badge-check" class="w-3 h-3"></i> Conta Azul
+                            <i data-lucide="badge-check" class="w-3 h-3"></i> Julho Cielo conciliado
                         </div>
                     </div>
                 </div>
@@ -919,6 +919,11 @@
                             <div class="number-tag mb-4">R$ 32.432 · Cielo líquida + dinheiro</div>
                             <div class="chart-box chart-box-sm"><canvas id="canvasRecJun"></canvas></div>
                         </div>
+                        <div class="card p-6" style="border-color: var(--cyan); background: linear-gradient(135deg, var(--cyan-soft) 0%, #fff 58%);">
+                            <h3 class="h-card mb-1">Recebimentos · Julho</h3>
+                            <div class="number-tag mb-4">R$ 42.668 · parcial Cielo conciliado</div>
+                            <div class="chart-box chart-box-sm"><canvas id="canvasRecJul"></canvas></div>
+                        </div>
                     </div>
                 </div>
 
@@ -1011,7 +1016,8 @@
                         <button onclick="switchMonth('fluxo','mar')" id="btn-month-fluxo-mar" class="pill-btn">Mar</button>
                         <button onclick="switchMonth('fluxo','abr')" id="btn-month-fluxo-abr" class="pill-btn">Abr</button>
                         <button onclick="switchMonth('fluxo','mai')" id="btn-month-fluxo-mai" class="pill-btn">Mai</button>
-                        <button onclick="switchMonth('fluxo','jun')" id="btn-month-fluxo-jun" class="pill-btn active">Jun</button>
+                        <button onclick="switchMonth('fluxo','jun')" id="btn-month-fluxo-jun" class="pill-btn">Jun</button>
+                        <button onclick="switchMonth('fluxo','jul')" id="btn-month-fluxo-jul" class="pill-btn active">Jul</button>
                         <button onclick="switchMonth('fluxo','consolidado')" id="btn-month-fluxo-consolidado" class="pill-btn">Consolidado</button>
                     </div>
                 </div>
@@ -1221,7 +1227,7 @@
                 </div>
 
                 <!-- JUN -->
-                <div id="month-fluxo-jun" class="month-content active">
+                <div id="month-fluxo-jun" class="month-content">
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
                         <div class="card p-5"><div class="kpi-label">Entradas (Jun)</div><div class="kpi-value tnum mt-1" style="color: var(--pos);">R$ 32.432</div></div>
                         <div class="card p-5"><div class="kpi-label">Saídas (Jun)</div><div class="kpi-value tnum mt-1" style="color: var(--neg);">R$ 73.380</div></div>
@@ -1246,6 +1252,49 @@
                                 <div><div class="flex justify-between text-[12px] font-semibold mb-2"><span>Royalties</span><span class="tnum">R$ 9.871,30 · 13,45%</span></div><div class="bar-track"><div class="bar-fill" style="width:13.45%; background:var(--cyan);"></div></div></div>
                                 <div><div class="flex justify-between text-[12px] font-semibold mb-2"><span>Simples Nacional</span><span class="tnum">R$ 6.414,18 · 8,74%</span></div><div class="bar-track"><div class="bar-fill" style="width:8.74%; background:var(--ink);"></div></div></div>
                                 <div><div class="flex justify-between text-[12px] font-semibold mb-2"><span>Demais categorias</span><span class="tnum">R$ 14.413,77 · 19,65%</span></div><div class="bar-track"><div class="bar-fill" style="width:19.65%; background:#9CA3AF;"></div></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- JUL · PARCIAL DE RECEITAS -->
+                <div id="month-fluxo-jul" class="month-content active">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-5">
+                        <div class="card p-5" style="border-color: var(--pos); background: linear-gradient(135deg, var(--pos-soft) 0%, #fff 65%);">
+                            <div class="kpi-label" style="color: var(--pos);">Entradas líquidas Cielo (Jul)</div>
+                            <div class="kpi-value tnum mt-1" style="color: var(--pos);">R$ 42.667,64</div>
+                            <div class="text-[10.5px] text-[var(--muted)] mt-1">646 vendas pagas</div>
+                        </div>
+                        <div class="card p-5">
+                            <div class="kpi-label">Vendas brutas Cielo</div>
+                            <div class="kpi-value tnum mt-1">R$ 44.686,72</div>
+                            <div class="text-[10.5px] text-[var(--muted)] mt-1">antes das tarifas</div>
+                        </div>
+                        <div class="card p-5" style="border-color: var(--coral);">
+                            <div class="kpi-label" style="color: var(--coral-deep);">Tarifas descontadas</div>
+                            <div class="kpi-value tnum mt-1" style="color: var(--coral-deep);">R$ 2.019,08</div>
+                            <div class="text-[10.5px] text-[var(--muted)] mt-1">taxa efetiva de 4,52%</div>
+                        </div>
+                    </div>
+
+                    <div class="mb-5 px-5 py-4 rounded-md border border-[var(--warn)]/30 bg-[var(--warn-soft)] flex items-start gap-3">
+                        <i data-lucide="clock-3" class="w-4 h-4 mt-0.5 shrink-0" style="color: var(--warn);"></i>
+                        <p class="text-[12px] text-[var(--ink)]/80"><strong style="color: var(--warn);">Julho parcial:</strong> este quadro contém somente receitas efetivamente pagas pela Cielo. Despesas e resultado do mês não foram calculados porque os dados ainda estão em levantamento. Dois aluguéis de máquina, no total de <strong class="tnum">R$ 199,80</strong>, foram separados das receitas.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+                        <div class="card p-6 lg:col-span-2">
+                            <h3 class="h-card mb-1">Recebimentos líquidos por dia · Julho/26</h3>
+                            <p class="text-[12px] text-[var(--muted)] mb-4">Barras mostram o caixa recebido no dia; a linha acompanha o acumulado mensal.</p>
+                            <div class="chart-box"><canvas id="canvasFluxoJul"></canvas></div>
+                        </div>
+                        <div class="card p-6">
+                            <h3 class="h-card mb-1">Composição das entradas · Julho</h3>
+                            <p class="text-[12px] text-[var(--muted)] mb-5">Valores líquidos após tarifas, sem dinheiro ou outros canais ainda não informados.</p>
+                            <div class="space-y-5">
+                                <div><div class="flex justify-between text-[12px] font-semibold mb-2"><span>Crédito</span><span class="tnum">R$ 19.243,54 · 45,10%</span></div><div class="bar-track"><div class="bar-fill" style="width:45.10%; background:var(--coral);"></div></div><div class="number-tag mt-1">à vista R$ 7.789,35 · parcelado R$ 11.454,19</div></div>
+                                <div><div class="flex justify-between text-[12px] font-semibold mb-2"><span>Débito</span><span class="tnum">R$ 12.972,37 · 30,40%</span></div><div class="bar-track"><div class="bar-fill" style="width:30.40%; background:var(--cyan);"></div></div></div>
+                                <div><div class="flex justify-between text-[12px] font-semibold mb-2"><span>PIX</span><span class="tnum">R$ 10.451,73 · 24,50%</span></div><div class="bar-track"><div class="bar-fill" style="width:24.50%; background:var(--ink);"></div></div></div>
                             </div>
                         </div>
                     </div>
@@ -1934,7 +1983,8 @@
                         <button onclick="switchMonth('recebimentos','mar')" id="btn-month-recebimentos-mar" class="pill-btn">Mar</button>
                         <button onclick="switchMonth('recebimentos','abr')" id="btn-month-recebimentos-abr" class="pill-btn">Abr</button>
                         <button onclick="switchMonth('recebimentos','mai')" id="btn-month-recebimentos-mai" class="pill-btn">Mai</button>
-                        <button onclick="switchMonth('recebimentos','jun')" id="btn-month-recebimentos-jun" class="pill-btn active">Jun</button>
+                        <button onclick="switchMonth('recebimentos','jun')" id="btn-month-recebimentos-jun" class="pill-btn">Jun</button>
+                        <button onclick="switchMonth('recebimentos','jul')" id="btn-month-recebimentos-jul" class="pill-btn active">Jul</button>
                     </div>
                 </div>
 
@@ -2041,7 +2091,7 @@
                 </div>
 
                 <!-- JUN -->
-                <div id="month-recebimentos-jun" class="month-content active">
+                <div id="month-recebimentos-jun" class="month-content">
                     <div class="card overflow-hidden">
                         <table class="data-table">
                             <thead><tr><th class="w-1/3">Categoria</th><th class="w-1/2">Representatividade</th><th class="text-right">Valor líquido</th></tr></thead>
@@ -2059,22 +2109,41 @@
                         </div>
                     </div>
                 </div>
+                <!-- JUL -->
+                <div id="month-recebimentos-jul" class="month-content active">
+                    <div class="card overflow-hidden" style="border-color: var(--cyan);">
+                        <table class="data-table">
+                            <thead><tr><th class="w-1/3">Categoria Cielo</th><th class="w-1/2">Representatividade</th><th class="text-right">Valor líquido</th></tr></thead>
+                            <tbody>
+                                <tr><td class="font-bold">Crédito à vista e pré-pago</td><td><div class="flex items-center gap-3"><div class="bar-track flex-1"><div class="bar-fill" style="width:18.26%; background:var(--coral);"></div></div><span class="number-tag w-14 text-right">18,26%</span></div></td><td class="text-right font-semibold tnum">R$ 7.789,35</td></tr>
+                                <tr><td class="font-bold">Crédito parcelado</td><td><div class="flex items-center gap-3"><div class="bar-track flex-1"><div class="bar-fill" style="width:26.85%; background:var(--coral-deep);"></div></div><span class="number-tag w-14 text-right">26,85%</span></div></td><td class="text-right font-semibold tnum">R$ 11.454,19</td></tr>
+                                <tr><td class="font-semibold">Débito</td><td><div class="flex items-center gap-3"><div class="bar-track flex-1"><div class="bar-fill" style="width:30.40%; background:var(--cyan);"></div></div><span class="number-tag w-14 text-right">30,40%</span></div></td><td class="text-right font-semibold tnum">R$ 12.972,37</td></tr>
+                                <tr><td class="font-semibold">PIX</td><td><div class="flex items-center gap-3"><div class="bar-track flex-1"><div class="bar-fill" style="width:24.50%; background:var(--ink);"></div></div><span class="number-tag w-14 text-right">24,50%</span></div></td><td class="text-right font-semibold tnum">R$ 10.451,73</td></tr>
+                                <tr class="total-row"><td>Total Cielo líquido</td><td></td><td class="text-right tnum">R$ 42.667,64</td></tr>
+                            </tbody>
+                        </table>
+                        <div class="px-5 py-4 bg-[var(--cyan-soft)] border-t border-[var(--cyan)]/30 flex items-start gap-3">
+                            <i data-lucide="badge-check" class="w-4 h-4 mt-0.5 shrink-0" style="color:var(--cyan-deep);"></i>
+                            <p class="text-[12px] text-[var(--ink)]/80"><strong style="color:var(--cyan-deep);">Conciliação Cielo · julho:</strong> 646 vendas pagas, com bruto de R$ 44.686,72 – tarifas de R$ 2.019,08 = líquido de R$ 42.667,64. O total é parcial e não inclui dinheiro ou outros canais ainda não informados. Dois aluguéis de máquina (R$ 199,80) foram excluídos das receitas.</p>
+                        </div>
+                    </div>
+                </div>
                 <!-- Tarifas Cielo · informação complementar -->
                 <div class="mt-8 pt-8 border-t border-[var(--line)]">
                     <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-3 mb-5">
                         <div>
-                            <div class="h-eyebrow mb-2">Informação complementar · Jan–Jun 2026</div>
+                            <div class="h-eyebrow mb-2">Informação complementar · Jan–Jul 2026</div>
                             <h3 class="h-card">TARIFAS CIELO POR CATEGORIA</h3>
                             <p class="text-[12px] text-[var(--muted)] mt-1">Valores extraídos dos relatórios detalhados por data de pagamento, sem alterar as receitas e conciliações apresentadas acima.</p>
                         </div>
-                        <span class="number-tag">3.326 lançamentos · 6 arquivos</span>
+                        <span class="number-tag">3.974 lançamentos · 7 arquivos</span>
                     </div>
 
                     <div class="grid grid-cols-2 lg:grid-cols-4 gap-5 mb-5">
-                        <div class="card p-5"><div class="kpi-label">Vendas Brutas Cielo</div><div class="kpi-value tnum mt-1">R$ 204.632,58</div><div class="text-[10.5px] text-[var(--muted)] mt-1">exclui aluguel de máquinas</div></div>
-                        <div class="card p-5"><div class="kpi-label">Tarifas Totais</div><div class="kpi-value tnum mt-1" style="color: var(--neg);">R$ 8.972,77</div></div>
-                        <div class="card p-5"><div class="kpi-label">Líquido Após Tarifas</div><div class="kpi-value tnum mt-1" style="color: var(--pos);">R$ 195.659,81</div></div>
-                        <div class="card p-5" style="border-color: var(--cyan); background: var(--cyan-soft);"><div class="kpi-label" style="color: var(--cyan-deep);">Taxa Efetiva Média</div><div class="kpi-value tnum mt-1" style="color: var(--cyan-deep);">4,38%</div></div>
+                        <div class="card p-5"><div class="kpi-label">Vendas Brutas Cielo</div><div class="kpi-value tnum mt-1">R$ 249.319,30</div><div class="text-[10.5px] text-[var(--muted)] mt-1">exclui aluguel de máquinas</div></div>
+                        <div class="card p-5"><div class="kpi-label">Tarifas Totais</div><div class="kpi-value tnum mt-1" style="color: var(--neg);">R$ 10.991,85</div></div>
+                        <div class="card p-5"><div class="kpi-label">Líquido Após Tarifas</div><div class="kpi-value tnum mt-1" style="color: var(--pos);">R$ 238.327,45</div></div>
+                        <div class="card p-5" style="border-color: var(--cyan); background: var(--cyan-soft);"><div class="kpi-label" style="color: var(--cyan-deep);">Taxa Efetiva Média</div><div class="kpi-value tnum mt-1" style="color: var(--cyan-deep);">4,41%</div></div>
                     </div>
 
                     <div class="grid grid-cols-1 gap-5">
@@ -2090,7 +2159,8 @@
                                         <tr><td class="font-semibold">Abril</td><td class="text-right tnum">R$ 140,82</td><td class="text-right tnum">R$ 539,83</td><td class="text-right tnum">R$ 115,66</td><td class="text-right tnum">R$ 49,75</td><td class="text-right font-semibold tnum">R$ 846,06</td></tr>
                                         <tr><td class="font-semibold">Maio</td><td class="text-right tnum">R$ 456,74</td><td class="text-right tnum">R$ 2.254,53</td><td class="text-right tnum">R$ 262,14</td><td class="text-right tnum">R$ 150,79</td><td class="text-right font-semibold tnum">R$ 3.124,20</td></tr>
                                         <tr><td class="font-semibold">Junho</td><td class="text-right tnum">R$ 368,44</td><td class="text-right tnum">R$ 1.164,30</td><td class="text-right tnum">R$ 171,11</td><td class="text-right tnum">R$ 44,76</td><td class="text-right font-semibold tnum">R$ 1.748,61</td></tr>
-                                        <tr class="total-row"><td>Total Jan–Jun</td><td class="text-right tnum">R$ 1.517,40</td><td class="text-right tnum">R$ 6.221,27</td><td class="text-right tnum">R$ 816,05</td><td class="text-right tnum">R$ 418,05</td><td class="text-right tnum">R$ 8.972,77</td></tr>
+                                        <tr><td class="font-semibold">Julho</td><td class="text-right tnum">R$ 367,28</td><td class="text-right tnum">R$ 1.291,44</td><td class="text-right tnum">R$ 255,66</td><td class="text-right tnum">R$ 104,70</td><td class="text-right font-semibold tnum">R$ 2.019,08</td></tr>
+                                        <tr class="total-row"><td>Total Jan–Jul</td><td class="text-right tnum">R$ 1.884,68</td><td class="text-right tnum">R$ 7.512,71</td><td class="text-right tnum">R$ 1.071,71</td><td class="text-right tnum">R$ 522,75</td><td class="text-right tnum">R$ 10.991,85</td></tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -2102,16 +2172,16 @@
                                 <table class="data-table" style="min-width: 520px;">
                                     <thead><tr><th>Categoria</th><th class="text-right">Vendas brutas</th><th class="text-right">Tarifa</th><th class="text-right">Taxa efetiva</th></tr></thead>
                                     <tbody>
-                                        <tr><td class="font-semibold">Crédito à vista</td><td class="text-right tnum">R$ 37.245,92</td><td class="text-right tnum" style="color: var(--neg);">R$ 1.517,40</td><td class="text-right tnum">4,07%</td></tr>
-                                        <tr><td class="font-semibold">Crédito parcelado</td><td class="text-right tnum">R$ 73.384,48</td><td class="text-right tnum" style="color: var(--neg);">R$ 6.221,27</td><td class="text-right tnum" style="color: var(--coral);">8,48%</td></tr>
-                                        <tr><td class="font-semibold">Débito</td><td class="text-right tnum">R$ 51.881,15</td><td class="text-right tnum" style="color: var(--neg);">R$ 816,05</td><td class="text-right tnum">1,57%</td></tr>
-                                        <tr><td class="font-semibold">Pix</td><td class="text-right tnum">R$ 42.121,03</td><td class="text-right tnum" style="color: var(--neg);">R$ 418,05</td><td class="text-right tnum">0,99%</td></tr>
-                                        <tr class="total-row"><td>Total</td><td class="text-right tnum">R$ 204.632,58</td><td class="text-right tnum">R$ 8.972,77</td><td class="text-right tnum">4,38%</td></tr>
+                                        <tr><td class="font-semibold">Crédito à vista</td><td class="text-right tnum">R$ 45.402,55</td><td class="text-right tnum" style="color: var(--neg);">R$ 1.884,68</td><td class="text-right tnum">4,15%</td></tr>
+                                        <tr><td class="font-semibold">Crédito parcelado</td><td class="text-right tnum">R$ 86.130,11</td><td class="text-right tnum" style="color: var(--neg);">R$ 7.512,71</td><td class="text-right tnum" style="color: var(--coral);">8,72%</td></tr>
+                                        <tr><td class="font-semibold">Débito</td><td class="text-right tnum">R$ 65.109,18</td><td class="text-right tnum" style="color: var(--neg);">R$ 1.071,71</td><td class="text-right tnum">1,65%</td></tr>
+                                        <tr><td class="font-semibold">Pix</td><td class="text-right tnum">R$ 52.677,46</td><td class="text-right tnum" style="color: var(--neg);">R$ 522,75</td><td class="text-right tnum">0,99%</td></tr>
+                                        <tr class="total-row"><td>Total</td><td class="text-right tnum">R$ 249.319,30</td><td class="text-right tnum">R$ 10.991,85</td><td class="text-right tnum">4,41%</td></tr>
                                     </tbody>
                                 </table>
                             </div>
                             <div class="px-5 py-4 bg-[var(--cyan-soft)] border-t border-[var(--cyan)]/30">
-                                <p class="text-[11.5px] text-[var(--ink)]/80"><strong style="color: var(--cyan-deep);">Conciliação:</strong> a soma das quatro categorias coincide com os totalizadores mensais da Cielo. Aluguéis de máquinas de R$ 1.192,00, lançados entre Janeiro e Abril, não compõem a coluna “Taxa/tarifa” e foram mantidos fora deste quadro.</p>
+                                <p class="text-[11.5px] text-[var(--ink)]/80"><strong style="color: var(--cyan-deep);">Conciliação:</strong> a soma das quatro categorias coincide com as vendas mensais da Cielo. Aluguéis de máquinas de R$ 1.391,80, identificados nos arquivos de Janeiro a Julho, não compõem a coluna “Taxa/tarifa” e foram mantidos fora deste quadro de receitas.</p>
                             </div>
                         </div>
                     </div>
@@ -2616,7 +2686,7 @@
                     </div>
                 </div>
                 <div class="text-[10.5px] text-[var(--muted)] number-tag">
-                    Relatório gerado para PV EMPREENDIMENTOS CRIATIVOS LTDA · CNPJ 50.351.135/0001-70 · 1º Semestre 2026
+                    Relatório gerado para PV EMPREENDIMENTOS CRIATIVOS LTDA · CNPJ 50.351.135/0001-70 · Jan–Jul 2026 · Julho parcial (receitas Cielo)
                 </div>
             </div>
         </footer>
@@ -2637,7 +2707,8 @@
 
         const chartsInitialized = {
             geral: false, rec: false, pag: false, nuvem: false,
-            fluxoJan: false, fluxoFev: false, fluxoAcum: false
+            fluxoJan: false, fluxoFev: false, fluxoMar: false, fluxoAbr: false,
+            fluxoJul: false, fluxoAcum: false
         };
 
         // === Defaults globais Chart.js para tipografia premium ===
@@ -2905,6 +2976,20 @@
                 },
                 options: donutOpts
             });
+
+            // Jul · parcial Cielo
+            new Chart(document.getElementById('canvasRecJul').getContext('2d'), {
+                type: 'doughnut',
+                data: {
+                    labels: ['Crédito à vista', 'Crédito parcelado', 'Débito', 'PIX'],
+                    datasets: [{
+                        data: [7789.35, 11454.19, 12972.37, 10451.73],
+                        backgroundColor: [CORAL, CORAL_DEEP, CYAN, INK],
+                        borderWidth: 2, borderColor: '#fff'
+                    }]
+                },
+                options: donutOpts
+            });
         }
 
         function initChartPagamentos() {
@@ -3018,6 +3103,46 @@
             }
         };
 
+        function renderFluxoReceitasJul() {
+            const labels = ['01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31'];
+            const receitas = [222.66,376.62,0,0,1019.08,3294.20,596.82,1158.47,2185.91,0,187.94,6182.22,17832.24,0,267.12,1072.33,0,0,667.71,1893.70,0,130.61,1271.90,109.25,0,623.25,2447.08,0,484.65,643.88,0];
+            const acumulado = [222.66,599.28,599.28,599.28,1618.36,4912.56,5509.38,6667.85,8853.76,8853.76,9041.70,15223.92,33056.16,33056.16,33323.28,34395.61,34395.61,34395.61,35063.32,36957.02,36957.02,37087.63,38359.53,38468.78,38468.78,39092.03,41539.11,41539.11,42023.76,42667.64,42667.64];
+
+            new Chart(document.getElementById('canvasFluxoJul').getContext('2d'), {
+                data: {
+                    labels,
+                    datasets: [
+                        {
+                            type: 'bar', label: 'Recebimentos líquidos', data: receitas,
+                            backgroundColor: 'rgba(31,192,217,0.85)', borderColor: CYAN,
+                            borderWidth: 0, borderRadius: 3, barPercentage: 0.85,
+                            categoryPercentage: 0.92, yAxisID: 'y'
+                        },
+                        {
+                            type: 'line', label: 'Receitas acumuladas', data: acumulado,
+                            borderColor: INK, backgroundColor: INK, borderWidth: 2.5,
+                            tension: 0.3, pointRadius: 0, pointHoverRadius: 5,
+                            pointBackgroundColor: '#fff', pointBorderColor: INK,
+                            pointBorderWidth: 2, yAxisID: 'y1'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    interaction: { mode: 'index', intersect: false },
+                    plugins: {
+                        tooltip: { callbacks: { label: (c) => c.dataset.label + ': ' + formatBR(c.raw) } },
+                        legend: { position: 'top', align: 'end', labels: { boxWidth: 10, boxHeight: 10, padding: 14, font: { size: 11 } } }
+                    },
+                    scales: {
+                        y: { position: 'left', beginAtZero: true, grid: { color: '#F2F3F5' }, ticks: { callback: (v) => formatBRshort(v), color: MUTED, font: { size: 10 } } },
+                        y1: { position: 'right', beginAtZero: true, grid: { display: false }, ticks: { callback: (v) => formatBRshort(v), color: INK, font: { size: 10, weight: '600' } } },
+                        x: { grid: { display: false }, ticks: { color: MUTED, font: { size: 10 } } }
+                    }
+                }
+            });
+        }
+
         function renderFluxoDiario(month, canvasId) {
             const d = fluxoData[month];
             new Chart(document.getElementById(canvasId).getContext('2d'), {
@@ -3098,6 +3223,10 @@
             if (month === 'abr' && !chartsInitialized.fluxoAbr) {
                 renderFluxoDiario('abr', 'canvasFluxoAbr');
                 chartsInitialized.fluxoAbr = true;
+            }
+            if (month === 'jul' && !chartsInitialized.fluxoJul) {
+                renderFluxoReceitasJul();
+                chartsInitialized.fluxoJul = true;
             }
             if (month === 'consolidado' && !chartsInitialized.fluxoAcum) {
                 const labels = ['Jan','Fev','Mar','Abr','Mai','Jun'];
