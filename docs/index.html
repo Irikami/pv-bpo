@@ -457,11 +457,11 @@
                     <span class="w-1.5 h-1.5 rounded-full bg-[var(--coral)] animate-pulse"></span>
                     Painel ao vivo
                 </span>
-                <span class="hidden md:inline">Financeiro: Jan–Jun fechado · Jul receitas Cielo</span>
+                <span class="hidden md:inline">Financeiro: Jan–Jun fechado · Jul receitas parciais</span>
                 <span class="hidden lg:inline">Moeda: BRL</span>
             </div>
             <div class="flex items-center gap-2 text-[11px] text-white/50">
-                <span class="number-tag">v2.3 · RECEITAS JUL</span>
+                <span class="number-tag">v2.4 · DRE CAIXA JUL</span>
             </div>
         </div>
 
@@ -478,13 +478,13 @@
                         <div class="h-eyebrow mb-3">Relatório Gerencial · Jan–Jul 2026</div>
                         <h1 class="h-section" style="font-size: 38px;">VISÃO EXECUTIVA<br><span style="color: var(--coral);">PV EMPREENDIMENTOS</span></h1>
                         <p class="text-[13.5px] text-[var(--muted)] mt-3 max-w-xl leading-relaxed">
-                            Consolidação financeira fechada de Janeiro a Junho de 2026, com atualização parcial de Julho para receitas Cielo — despesas e resultado do mês aguardam os dados complementares.
+                            Consolidação financeira fechada de Janeiro a Junho de 2026, com atualização parcial de Julho para receitas Cielo e dinheiro — despesas e resultado do mês aguardam os dados complementares.
                         </p>
                     </div>
                     <div class="flex items-center gap-3">
                         <div class="stamp"><i data-lucide="shield-check" class="w-3 h-3"></i> Jan–Jun auditado</div>
                         <div class="stamp" style="border-color: var(--cyan); color: var(--cyan);">
-                            <i data-lucide="badge-check" class="w-3 h-3"></i> Julho Cielo conciliado
+                            <i data-lucide="badge-check" class="w-3 h-3"></i> Julho receitas conciliadas
                         </div>
                     </div>
                 </div>
@@ -921,7 +921,7 @@
                         </div>
                         <div class="card p-6" style="border-color: var(--cyan); background: linear-gradient(135deg, var(--cyan-soft) 0%, #fff 58%);">
                             <h3 class="h-card mb-1">Recebimentos · Julho</h3>
-                            <div class="number-tag mb-4">R$ 42.668 · parcial Cielo conciliado</div>
+                            <div class="number-tag mb-4">R$ 45.241 · Cielo líquida + dinheiro</div>
                             <div class="chart-box chart-box-sm"><canvas id="canvasRecJul"></canvas></div>
                         </div>
                     </div>
@@ -1261,9 +1261,9 @@
                 <div id="month-fluxo-jul" class="month-content active">
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-5">
                         <div class="card p-5" style="border-color: var(--pos); background: linear-gradient(135deg, var(--pos-soft) 0%, #fff 65%);">
-                            <div class="kpi-label" style="color: var(--pos);">Entradas líquidas Cielo (Jul)</div>
-                            <div class="kpi-value tnum mt-1" style="color: var(--pos);">R$ 42.667,64</div>
-                            <div class="text-[10.5px] text-[var(--muted)] mt-1">646 vendas pagas</div>
+                            <div class="kpi-label" style="color: var(--pos);">Entradas apuradas (Jul)</div>
+                            <div class="kpi-value tnum mt-1" style="color: var(--pos);">R$ 45.241,16</div>
+                            <div class="text-[10.5px] text-[var(--muted)] mt-1">Cielo líquida + dinheiro</div>
                         </div>
                         <div class="card p-5">
                             <div class="kpi-label">Vendas brutas Cielo</div>
@@ -1279,22 +1279,23 @@
 
                     <div class="mb-5 px-5 py-4 rounded-md border border-[var(--warn)]/30 bg-[var(--warn-soft)] flex items-start gap-3">
                         <i data-lucide="clock-3" class="w-4 h-4 mt-0.5 shrink-0" style="color: var(--warn);"></i>
-                        <p class="text-[12px] text-[var(--ink)]/80"><strong style="color: var(--warn);">Julho parcial:</strong> este quadro contém somente receitas efetivamente pagas pela Cielo. Despesas e resultado do mês não foram calculados porque os dados ainda estão em levantamento. Dois aluguéis de máquina, no total de <strong class="tnum">R$ 199,80</strong>, foram separados das receitas.</p>
+                        <p class="text-[12px] text-[var(--ink)]/80"><strong style="color: var(--warn);">Julho parcial:</strong> este quadro contém receitas líquidas da Cielo e R$ 2.573,52 em dinheiro. Despesas e resultado do mês não foram calculados porque os dados ainda estão em levantamento. Dois aluguéis de máquina, no total de <strong class="tnum">R$ 199,80</strong>, foram separados das receitas.</p>
                     </div>
 
                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
                         <div class="card p-6 lg:col-span-2">
-                            <h3 class="h-card mb-1">Recebimentos líquidos por dia · Julho/26</h3>
-                            <p class="text-[12px] text-[var(--muted)] mb-4">Barras mostram o caixa recebido no dia; a linha acompanha o acumulado mensal.</p>
+                            <h3 class="h-card mb-1">Recebimentos líquidos Cielo por dia · Julho/26</h3>
+                            <p class="text-[12px] text-[var(--muted)] mb-4">Barras mostram os pagamentos Cielo no dia; o dinheiro foi informado sem abertura diária e consta no total e na composição ao lado.</p>
                             <div class="chart-box"><canvas id="canvasFluxoJul"></canvas></div>
                         </div>
                         <div class="card p-6">
                             <h3 class="h-card mb-1">Composição das entradas · Julho</h3>
-                            <p class="text-[12px] text-[var(--muted)] mb-5">Valores líquidos após tarifas, sem dinheiro ou outros canais ainda não informados.</p>
+                            <p class="text-[12px] text-[var(--muted)] mb-5">Valores líquidos Cielo após tarifas, acrescidos das vendas em dinheiro informadas.</p>
                             <div class="space-y-5">
-                                <div><div class="flex justify-between text-[12px] font-semibold mb-2"><span>Crédito</span><span class="tnum">R$ 19.243,54 · 45,10%</span></div><div class="bar-track"><div class="bar-fill" style="width:45.10%; background:var(--coral);"></div></div><div class="number-tag mt-1">à vista R$ 7.789,35 · parcelado R$ 11.454,19</div></div>
-                                <div><div class="flex justify-between text-[12px] font-semibold mb-2"><span>Débito</span><span class="tnum">R$ 12.972,37 · 30,40%</span></div><div class="bar-track"><div class="bar-fill" style="width:30.40%; background:var(--cyan);"></div></div></div>
-                                <div><div class="flex justify-between text-[12px] font-semibold mb-2"><span>PIX</span><span class="tnum">R$ 10.451,73 · 24,50%</span></div><div class="bar-track"><div class="bar-fill" style="width:24.50%; background:var(--ink);"></div></div></div>
+                                <div><div class="flex justify-between text-[12px] font-semibold mb-2"><span>Crédito</span><span class="tnum">R$ 19.243,54 · 42,54%</span></div><div class="bar-track"><div class="bar-fill" style="width:42.54%; background:var(--coral);"></div></div><div class="number-tag mt-1">à vista R$ 7.789,35 · parcelado R$ 11.454,19</div></div>
+                                <div><div class="flex justify-between text-[12px] font-semibold mb-2"><span>Débito</span><span class="tnum">R$ 12.972,37 · 28,67%</span></div><div class="bar-track"><div class="bar-fill" style="width:28.67%; background:var(--cyan);"></div></div></div>
+                                <div><div class="flex justify-between text-[12px] font-semibold mb-2"><span>PIX</span><span class="tnum">R$ 10.451,73 · 23,10%</span></div><div class="bar-track"><div class="bar-fill" style="width:23.10%; background:var(--ink);"></div></div></div>
+                                <div><div class="flex justify-between text-[12px] font-semibold mb-2"><span>Dinheiro</span><span class="tnum">R$ 2.573,52 · 5,69%</span></div><div class="bar-track"><div class="bar-fill" style="width:5.69%; background:#9CA3AF;"></div></div></div>
                             </div>
                         </div>
                     </div>
@@ -1337,7 +1338,8 @@
                             <button onclick="switchMonth('dre','mar')" id="btn-month-dre-mar" class="pill-btn">Mar</button>
                             <button onclick="switchMonth('dre','abr')" id="btn-month-dre-abr" class="pill-btn">Abr</button>
                             <button onclick="switchMonth('dre','mai')" id="btn-month-dre-mai" class="pill-btn">Mai</button>
-                            <button onclick="switchMonth('dre','jun')" id="btn-month-dre-jun" class="pill-btn active">Jun</button>
+                            <button onclick="switchMonth('dre','jun')" id="btn-month-dre-jun" class="pill-btn">Jun</button>
+                            <button onclick="switchMonth('dre','jul')" id="btn-month-dre-jul" class="pill-btn active">Jul</button>
                         </div>
                         <div class="pill-group no-print" id="dre-comp-month-tabs" style="display:none;">
                             <button onclick="switchMonth('drecomp','jan')" id="btn-month-drecomp-jan" class="pill-btn">Jan</button>
@@ -1549,7 +1551,7 @@
                 </div>
 
                 <!-- JUN DRE -->
-                <div id="month-dre-jun" class="month-content active">
+                <div id="month-dre-jun" class="month-content">
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
                         <div class="card p-5"><div class="kpi-label">Receitas Totais</div><div class="kpi-value tnum mt-1" style="color: var(--pos);">R$ 32.431,67</div></div>
                         <div class="card p-5"><div class="kpi-label">Despesas Totais</div><div class="kpi-value tnum mt-1" style="color: var(--neg);">R$ 73.380,46</div></div>
@@ -1585,6 +1587,35 @@
                     </div>
                     <div class="card p-5 mt-5" style="background: var(--paper); border-left: 3px solid var(--warn);">
                         <p class="text-[12.5px] text-[var(--muted)] leading-relaxed"><strong class="text-[var(--ink)]">Junho fechado por competência:</strong> o PGDAS-D registra R$ 33.644,49 de receita e a DRE reconhece R$ 29.268,67 de custos e despesas, resultando em <strong class="text-[var(--ink)]">+R$ 4.375,82</strong>. O déficit de R$ 40.948,79 acima permanece a leitura de caixa.</p>
+                    </div>
+                </div>
+                <!-- JUL DRE · PARCIAL DE RECEITAS -->
+                <div id="month-dre-jul" class="month-content active">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-5">
+                        <div class="card p-5" style="border-color: var(--pos); background: linear-gradient(135deg, var(--pos-soft) 0%, #fff 65%);"><div class="kpi-label" style="color: var(--pos);">Receitas Apuradas</div><div class="kpi-value tnum mt-1" style="color: var(--pos);">R$ 45.241,16</div><div class="text-[10.5px] text-[var(--muted)] mt-1">Cielo líquida + dinheiro</div></div>
+                        <div class="card p-5"><div class="kpi-label">Despesas Totais</div><div class="kpi-value mt-1" style="color: var(--muted); font-size: 22px;">Aguardando dados</div></div>
+                        <div class="card p-5" style="border-color: var(--warn); background: var(--warn-soft);"><div class="kpi-label" style="color: var(--warn);">Resultado Caixa</div><div class="kpi-value mt-1" style="color: var(--warn); font-size: 22px;">Não calculado</div><div class="text-[10.5px] text-[var(--muted)] mt-1">parcial de receitas</div></div>
+                    </div>
+
+                    <div class="mb-5 px-5 py-4 rounded-md border border-[var(--warn)]/30 bg-[var(--warn-soft)] flex items-start gap-3">
+                        <i data-lucide="clock-3" class="w-4 h-4 mt-0.5 shrink-0" style="color: var(--warn);"></i>
+                        <p class="text-[12px] text-[var(--ink)]/80"><strong style="color: var(--warn);">DRE Caixa provisória:</strong> julho contém somente as receitas já informadas. Custos, despesas e resultado serão completados quando o levantamento das saídas for recebido.</p>
+                    </div>
+
+                    <div class="card overflow-hidden">
+                        <table class="data-table">
+                            <thead><tr><th>Categoria</th><th class="text-right">Valor</th></tr></thead>
+                            <tbody>
+                                <tr class="subhead"><td colspan="2" style="color: var(--pos);">▍ Entradas operacionais</td></tr>
+                                <tr><td class="pl-8">Receita de Vendas - Crédito</td><td class="text-right font-semibold tnum" style="color: var(--pos);">R$ 19.243,54</td></tr>
+                                <tr><td class="pl-8">Receita de Vendas - Débito</td><td class="text-right tnum" style="color: var(--pos);">R$ 12.972,37</td></tr>
+                                <tr><td class="pl-8">Receita de Vendas - PIX</td><td class="text-right tnum" style="color: var(--pos);">R$ 10.451,73</td></tr>
+                                <tr><td class="pl-8">Venda em Dinheiro</td><td class="text-right tnum">R$ 2.573,52</td></tr>
+                                <tr class="subhead"><td colspan="2" style="color: var(--muted);">▍ Custos e despesas pendentes de levantamento</td></tr>
+                                <tr><td class="pl-8 text-[var(--muted)]">Total de saídas</td><td class="text-right text-[var(--muted)]">Aguardando dados</td></tr>
+                                <tr class="total-row"><td>RECEITAS PARCIAIS (CAIXA)</td><td class="text-right tnum">R$ 45.241,16</td></tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
                 </div><!-- /regime-caixa -->
@@ -2113,18 +2144,19 @@
                 <div id="month-recebimentos-jul" class="month-content active">
                     <div class="card overflow-hidden" style="border-color: var(--cyan);">
                         <table class="data-table">
-                            <thead><tr><th class="w-1/3">Categoria Cielo</th><th class="w-1/2">Representatividade</th><th class="text-right">Valor líquido</th></tr></thead>
+                            <thead><tr><th class="w-1/3">Categoria</th><th class="w-1/2">Representatividade</th><th class="text-right">Valor líquido</th></tr></thead>
                             <tbody>
-                                <tr><td class="font-bold">Crédito à vista e pré-pago</td><td><div class="flex items-center gap-3"><div class="bar-track flex-1"><div class="bar-fill" style="width:18.26%; background:var(--coral);"></div></div><span class="number-tag w-14 text-right">18,26%</span></div></td><td class="text-right font-semibold tnum">R$ 7.789,35</td></tr>
-                                <tr><td class="font-bold">Crédito parcelado</td><td><div class="flex items-center gap-3"><div class="bar-track flex-1"><div class="bar-fill" style="width:26.85%; background:var(--coral-deep);"></div></div><span class="number-tag w-14 text-right">26,85%</span></div></td><td class="text-right font-semibold tnum">R$ 11.454,19</td></tr>
-                                <tr><td class="font-semibold">Débito</td><td><div class="flex items-center gap-3"><div class="bar-track flex-1"><div class="bar-fill" style="width:30.40%; background:var(--cyan);"></div></div><span class="number-tag w-14 text-right">30,40%</span></div></td><td class="text-right font-semibold tnum">R$ 12.972,37</td></tr>
-                                <tr><td class="font-semibold">PIX</td><td><div class="flex items-center gap-3"><div class="bar-track flex-1"><div class="bar-fill" style="width:24.50%; background:var(--ink);"></div></div><span class="number-tag w-14 text-right">24,50%</span></div></td><td class="text-right font-semibold tnum">R$ 10.451,73</td></tr>
-                                <tr class="total-row"><td>Total Cielo líquido</td><td></td><td class="text-right tnum">R$ 42.667,64</td></tr>
+                                <tr><td class="font-bold">Crédito à vista e pré-pago</td><td><div class="flex items-center gap-3"><div class="bar-track flex-1"><div class="bar-fill" style="width:17.22%; background:var(--coral);"></div></div><span class="number-tag w-14 text-right">17,22%</span></div></td><td class="text-right font-semibold tnum">R$ 7.789,35</td></tr>
+                                <tr><td class="font-bold">Crédito parcelado</td><td><div class="flex items-center gap-3"><div class="bar-track flex-1"><div class="bar-fill" style="width:25.32%; background:var(--coral-deep);"></div></div><span class="number-tag w-14 text-right">25,32%</span></div></td><td class="text-right font-semibold tnum">R$ 11.454,19</td></tr>
+                                <tr><td class="font-semibold">Débito</td><td><div class="flex items-center gap-3"><div class="bar-track flex-1"><div class="bar-fill" style="width:28.67%; background:var(--cyan);"></div></div><span class="number-tag w-14 text-right">28,67%</span></div></td><td class="text-right font-semibold tnum">R$ 12.972,37</td></tr>
+                                <tr><td class="font-semibold">PIX</td><td><div class="flex items-center gap-3"><div class="bar-track flex-1"><div class="bar-fill" style="width:23.10%; background:var(--ink);"></div></div><span class="number-tag w-14 text-right">23,10%</span></div></td><td class="text-right font-semibold tnum">R$ 10.451,73</td></tr>
+                                <tr><td>Venda em Dinheiro</td><td><div class="flex items-center gap-3"><div class="bar-track flex-1"><div class="bar-fill" style="width:5.69%; background:#9CA3AF;"></div></div><span class="number-tag w-14 text-right">5,69%</span></div></td><td class="text-right tnum">R$ 2.573,52</td></tr>
+                                <tr class="total-row"><td>Total do Período</td><td></td><td class="text-right tnum">R$ 45.241,16</td></tr>
                             </tbody>
                         </table>
                         <div class="px-5 py-4 bg-[var(--cyan-soft)] border-t border-[var(--cyan)]/30 flex items-start gap-3">
                             <i data-lucide="badge-check" class="w-4 h-4 mt-0.5 shrink-0" style="color:var(--cyan-deep);"></i>
-                            <p class="text-[12px] text-[var(--ink)]/80"><strong style="color:var(--cyan-deep);">Conciliação Cielo · julho:</strong> 646 vendas pagas, com bruto de R$ 44.686,72 – tarifas de R$ 2.019,08 = líquido de R$ 42.667,64. O total é parcial e não inclui dinheiro ou outros canais ainda não informados. Dois aluguéis de máquina (R$ 199,80) foram excluídos das receitas.</p>
+                            <p class="text-[12px] text-[var(--ink)]/80"><strong style="color:var(--cyan-deep);">Conciliação de julho:</strong> Cielo líquido de R$ 42.667,64 + dinheiro de R$ 2.573,52 = entradas de R$ 45.241,16. Na Cielo, foram 646 vendas pagas, com bruto de R$ 44.686,72 e tarifas de R$ 2.019,08. Dois aluguéis de máquina (R$ 199,80) foram excluídos das receitas.</p>
                         </div>
                     </div>
                 </div>
@@ -2686,7 +2718,7 @@
                     </div>
                 </div>
                 <div class="text-[10.5px] text-[var(--muted)] number-tag">
-                    Relatório gerado para PV EMPREENDIMENTOS CRIATIVOS LTDA · CNPJ 50.351.135/0001-70 · Jan–Jul 2026 · Julho parcial (receitas Cielo)
+                    Relatório gerado para PV EMPREENDIMENTOS CRIATIVOS LTDA · CNPJ 50.351.135/0001-70 · Jan–Jul 2026 · Julho parcial (Cielo + dinheiro)
                 </div>
             </div>
         </footer>
@@ -2981,10 +3013,10 @@
             new Chart(document.getElementById('canvasRecJul').getContext('2d'), {
                 type: 'doughnut',
                 data: {
-                    labels: ['Crédito à vista', 'Crédito parcelado', 'Débito', 'PIX'],
+                    labels: ['Crédito à vista', 'Crédito parcelado', 'Débito', 'PIX', 'Dinheiro'],
                     datasets: [{
-                        data: [7789.35, 11454.19, 12972.37, 10451.73],
-                        backgroundColor: [CORAL, CORAL_DEEP, CYAN, INK],
+                        data: [7789.35, 11454.19, 12972.37, 10451.73, 2573.52],
+                        backgroundColor: [CORAL, CORAL_DEEP, CYAN, INK, '#9CA3AF'],
                         borderWidth: 2, borderColor: '#fff'
                     }]
                 },
@@ -3113,13 +3145,13 @@
                     labels,
                     datasets: [
                         {
-                            type: 'bar', label: 'Recebimentos líquidos', data: receitas,
+                            type: 'bar', label: 'Recebimentos líquidos Cielo', data: receitas,
                             backgroundColor: 'rgba(31,192,217,0.85)', borderColor: CYAN,
                             borderWidth: 0, borderRadius: 3, barPercentage: 0.85,
                             categoryPercentage: 0.92, yAxisID: 'y'
                         },
                         {
-                            type: 'line', label: 'Receitas acumuladas', data: acumulado,
+                            type: 'line', label: 'Cielo acumulado', data: acumulado,
                             borderColor: INK, backgroundColor: INK, borderWidth: 2.5,
                             tension: 0.3, pointRadius: 0, pointHoverRadius: 5,
                             pointBackgroundColor: '#fff', pointBorderColor: INK,
