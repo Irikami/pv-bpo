@@ -3,7 +3,7 @@
 <head>
     <meta name="robots" content="noindex,nofollow">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Painel Financeiro · PV Empreendimentos · Canella & Santos</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -49,6 +49,8 @@
             background: var(--paper);
             color: var(--ink);
             font-feature-settings: "ss01", "cv11", "tnum";
+            -webkit-text-size-adjust: 100%;
+            text-size-adjust: 100%;
         }
 
         .font-display { font-family: 'Plus Jakarta Sans', 'Inter Tight', sans-serif; font-weight: 800; letter-spacing: -0.025em; }
@@ -283,6 +285,65 @@
         }
         .data-table tr.total-row td:last-child { color: var(--cyan); }
 
+        .table-scroll {
+            width: 100%;
+            max-width: 100%;
+            overflow-x: auto;
+            overscroll-behavior-x: contain;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* === MOBILE NAV === */
+        .mobile-nav-shell {
+            position: sticky;
+            top: 0;
+            z-index: 40;
+            background: rgba(250, 250, 247, 0.96);
+            border-bottom: 1px solid var(--line);
+            box-shadow: 0 6px 18px rgba(14, 17, 22, 0.06);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+        }
+        .mobile-nav-scroll {
+            display: flex;
+            gap: 6px;
+            padding: 8px 12px 9px;
+            overflow-x: auto;
+            overscroll-behavior-x: contain;
+            scroll-snap-type: x proximity;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+        }
+        .mobile-nav-scroll::-webkit-scrollbar { display: none; }
+        .mobile-nav-item {
+            flex: 0 0 auto;
+            min-height: 46px;
+            min-width: 74px;
+            padding: 7px 10px;
+            border: 1px solid transparent;
+            border-radius: 10px;
+            color: var(--muted);
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 3px;
+            font-size: 10px;
+            font-weight: 700;
+            line-height: 1;
+            white-space: nowrap;
+            scroll-snap-align: start;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .mobile-nav-item .nav-icon { width: 17px; height: 17px; }
+        .mobile-nav-item.active {
+            color: var(--ink);
+            background: var(--paper-2);
+            border-color: var(--line);
+            box-shadow: 0 2px 8px rgba(14, 17, 22, 0.08);
+        }
+        .mobile-nav-item.active .nav-icon { color: var(--coral); }
+
         /* === VIEW SWITCHING === */
         .view-section { display: none; }
         .view-section.active { display: block; animation: fadeUp .35s ease-out; }
@@ -334,6 +395,130 @@
             border-radius: 3px;
             text-transform: uppercase;
             display: inline-flex; align-items: center; gap: 6px;
+        }
+
+        /* === MOBILE / TOUCH === */
+        @media (max-width: 767px) {
+            body {
+                height: 100dvh !important;
+                min-height: -webkit-fill-available;
+                overflow: hidden;
+            }
+            .main-content {
+                min-width: 0;
+                height: 100dvh !important;
+                overflow-x: hidden;
+                overscroll-behavior-y: contain;
+                -webkit-overflow-scrolling: touch;
+                scroll-padding-top: 72px;
+            }
+            .mobile-brand {
+                padding-top: max(14px, env(safe-area-inset-top));
+                padding-left: max(16px, env(safe-area-inset-left));
+                padding-right: max(16px, env(safe-area-inset-right));
+                padding-bottom: 12px;
+            }
+            .top-ribbon {
+                padding: 9px max(16px, env(safe-area-inset-right)) 9px max(16px, env(safe-area-inset-left));
+            }
+            .top-ribbon .ribbon-version { display: none; }
+            .page-shell {
+                padding: 22px 16px calc(80px + env(safe-area-inset-bottom)) !important;
+            }
+            .page-shell > .view-section { min-width: 0; }
+            .view-section .grid,
+            .view-section .card,
+            .view-section .flex-1 { min-width: 0; }
+            .h-section,
+            .h-section[style] {
+                font-size: clamp(27px, 8vw, 32px) !important;
+                line-height: 1.06;
+                overflow-wrap: anywhere;
+            }
+            .h-eyebrow {
+                font-size: 10px;
+                letter-spacing: 0.16em;
+                line-height: 1.45;
+            }
+            .h-card { font-size: 13.5px; }
+            .card { border-radius: 12px; }
+            .card.p-5,
+            .card.p-6,
+            .card.p-7 { padding: 16px !important; }
+            .kpi-label {
+                font-size: 9.5px;
+                letter-spacing: 0.11em;
+                line-height: 1.35;
+            }
+            .kpi-value {
+                font-size: clamp(19px, 5.7vw, 23px);
+                overflow-wrap: anywhere;
+            }
+            .pill-group {
+                display: flex;
+                width: 100%;
+                max-width: 100%;
+                overflow-x: auto;
+                overscroll-behavior-x: contain;
+                scrollbar-width: none;
+                -webkit-overflow-scrolling: touch;
+            }
+            .pill-group::-webkit-scrollbar { display: none; }
+            .pill-btn {
+                flex: 0 0 auto;
+                min-height: 42px;
+                padding: 8px 13px;
+                -webkit-tap-highlight-color: transparent;
+            }
+            .table-scroll {
+                margin-left: -1px;
+                margin-right: -1px;
+                border-radius: 0 0 12px 12px;
+            }
+            .data-table.mobile-wide { min-width: 610px; }
+            .data-table thead th {
+                padding: 11px 12px;
+                font-size: 9.5px;
+                letter-spacing: 0.1em;
+                white-space: nowrap;
+            }
+            .data-table tbody td {
+                padding: 11px 12px;
+                font-size: 12px;
+            }
+            .data-table tr.subhead td { padding: 9px 12px; }
+            .data-table tr.total-row td {
+                padding: 13px 12px;
+                font-size: 12.5px;
+                white-space: nowrap;
+            }
+            .chart-box { height: 290px !important; }
+            .chart-box-sm { height: 245px !important; }
+            footer .max-w-\[1400px\] {
+                padding-left: 16px !important;
+                padding-right: 16px !important;
+                padding-bottom: calc(24px + env(safe-area-inset-bottom));
+            }
+            footer .number-tag {
+                max-width: 100%;
+                text-align: center;
+                overflow-wrap: anywhere;
+                line-height: 1.5;
+            }
+        }
+
+        @media (max-width: 359px) {
+            .grid.grid-cols-2 { grid-template-columns: minmax(0, 1fr) !important; }
+            .mobile-nav-item { min-width: 70px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                scroll-behavior: auto !important;
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
         }
 
         /* === PRINT === */
@@ -441,17 +626,21 @@
     <main class="main-content flex-1 h-full overflow-y-auto relative">
 
         <!-- Mobile brand -->
-        <div class="md:hidden bg-[var(--ink)] text-white p-4 flex justify-between items-center no-print">
+        <div class="mobile-brand md:hidden bg-[var(--ink)] text-white flex justify-between items-center no-print">
             <div class="flex items-center gap-2">
                 <div class="brand-mark rounded" style="width:32px;height:32px;position:relative;">
                     <div class="name" style="padding: 6px 6px; font-size: 8px;">C&amp;S</div>
                 </div>
-                <span class="font-display text-[14px]">CANELLA &amp; SANTOS</span>
+                <div class="leading-tight">
+                    <div class="font-display text-[13px]">CANELLA &amp; SANTOS</div>
+                    <div class="text-[9px] uppercase tracking-[0.16em] text-white/45 mt-0.5">PV Empreendimentos</div>
+                </div>
             </div>
+            <span class="number-tag text-white/40">JAN–JUL · 2026</span>
         </div>
 
         <!-- Top ribbon -->
-        <div class="bg-[var(--ink)] text-white px-8 py-3 flex items-center justify-between no-print">
+        <div class="top-ribbon bg-[var(--ink)] text-white px-8 py-3 flex items-center justify-between no-print">
             <div class="flex items-center gap-6 text-[11px] uppercase tracking-[0.18em] text-white/60">
                 <span class="flex items-center gap-2">
                     <span class="w-1.5 h-1.5 rounded-full bg-[var(--coral)] animate-pulse"></span>
@@ -460,12 +649,42 @@
                 <span class="hidden md:inline">Financeiro: Jan–Jul fechado por caixa · Competência até Jun</span>
                 <span class="hidden lg:inline">Moeda: BRL</span>
             </div>
-            <div class="flex items-center gap-2 text-[11px] text-white/50">
+            <div class="ribbon-version flex items-center gap-2 text-[11px] text-white/50">
                 <span class="number-tag">v2.6 · SALDOS + AJUSTES CAIXA</span>
             </div>
         </div>
 
-        <div class="px-6 sm:px-10 py-8 max-w-[1400px] mx-auto pb-24">
+        <!-- Navegação compacta para Android e iOS -->
+        <nav class="mobile-nav-shell md:hidden no-print" aria-label="Navegação principal móvel">
+            <div class="mobile-nav-scroll">
+                <button onclick="switchView('dashboard')" id="mobile-nav-dashboard" class="mobile-nav-item active" aria-current="page">
+                    <i data-lucide="layout-dashboard" class="nav-icon"></i><span>Visão</span>
+                </button>
+                <button onclick="switchView('charts')" id="mobile-nav-charts" class="mobile-nav-item">
+                    <i data-lucide="trending-up" class="nav-icon"></i><span>Evolução</span>
+                </button>
+                <button onclick="switchView('fluxo')" id="mobile-nav-fluxo" class="mobile-nav-item">
+                    <i data-lucide="activity" class="nav-icon"></i><span>Fluxo</span>
+                </button>
+                <button onclick="switchView('dre')" id="mobile-nav-dre" class="mobile-nav-item">
+                    <i data-lucide="calculator" class="nav-icon"></i><span>DRE</span>
+                </button>
+                <button onclick="switchView('saldos')" id="mobile-nav-saldos" class="mobile-nav-item">
+                    <i data-lucide="wallet-cards" class="nav-icon"></i><span>Saldos</span>
+                </button>
+                <button onclick="switchView('recebimentos')" id="mobile-nav-recebimentos" class="mobile-nav-item">
+                    <i data-lucide="arrow-down-left" class="nav-icon"></i><span>Recebimentos</span>
+                </button>
+                <button onclick="switchView('pagamentos')" id="mobile-nav-pagamentos" class="mobile-nav-item">
+                    <i data-lucide="arrow-up-right" class="nav-icon"></i><span>Pagamentos</span>
+                </button>
+                <button onclick="switchView('nuvemshop')" id="mobile-nav-nuvemshop" class="mobile-nav-item">
+                    <i data-lucide="shopping-bag" class="nav-icon"></i><span>NuvemShop</span>
+                </button>
+            </div>
+        </nav>
+
+        <div class="page-shell px-6 sm:px-10 py-8 max-w-[1400px] mx-auto pb-24">
 
             <!-- ===================================================================================== -->
             <!-- 1. VISÃO EXECUTIVA -->
@@ -2822,18 +3041,59 @@
             Chart.defaults.plugins.tooltip.titleFont = { weight: '700', size: 12 };
             Chart.defaults.plugins.tooltip.bodyFont = { weight: '500', size: 12 };
             Chart.defaults.plugins.tooltip.boxPadding = 6;
+
+            if (window.matchMedia('(max-width: 767px)').matches) {
+                Chart.defaults.font.size = 10;
+                Chart.defaults.plugins.legend.labels.padding = 9;
+                Chart.defaults.plugins.legend.labels.boxWidth = 7;
+                Chart.defaults.plugins.legend.labels.boxHeight = 7;
+                Chart.defaults.plugins.tooltip.padding = 10;
+            }
         }
 
         document.addEventListener("DOMContentLoaded", function() {
+            enhanceTablesForTouch();
             lucide.createIcons();
         });
+
+        function enhanceTablesForTouch() {
+            document.querySelectorAll('.data-table').forEach(table => {
+                const columnCount = Math.max(...Array.from(table.rows, row => row.cells.length));
+                table.classList.add(columnCount > 3 ? 'mobile-wide' : 'mobile-compact');
+
+                const existingScrollParent = table.closest('.overflow-x-auto, .table-scroll');
+                if (existingScrollParent) {
+                    existingScrollParent.classList.add('table-scroll');
+                    return;
+                }
+
+                const wrapper = document.createElement('div');
+                wrapper.className = 'table-scroll';
+                table.parentNode.insertBefore(wrapper, table);
+                wrapper.appendChild(table);
+            });
+        }
 
         // ================= NAVIGATION =================
         function switchView(viewName) {
             document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.mobile-nav-item').forEach(el => {
+                el.classList.remove('active');
+                el.removeAttribute('aria-current');
+            });
             document.getElementById('view-' + viewName).classList.add('active');
             document.getElementById('nav-' + viewName).classList.add('active');
+            const mobileNavItem = document.getElementById('mobile-nav-' + viewName);
+            if (mobileNavItem) {
+                mobileNavItem.classList.add('active');
+                mobileNavItem.setAttribute('aria-current', 'page');
+                mobileNavItem.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            }
+
+            if (window.matchMedia('(max-width: 767px)').matches) {
+                document.querySelector('.main-content').scrollTo({ top: 0, behavior: 'auto' });
+            }
             setTimeout(() => lucide.createIcons(), 50);
 
             if (viewName === 'charts') ensureChartLoaded('geral');
